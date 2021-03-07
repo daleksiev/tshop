@@ -1,17 +1,17 @@
 import { BrowserRouter } from "react-router-dom";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './components/App';
 import GlobalContext from './store';
 import './index.scss';
 
 ReactDOM.render(
-	<GlobalContext>
-		<BrowserRouter>
+	<BrowserRouter>
+		<GlobalContext.Provider  value={{}}>
 			<React.StrictMode>
 				<App />
 			</React.StrictMode>
-		</BrowserRouter>
-	</GlobalContext>,
+		</GlobalContext.Provider>
+	</BrowserRouter>,
 	document.getElementById('root')
 );
