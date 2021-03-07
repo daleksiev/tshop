@@ -1,8 +1,10 @@
 .header-wrapper {
-
-	.header-container {
-
+	display:flex;
+	justify-content: center;
+	padding:20px;
+    box-shadow: 0 -15px 28px;
+	a {
+		margin:0 10px;
 	}
 
-	
 }

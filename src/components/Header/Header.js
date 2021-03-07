@@ -3,11 +3,9 @@ import './Header.scss';
 
 const Header = () => (
 	<header className="header-wrapper">
-		<div className="header-container">
-			<Link to="/" >Home</Link>
-			<Link to="/login" >Login</Link>
-			<Link to="/register" >Register</Link>
-		</div>
+		<Link to="/" >Home</Link>
+		<Link to="/login" >Login</Link>
+		<Link to="/register" >Register</Link>
 	</header>
 )
 
