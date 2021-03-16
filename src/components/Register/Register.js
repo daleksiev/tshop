@@ -2,6 +2,7 @@ import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
+import { Redirect } from 'react-router';
 
 const Register = () => {
 	const [state, setState] = useState({
@@ -9,6 +10,8 @@ const Register = () => {
 		password: '',
 		repeatPassword: '',
 	});
+	const [message, setMessage] = useState('');
+	const [isOk, setIsOk] = useState(false);
 
 	const onChangeInput = (e) => setState({ ...state, [e.target.name]: e.target.value });
 
@@ -16,18 +19,24 @@ const Register = () => {
 		e.preventDefault();
 		
 		if(state.password !== state.repeatPassword)  {
-			return false;
+			return setMessage('The passwords do not match.');
 		}
 
 		firebaseService
 			.signup(state.email, state.password)
-			.then(res => console.log(res))
-			.catch(err => console.log(err));
+			.then(res => setIsOk(true))
+			.catch(err => setMessage(err.message));
+	}
+
+	if(isOk) {
+		return <Redirect to='login'/>
 	}
 
 	return (
 		<form method="post">
 			<h1>Register</h1>
+
+			<p>{message}</p>
 
 			<Input
 				id="email"
