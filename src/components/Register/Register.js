@@ -1,9 +1,8 @@
 import Button from '../Shared/Button/Button';
 import Input from '../Shared/Input';
-import './Register.scss'
 
 const Register = () => (
-	<form method="post" className="register-form">
+	<form method="post">
 		<h1>Register</h1>
 
 		<Input
