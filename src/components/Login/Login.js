@@ -1,4 +1,4 @@
-import Button from '../Shared/Button/Button';
+import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 
 const Login = () => (

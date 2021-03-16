@@ -2,8 +2,9 @@ import './Button.scss';
 
 const Button = ({
 	name,
+	onClick,
 }) => (
-	<button className="button">
+	<button onClick={onClick} className="button">
 		{name}
 	</button>
 )
