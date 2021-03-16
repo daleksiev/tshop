@@ -1,33 +1,61 @@
-import Button from '../Shared/Button/Button';
+import Button from '../Shared/Button';
 import Input from '../Shared/Input';
+import { useState } from 'react';
+import firebaseService from '../../services/firebaseService';
 
-const Register = () => (
-	<form method="post">
-		<h1>Register</h1>
+const Register = () => {
+	const [state, setState] = useState({
+		email: '',
+		password: '',
+		repeatPassword: '',
+	});
 
-		<Input
-			id="email"
-			type="email"
-			name="email"
-			title="Email:"
-		/>
+	const onChangeInput = (e) => setState({ ...state, [e.target.name]: e.target.value });
 
-		<Input
-			id="password"
-			type="password"
-			name="password"
-			title="Password:"
-		/>
+	const onClickButton = (e) => {
+		e.preventDefault();
+		
+		if(state.password !== state.repeatPassword)  {
+			return false;
+		}
 
-		<Input
-			id="repeatPassword"
-			type="password"
-			name="repeatPassword"
-			title="Repeat Password:"
-		/>
+		firebaseService
+			.signup(state.email, state.password)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
+	}
 
-		<Button name="Sign Up" />
-	</form>
-)
+	return (
+		<form method="post">
+			<h1>Register</h1>
+
+			<Input
+				id="email"
+				type="text"
+				name="email"
+				title="Email:"
+				onChange={onChangeInput}
+			/>
+
+			<Input
+				id="password"
+				type="password"
+				name="password"
+				title="Password:"
+				onChange={onChangeInput}
+			/>
+
+			<Input
+				id="repeatPassword"
+				type="password"
+				name="repeatPassword"
+				title="Repeat Password:"
+				onChange={onChangeInput}
+			/>
+
+			<Button name="Sign Up" onClick={onClickButton}/>
+		</form>
+	)
+}
 
 export default Register;

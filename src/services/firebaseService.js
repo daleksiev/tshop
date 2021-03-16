@@ -1,15 +1,15 @@
-import { auth } from 'firebase';
+import {auth} from '../firebase';
 
-const signup = auth().createUserWithEmailAndPassword;
+const signup = (email,password) => auth().createUserWithEmailAndPassword(email,password);
 
 const login = (email, password) => {
 	return auth().signInWithEmailAndPassword(email, password)
-			.then(user => {
-				if(!user) throw user;
+		.then(user => {
+			if (!user) throw user;
 
-				localStorage.setItem('user', user);
-				return user;
-			});
+			localStorage.setItem('user', user);
+			return user;
+		});
 }
 
 const logout = () => {
@@ -17,8 +17,10 @@ const logout = () => {
 	return auth().signOut();
 }
 
-export default {
+const firebaseService = {
 	signup,
 	login,
 	logout,
-}
+};
+
+export default firebaseService

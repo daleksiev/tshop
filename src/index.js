@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import GlobalContext from './store';
-import './firebase'
+import './firebase';
 import './index.scss';
 
 ReactDOM.render(
