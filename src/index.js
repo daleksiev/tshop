@@ -8,7 +8,7 @@ import './index.scss';
 
 ReactDOM.render(
 	<BrowserRouter>
-		<GlobalContext.Provider  value={{}}>
+		<GlobalContext.Provider value={{}}>
 			<React.StrictMode>
 				<App />
 			</React.StrictMode>

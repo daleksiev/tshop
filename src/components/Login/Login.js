@@ -3,29 +3,30 @@ import Input from '../Shared/Input';
 import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
+import useForm from '../../hooks/useForm';
 
 const Login = () => {
-	const [state, setState] = useState({
+	const [state, onChangeInput] = useForm({
 		email: '',
 		password: '',
 	});
-	const [message, setMessage] = useState('');
-	const [isOk, setIsOk] = useState(false);
 
-	const onChangeInput = (e) => setState({ ...state, [e.target.name]: e.target.value });
+	const [message, setMessage] = useState('');
+	const [toRedirect, setToRedirect] = useState(false);
 
 	const onClickButton = (e) => {
 		e.preventDefault();
 
 		firebaseService
 			.login(state.email, state.password)
-			.then(res => setIsOk(true))
+			.then(res => setToRedirect(true))
 			.catch(err => setMessage(err.message));
 	}
 
-	if (isOk) {
+	if (toRedirect) {
 		return <Redirect to='/' />
 	}
+
 	return (
 		<form method="post">
 			<h1>Login</h1>
@@ -48,7 +49,7 @@ const Login = () => {
 				onChange={onChangeInput}
 			/>
 
-			<Button name="Login" onClick={onClickButton}/>
+			<Button name="Login" onClick={onClickButton} />
 		</form>
 	)
 }

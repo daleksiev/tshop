@@ -3,33 +3,33 @@ import Input from '../Shared/Input';
 import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
+import useForm from '../../hooks/useForm';
 
 const Register = () => {
-	const [state, setState] = useState({
+	const [state, onChangeInput] = useForm({
 		email: '',
 		password: '',
 		repeatPassword: '',
 	});
+
 	const [message, setMessage] = useState('');
-	const [isOk, setIsOk] = useState(false);
+	const [toRedirect, setToRedirect] = useState(false);
 
-	const onChangeInput = (e) => setState({ ...state, [e.target.name]: e.target.value });
-
-	const onClickButton = (e) => {
+	const onClickSubmit = (e) => {
 		e.preventDefault();
-		
-		if(state.password !== state.repeatPassword)  {
+
+		if (state.password !== state.repeatPassword) {
 			return setMessage('The passwords do not match.');
 		}
 
 		firebaseService
 			.signup(state.email, state.password)
-			.then(res => setIsOk(true))
+			.then(res => setToRedirect(true))
 			.catch(err => setMessage(err.message));
 	}
 
-	if(isOk) {
-		return <Redirect to='login'/>
+	if (toRedirect) {
+		return <Redirect to='login' />
 	}
 
 	return (
@@ -62,7 +62,7 @@ const Register = () => {
 				onChange={onChangeInput}
 			/>
 
-			<Button name="Sign Up" onClick={onClickButton}/>
+			<Button name="Sign Up" onClick={onClickSubmit} />
 		</form>
 	)
 }
