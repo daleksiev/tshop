@@ -1,16 +1,20 @@
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-
+import GlobalContext from "../../store";
+import { addErrorAction } from "../../reducers/messageReducer";
 const Register = () => {
+	const { message: [messageState, setMessageState] } = useContext(GlobalContext);
+
 	const [state, onChangeInput] = useForm({
 		email: '',
 		password: '',
 		repeatPassword: '',
 	});
+
 
 	const [message, setMessage] = useState('');
 	const [toRedirect, setToRedirect] = useState(false);
