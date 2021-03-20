@@ -4,8 +4,8 @@ import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-import { addErrorAction } from "../../reducers/messageReducer";
 import connect from "../../hoc/connect";
+import { addErrorAction } from '../../actions/messageAction'
 
 const Register = ({
 	message,
@@ -16,20 +16,19 @@ const Register = ({
 		repeatPassword: '',
 	});
 
-	const [messages, setMessages] = message;
 	const [toRedirect, setToRedirect] = useState(false);
 
 	const onClickSubmit = (e) => {
 		e.preventDefault();
 
 		if (state.password !== state.repeatPassword) {
-			return setMessages(addErrorAction('The passwords do not match.'));
+			return message.dispatch(addErrorAction('The passwords do not match.'));
 		}
 
 		firebaseService
 			.signup(state.email, state.password)
 			.then(res => setToRedirect(true))
-			.catch(err => setMessages(addErrorAction(err.message)));
+			.catch(err => message.dispatch(addErrorAction(err.message)));
 	}
 
 	if (toRedirect) {
@@ -40,7 +39,7 @@ const Register = ({
 		<form method="post">
 			<h1>Register</h1>
 
-			<p>{messages.error}</p>
+			<p>{message.error}</p>
 
 			<Input
 				id="email"
