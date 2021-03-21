@@ -3,40 +3,43 @@ import Input from '../Shared/Input';
 import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
+import useForm from '../../hooks/useForm';
+import connect from "../../hoc/connect";
+import { addErrorAction } from '../../actions/messageAction'
 
-const Register = () => {
-	const [state, setState] = useState({
+const Register = ({
+	message,
+}) => {
+	const [state, onChangeInput] = useForm({
 		email: '',
 		password: '',
 		repeatPassword: '',
 	});
-	const [message, setMessage] = useState('');
-	const [isOk, setIsOk] = useState(false);
 
-	const onChangeInput = (e) => setState({ ...state, [e.target.name]: e.target.value });
+	const [toRedirect, setToRedirect] = useState(false);
 
-	const onClickButton = (e) => {
+	const onClickSubmit = (e) => {
 		e.preventDefault();
-		
-		if(state.password !== state.repeatPassword)  {
-			return setMessage('The passwords do not match.');
+
+		if (state.password !== state.repeatPassword) {
+			return message.dispatch(addErrorAction('The passwords do not match.'));
 		}
 
 		firebaseService
 			.signup(state.email, state.password)
-			.then(res => setIsOk(true))
-			.catch(err => setMessage(err.message));
+			.then(res => setToRedirect(true))
+			.catch(err => message.dispatch(addErrorAction(err.message)));
 	}
 
-	if(isOk) {
-		return <Redirect to='login'/>
+	if (toRedirect) {
+		return <Redirect to='login' />
 	}
 
 	return (
 		<form method="post">
 			<h1>Register</h1>
 
-			<p>{message}</p>
+			<p>{message.error}</p>
 
 			<Input
 				id="email"
@@ -62,9 +65,14 @@ const Register = () => {
 				onChange={onChangeInput}
 			/>
 
-			<Button name="Sign Up" onClick={onClickButton}/>
+			<Button name="Sign Up" onClick={onClickSubmit} />
 		</form>
 	)
 }
 
-export default Register;
+
+const mapStateToProps = (state) => ({
+	message: state.message,
+})
+
+export default connect(mapStateToProps)(Register);
