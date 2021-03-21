@@ -4,7 +4,6 @@ import { useContext } from 'react';
 const connect = (mapStateToProps, mapDispatchToProps) => (Component) => (props) => {
     const context = useContext(GlobalContext);
     let newContext = {};
-    // let dispatch = {};
 
     for (const key in context) {
         if (Object.hasOwnProperty.call(context, key)) {

@@ -2,24 +2,26 @@
 	.app-container {
 		display: flex;
 		justify-content: center;
-		padding:75px 0 0;
+		padding: 75px 0 0;
 	}
 
 	form {
 		display: flex;
 		flex-direction: column;
-		border:2px solid #8080d2;
-		padding:75px;
+		border: 2px solid #8080d2;
+		padding: 75px;
 		border-radius: 15px;
-	
+		max-width: 410px;
+		box-sizing: border-box;
+
 		h1 {
-			color:#8080d2;
+			color: #8080d2;
 			text-align: center;
-			margin:0 0 35px;
+			margin: 0 0 35px;
 		}
-	
+
 		input {
-			margin:10px 0 35px;
+			margin: 10px 0 35px;
 		}
 	}
 }
