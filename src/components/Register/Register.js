@@ -4,7 +4,7 @@ import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-import { setError } from '../../actions/messageAction'
+import { setError } from '../../actions/messageActions'
 import { connect } from 'react-redux';
 
 const Register = ({

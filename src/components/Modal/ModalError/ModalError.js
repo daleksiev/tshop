@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
-import { setError } from '../../../actions/messageAction';
+import { setError } from '../../../actions/messageActions';
 import Modal from '..';
 import './ModalError.scss';
 
