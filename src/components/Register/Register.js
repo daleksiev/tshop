@@ -4,11 +4,9 @@ import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-import connect from "../../hoc/connect";
 import { addErrorAction } from '../../actions/messageAction'
 
 const Register = ({
-	message,
 }) => {
 	const [state, onChangeInput] = useForm({
 		email: '',
@@ -17,18 +15,19 @@ const Register = ({
 	});
 
 	const [toRedirect, setToRedirect] = useState(false);
+	const [message, setMessage] = useState('');
 
 	const onClickSubmit = (e) => {
 		e.preventDefault();
 
 		if (state.password !== state.repeatPassword) {
-			return message.dispatch(addErrorAction('The passwords do not match.'));
+			return setMessage('The passwords do not match.');
 		}
 
 		firebaseService
 			.signup(state.email, state.password)
 			.then(res => setToRedirect(true))
-			.catch(err => message.dispatch(addErrorAction(err.message)));
+			.catch(err => setMessage(err.message));
 	}
 
 	if (toRedirect) {
@@ -70,9 +69,4 @@ const Register = ({
 	)
 }
 
-
-const mapStateToProps = (state) => ({
-	message: state.message,
-})
-
-export default connect(mapStateToProps)(Register);
+export default Register;

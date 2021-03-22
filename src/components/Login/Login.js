@@ -4,18 +4,16 @@ import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-import connect from "../../hoc/connect";
-import { addErrorAction } from '../../actions/messageAction'
+// import { addErrorAction } from '../../actions/messageAction'
 
 const Login = ({
-	message,
 }) => {
 	const [state, onChangeInput] = useForm({
 		email: '',
 		password: '',
 	});
 
-	// const [message, setMessage] = useState('');
+	const [message, setMessage] = useState('');
 	const [toRedirect, setToRedirect] = useState(false);
 
 	const onClickButton = (e) => {
@@ -24,7 +22,7 @@ const Login = ({
 		firebaseService
 			.login(state.email, state.password)
 			.then(res => setToRedirect(true))
-			.catch(err => message.dispatch(addErrorAction(err.message)));
+			.catch(err => setMessage(err.message));
 	}
 
 	if (toRedirect) {
@@ -58,8 +56,4 @@ const Login = ({
 	)
 }
 
-const mapStateToProps = (state) => ({
-	message: state.message,
-})
-
-export default connect(mapStateToProps)(Login);
+export default Login;

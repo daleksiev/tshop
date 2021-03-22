@@ -1,3 +1,13 @@
-import { createContext } from 'react';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
 
-export default createContext();
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
+const middlewares = [
+    thunk,
+];
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware(...middlewares)));
+
+export default store;

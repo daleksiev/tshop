@@ -1,4 +1,3 @@
-import { useReducer } from "react";
 import {
     ADD_ERROR_MESSAGE,
     ADD_SUCCESS_MESSAGE
@@ -20,8 +19,6 @@ const messageReducer = (state = messageInitialState, action = {}) => {
     }
 }
 
-const useMessageReducer = () => useReducer(messageReducer, messageInitialState)
-
-export default useMessageReducer;
+export default messageReducer;
 
 
