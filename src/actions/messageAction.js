@@ -1,8 +1,8 @@
 import {
-    ADD_ERROR_MESSAGE,
-    ADD_SUCCESS_MESSAGE
+    SET_ERROR_MESSAGE,
+    SET_SUCCESS_MESSAGE
 } from '../actionTypes/messageActionTypes';
 
-export const addMessageAction = (msg) => ({ type: ADD_SUCCESS_MESSAGE, payload: msg });
+export const setMessage = (msg) => ({ type: SET_SUCCESS_MESSAGE, payload: msg });
 
-export const addErrorAction = (err) => ({ type: ADD_ERROR_MESSAGE, payload: err });
+export const setError = (err) => ({ type: SET_ERROR_MESSAGE, payload: err });

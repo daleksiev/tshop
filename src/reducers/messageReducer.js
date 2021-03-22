@@ -1,6 +1,6 @@
 import {
-    ADD_ERROR_MESSAGE,
-    ADD_SUCCESS_MESSAGE
+    SET_SUCCESS_MESSAGE,
+    SET_ERROR_MESSAGE,
 } from '../actionTypes/messageActionTypes';
 
 const messageInitialState = {
@@ -10,9 +10,9 @@ const messageInitialState = {
 
 const messageReducer = (state = messageInitialState, action = {}) => {
     switch (action.type) {
-        case ADD_SUCCESS_MESSAGE:
+        case SET_SUCCESS_MESSAGE:
             return { ...state, success: action.payload };
-        case ADD_ERROR_MESSAGE:
+        case SET_ERROR_MESSAGE:
             return { ...state, error: action.payload };
         default:
             return state;
