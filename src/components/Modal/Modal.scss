@@ -1,0 +1,15 @@
+.modal-wrapper {
+    position: absolute;
+    top: -1000px;
+    right: 200px;
+    width: auto;
+    max-width: 500px;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.4s;
+
+    &.active {
+        top: 13px;
+        opacity: 1;
+    }
+}

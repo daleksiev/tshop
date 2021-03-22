@@ -8,7 +8,6 @@ import { setError } from '../../actions/messageAction'
 import { connect } from 'react-redux';
 
 const Register = ({
-	error,
 	setError
 }) => {
 	const [state, onChangeInput] = useForm({
@@ -40,8 +39,6 @@ const Register = ({
 		<form method="post">
 			<h1>Register</h1>
 
-			<p>{error}</p>
-
 			<Input
 				id="email"
 				type="text"
@@ -72,7 +69,6 @@ const Register = ({
 }
 
 const mapStateToProps = (state) => ({
-	error: state.message.error,
 })
 
 const mapDispatchToProps = {

@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 
 const Login = ({
 	setError,
-	error,
 }) => {
 	const [state, onChangeInput] = useForm({
 		email: '',
@@ -35,8 +34,6 @@ const Login = ({
 		<form method="post">
 			<h1>Login</h1>
 
-			<p>{error}</p>
-
 			<Input
 				id="email"
 				type="email"
@@ -59,7 +56,6 @@ const Login = ({
 }
 
 const mapStateToProps = (state) => ({
-	error: state.message.error,
 })
 
 const mapDispatchToProps = {
