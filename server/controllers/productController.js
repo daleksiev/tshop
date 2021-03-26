@@ -13,12 +13,12 @@ router.post('/', (req, res) => {
         .catch(err => console.log(err));
 })
 
-router.patch('/', (req, res) => {
-    res.send('Hello there!');
-})
+// router.patch('/', (req, res) => {
+//     res.send('Hello there!');
+// })
 
-router.delete('/', (req, res) => {
-    res.send('Hello there!');
-})
+// router.delete('/', (req, res) => {
+//     res.send('Hello there!');
+// })
 
 module.exports = router;

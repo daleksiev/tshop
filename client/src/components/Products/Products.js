@@ -1,13 +1,34 @@
 import data from './data';
 import ProductsItem from './ProductsItem';
 import styles from './Products.module.scss';
+import { connect } from 'react-redux';
+import { fetchProductsAsync } from '../../actions/productsActions';
+import { useEffect } from 'react';
 
-const Products = () => (
-    <section className={styles['products-wrapper']}>
-        {data.map((product, i) =>
-            <ProductsItem key={i} href={''} {...product} />
-        )}
-    </section>
-)
+const Products = ({
+    fetchProductsAsync,
+    products,
+}) => {
+    useEffect(() => {
+        fetchProductsAsync();
+    }, [])
 
-export default Products;
+    return (
+        <section className={styles['products-wrapper']}>
+            {products.map((product, i) =>
+                <ProductsItem key={i} href={''} {...product} />
+            )}
+        </section>
+    )
+}
+
+
+const mapStateToProps = (state) => ({
+    products: state.products,
+})
+
+const mapDispatchToProps = {
+    fetchProductsAsync,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
