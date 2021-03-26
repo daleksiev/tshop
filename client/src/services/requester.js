@@ -13,10 +13,12 @@ const requester = (method = "GET", url, body = {}) => {
         .then(res => res.json())
 }
 
-export default {
+const requesters = {
     get: requester.bind(undefined, "GET"),
     post: requester.bind(undefined, "POST"),
     patch: requester.bind(undefined, "PATCH"),
     put: requester.bind(undefined, "PUT"),
     delete: requester.bind(undefined, "DELETE"),
 }
+
+export default requesters;

@@ -1,4 +1,3 @@
-import data from './data';
 import ProductsItem from './ProductsItem';
 import styles from './Products.module.scss';
 import { connect } from 'react-redux';
@@ -11,7 +10,7 @@ const Products = ({
 }) => {
     useEffect(() => {
         fetchProductsAsync();
-    }, [])
+    }, [fetchProductsAsync,])
 
     return (
         <section className={styles['products-wrapper']}>
