@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './ProductsItem.module.scss';
 
 const ProductsItem = ({
-    name,
+    title,
     brand,
     price,
     imageUrl,
@@ -12,10 +12,10 @@ const ProductsItem = ({
         <Link to={href}>
             <img
                 src={imageUrl}
-                alt={name}
+                alt={title}
             />
 
-            <h1>{name}</h1>
+            <h1>{title}</h1>
 
             <strong>{brand}</strong>
 

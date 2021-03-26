@@ -31,7 +31,7 @@ export const product = (state = productInitialState, action = {}) => {
 export const products = (state = productsInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ALL_PRODUCTS_SUCCESS:
-            return [...state, ...action.payload];
+            return [...action.payload];
         case FETCH_ALL_PRODUCTS_ERROR:
         case FETCH_ALL_PRODUCTS:
         default:
