@@ -24,8 +24,8 @@ const Login = ({
 
 		firebaseService
 			.login(state.email, state.password)
-			.then(user => {
-				setUserAuth(user);
+			.then(userInfo => {
+				setUserAuth(userInfo.user);
 				setToRedirect(true)
 			})
 			.catch(err => setError(err.message));
