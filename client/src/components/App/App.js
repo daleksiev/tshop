@@ -1,8 +1,9 @@
 import Header from '../Header';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import Login from '../Login';
 import Register from '../Register';
 import Products from '../Products';
+import ProductsDetails from '../Products/ProductsDetails';
 import './App.scss';
 
 const App = () => (
@@ -15,7 +16,11 @@ const App = () => (
 
 				<Route path="/register" component={Register} />
 
-				<Route path="/" component={Products} />
+				<Route path="/" exact render={() => <Redirect to="/products" />} />
+
+				<Route path="/products" exact component={Products} />
+
+				<Route path="/products/:productId" exact component={ProductsDetails} />
 			</Switch>
 		</article>
 	</section>

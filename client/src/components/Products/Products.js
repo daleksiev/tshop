@@ -14,8 +14,8 @@ const Products = ({
 
     return (
         <section className={styles['products-wrapper']}>
-            {products.map((product, i) =>
-                <ProductsItem key={i} href={''} {...product} />
+            {products.map((product) =>
+                <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
             )}
         </section>
     )
