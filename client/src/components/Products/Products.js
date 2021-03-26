@@ -4,8 +4,8 @@ import styles from './Products.module.scss';
 
 const Products = () => (
     <section className={styles['products-wrapper']}>
-        {data.map(product =>
-            <ProductsItem {...product} />
+        {data.map((product, i) =>
+            <ProductsItem key={i} href={''} {...product} />
         )}
     </section>
 )
