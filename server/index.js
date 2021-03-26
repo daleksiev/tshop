@@ -1,7 +1,8 @@
 const express = require('express');
-const port = 3001;
+const { PORT } = require('./config/config');
 const app = express();
 
 require('./config/express')(app);
+require('./config/mongoose');
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
