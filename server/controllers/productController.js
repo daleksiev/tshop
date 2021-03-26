@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:productId', (req, res) => {
-    productService.getOne()
+    productService.getOneById(req.params.productId)
         .then(product => res.json(product))
         .catch(err => console.log(err));
 })

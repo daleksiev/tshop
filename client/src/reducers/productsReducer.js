@@ -20,7 +20,7 @@ const productInitialState = {
 export const product = (state = productInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ONE_PRODUCT_SUCCESS:
-            return { ...action.payload };
+            return { ...state, ...action.payload };
         case FETCH_ONE_PRODUCT_ERROR:
         case FETCH_ONE_PRODUCT:
         default:
@@ -31,7 +31,7 @@ export const product = (state = productInitialState, action = {}) => {
 export const products = (state = productsInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ALL_PRODUCTS_SUCCESS:
-            return action.payload.slice();
+            return [...state, ...action.payload];
         case FETCH_ALL_PRODUCTS_ERROR:
         case FETCH_ALL_PRODUCTS:
         default:
