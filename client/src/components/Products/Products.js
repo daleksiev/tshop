@@ -1,16 +1,16 @@
 import ProductsItem from './ProductsItem';
 import styles from './Products.module.scss';
 import { connect } from 'react-redux';
-import { fetchProductsAsync } from '../../actions/productsActions';
+import { fetchAllProductsAsync } from '../../actions/productsActions';
 import { useEffect } from 'react';
 
 const Products = ({
-    fetchProductsAsync,
+    fetchAllProductsAsync,
     products,
 }) => {
     useEffect(() => {
-        fetchProductsAsync();
-    }, [fetchProductsAsync,])
+        fetchAllProductsAsync();
+    }, [fetchAllProductsAsync,])
 
     return (
         <section className={styles['products-wrapper']}>
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    fetchProductsAsync,
+    fetchAllProductsAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

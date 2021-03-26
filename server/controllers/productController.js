@@ -7,6 +7,12 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err));
 })
 
+router.get('/:productId', (req, res) => {
+    productService.getOne()
+        .then(product => res.json(product))
+        .catch(err => console.log(err));
+})
+
 router.post('/', (req, res) => {
     productService.createOne(req.body)
         .then(response => res.json(response))
