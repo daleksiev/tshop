@@ -8,7 +8,7 @@ const getOne = (filter) => Product.findOne(filter);
 
 const createOne = (data) => new Product(data).save();
 
-const updateOne = (_id, data) => Product.findByIdAndUpdate(_id, { $set: data });
+const updateOne = (_id, data) => Product.findByIdAndUpdate(_id, { $set: data }, { new: true });
 
 const removeOne = (_id) => Product.findByIdAndDelete(_id);
 

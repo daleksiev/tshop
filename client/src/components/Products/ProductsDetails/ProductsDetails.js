@@ -16,8 +16,6 @@ const ProductsDetails = ({
     const [toRedirect, setToRedirect] = useState(false);
     const { productId } = match.params;
 
-    console.log(productId);
-
     useEffect(() => {
         fetchOneProductAsync(productId);
     }, [fetchOneProductAsync, productId]);

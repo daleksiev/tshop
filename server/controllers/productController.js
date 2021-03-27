@@ -15,17 +15,19 @@ router.get('/:productId', (req, res) => {
 
 router.post('/', (req, res) => {
     productService.createOne(req.body)
-        .then(response => res.json(response))
+        .then(product => res.json(product))
         .catch(err => console.log(err));
 })
 
-// router.patch('/', (req, res) => {
-//     res.send('Hello there!');
-// })
+router.patch('/:productId', (req, res) => {
+    productService.updateOne(req.params.productId, req.body)
+        .then(product => res.json(product))
+        .catch(err => console.log(err));
+})
 
 router.delete('/:productId', (req, res) => {
     productService.removeOne(req.params.productId)
-        .then(res => res.send(res))
+        .then(response => res.send(response))
         .catch(err => console.log(err));
 })
 

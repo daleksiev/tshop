@@ -8,6 +8,9 @@ import {
     CREATE_PRODUCT,
     CREATE_PRODUCT_ERROR,
     CREATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_ERROR,
     DELETE_PRODUCT,
     DELETE_PRODUCT_ERROR,
     DELETE_PRODUCT_SUCCESS,
@@ -83,6 +86,30 @@ export const createProductAsync = (data) => async (dispatch) => {
         .then(product => dispatch(createProductSuccess(product)))
         .catch(err => dispatch(createProductError(err)));
 }
+
+// update product
+export const updateProduct = () => ({
+    type: UPDATE_PRODUCT,
+})
+
+export const updateProductSuccess = (payload) => ({
+    type: UPDATE_PRODUCT_SUCCESS,
+    payload,
+})
+
+export const updateProductError = (payload) => ({
+    type: UPDATE_PRODUCT_ERROR,
+    payload,
+})
+
+export const updateProductAsync = (id, data) => async (dispatch) => {
+    dispatch(updateProduct());
+
+    productService.update(id, data)
+        .then(product => dispatch(updateProductSuccess(product)))
+        .catch(err => dispatch(updateProductError(err)));
+}
+
 
 //delete product
 export const deleteProduct = () => ({

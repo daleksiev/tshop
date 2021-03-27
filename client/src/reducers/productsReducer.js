@@ -8,6 +8,9 @@ import {
     CREATE_PRODUCT,
     CREATE_PRODUCT_ERROR,
     CREATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_ERROR,
     DELETE_PRODUCT,
     DELETE_PRODUCT_ERROR,
     DELETE_PRODUCT_SUCCESS
@@ -32,6 +35,9 @@ export const product = (state = productInitialState, action = {}) => {
         case CREATE_PRODUCT:
         case CREATE_PRODUCT_ERROR:
         case CREATE_PRODUCT_SUCCESS:
+        case UPDATE_PRODUCT:
+        case UPDATE_PRODUCT_SUCCESS:
+        case UPDATE_PRODUCT_ERROR:
         case DELETE_PRODUCT:
         case DELETE_PRODUCT_ERROR:
         case DELETE_PRODUCT_SUCCESS:

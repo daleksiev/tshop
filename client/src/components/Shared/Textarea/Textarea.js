@@ -10,7 +10,7 @@ const Textarea = ({
 	<div className="textarea-container input-container">
 		<label htmlFor={id}>{title}</label>
 
-		<textarea id={id} name={name} onChange={onChange} >{value}</textarea>
+		<textarea id={id} name={name} onChange={onChange} defaultValue={value}></textarea>
 	</div>
 )
 

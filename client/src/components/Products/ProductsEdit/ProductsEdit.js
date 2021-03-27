@@ -2,16 +2,22 @@ import Button from '../../Shared/Button';
 import Input from '../../Shared/Input';
 import Textarea from '../../Shared/Textarea';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
     fetchOneProductAsync,
+    updateProductAsync,
 } from '../../../actions/productsActions'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useForm from '../../../hooks/useForm';
 
 const ProductsEdit = ({
     product,
     match,
+    fetchOneProductAsync,
+    updateProductAsync,
 }) => {
+    const [toRedirect, setToRedirect] = useState(false);
+
     const [state, onChangeInput] = useForm({
         title: product.title,
         brand: product.brand,
@@ -22,10 +28,18 @@ const ProductsEdit = ({
 
     const { productId } = match.params;
 
-    useEffect(() => fetchOneProductAsync(productId))
+    useEffect(() => {
+        fetchOneProductAsync(productId)
+    }, [fetchOneProductAsync, productId])
 
     const onClickButton = (e) => {
         e.preventDefault();
+        updateProductAsync(productId, state)
+        setToRedirect(true);
+    }
+
+    if (toRedirect) {
+        return <Redirect to={`/products/${productId}`} />
     }
 
     return (
@@ -38,7 +52,7 @@ const ProductsEdit = ({
                 name="title"
                 title="Title:"
                 onChange={onChangeInput}
-                value={state.title}
+                value={product.title}
             />
 
             <Input
@@ -47,7 +61,7 @@ const ProductsEdit = ({
                 name="brand"
                 title="Brand:"
                 onChange={onChangeInput}
-                value={state.brand}
+                value={product.brand}
             />
 
             <Input
@@ -56,7 +70,7 @@ const ProductsEdit = ({
                 name="imageUrl"
                 title="Image URL:"
                 onChange={onChangeInput}
-                value={state.imageUrl}
+                value={product.imageUrl}
             />
 
             <Input
@@ -65,7 +79,7 @@ const ProductsEdit = ({
                 name="price"
                 title="Price:"
                 onChange={onChangeInput}
-                value={state.price}
+                value={product.price}
             />
 
             <Textarea
@@ -73,7 +87,7 @@ const ProductsEdit = ({
                 name="description"
                 title="Description:"
                 onChange={onChangeInput}
-                value={state.description}
+                value={product.description}
             />
 
             <Button name="Edit" onClick={onClickButton} />
@@ -86,7 +100,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-
+    fetchOneProductAsync,
+    updateProductAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsEdit);
