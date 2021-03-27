@@ -1,39 +1,36 @@
 import Button from '../../Shared/Button';
 import Input from '../../Shared/Input';
 import Textarea from '../../Shared/Textarea';
-import { Redirect } from 'react-router';
-import { useState } from 'react';
-import useForm from '../../../hooks/useForm';
-// import { setError } from '../../../actions/messageActions';
 import { connect } from 'react-redux';
-import { createProductAsync } from '../../../actions/productsActions';
+import {
+    fetchOneProductAsync,
+} from '../../../actions/productsActions'
+import { useEffect } from 'react';
+import useForm from '../../../hooks/useForm';
 
-const ProductsCreate = ({
-    createProductAsync,
+const ProductsEdit = ({
+    product,
+    match,
 }) => {
     const [state, onChangeInput] = useForm({
-        title: '',
-        brand: '',
-        imageUrl: '',
-        price: '',
-        description: '',
+        title: product.title,
+        brand: product.brand,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        description: product.description,
     });
 
-    const [toRedirect, setToRedirect] = useState(false);
+    const { productId } = match.params;
+
+    useEffect(() => fetchOneProductAsync(productId))
 
     const onClickButton = (e) => {
         e.preventDefault();
-        createProductAsync(state)
-            .then(res => setToRedirect(true));
-    }
-
-    if (toRedirect) {
-        return <Redirect to="/" />
     }
 
     return (
         <form method="post">
-            <h1>Create Product</h1>
+            <h1>Edit Product</h1>
 
             <Input
                 id="title"
@@ -41,6 +38,7 @@ const ProductsCreate = ({
                 name="title"
                 title="Title:"
                 onChange={onChangeInput}
+                value={state.title}
             />
 
             <Input
@@ -49,6 +47,7 @@ const ProductsCreate = ({
                 name="brand"
                 title="Brand:"
                 onChange={onChangeInput}
+                value={state.brand}
             />
 
             <Input
@@ -57,6 +56,7 @@ const ProductsCreate = ({
                 name="imageUrl"
                 title="Image URL:"
                 onChange={onChangeInput}
+                value={state.imageUrl}
             />
 
             <Input
@@ -65,6 +65,7 @@ const ProductsCreate = ({
                 name="price"
                 title="Price:"
                 onChange={onChangeInput}
+                value={state.price}
             />
 
             <Textarea
@@ -72,19 +73,20 @@ const ProductsCreate = ({
                 name="description"
                 title="Description:"
                 onChange={onChangeInput}
+                value={state.description}
             />
 
-            <Button name="Create" onClick={onClickButton} />
+            <Button name="Edit" onClick={onClickButton} />
         </form>
     )
 }
 
 const mapStateToProps = (state) => ({
-
+    product: state.product,
 })
 
 const mapDispatchToProps = {
-    createProductAsync,
+
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsEdit);

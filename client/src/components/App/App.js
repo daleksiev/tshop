@@ -4,7 +4,8 @@ import Login from '../Login';
 import Register from '../Register';
 import Products from '../Products';
 import ProductsDetails from '../Products/ProductsDetails';
-import Create from '../Products/ProductsCreate';
+import ProductsCreate from '../Products/ProductsCreate';
+import ProductsEdit from '../Products/ProductsEdit';
 import './App.scss';
 
 const App = () => (
@@ -21,9 +22,13 @@ const App = () => (
 
 				<Route path="/products" exact component={Products} />
 
-				<Route path="/create" exact component={Create} />
+				<Route path="/create" exact component={ProductsCreate} />
 
 				<Route path="/products/:productId" exact component={ProductsDetails} />
+
+				<Route path="/products/edit/:productId" exact component={ProductsEdit} />
+
+
 			</Switch>
 		</article>
 	</section>

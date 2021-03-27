@@ -12,7 +12,10 @@
         padding: 20px 0;
     }
 
-    button {
+    button,
+    a {
+        font-weight: normal;
+        text-decoration: none;
         color: #fff;
         border: none;
         padding: 20px;
