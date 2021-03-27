@@ -23,8 +23,10 @@ router.post('/', (req, res) => {
 //     res.send('Hello there!');
 // })
 
-// router.delete('/', (req, res) => {
-//     res.send('Hello there!');
-// })
+router.delete('/:productId', (req, res) => {
+    productService.removeOne(req.params.productId)
+        .then(res => res.send(res))
+        .catch(err => console.log(err));
+})
 
 module.exports = router;

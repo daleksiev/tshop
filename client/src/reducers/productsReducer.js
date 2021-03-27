@@ -8,6 +8,9 @@ import {
     CREATE_PRODUCT,
     CREATE_PRODUCT_ERROR,
     CREATE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT,
+    DELETE_PRODUCT_ERROR,
+    DELETE_PRODUCT_SUCCESS
 } from '../actionTypes/productsActionTypes';
 
 const productsInitialState = [];
@@ -29,6 +32,9 @@ export const product = (state = productInitialState, action = {}) => {
         case CREATE_PRODUCT:
         case CREATE_PRODUCT_ERROR:
         case CREATE_PRODUCT_SUCCESS:
+        case DELETE_PRODUCT:
+        case DELETE_PRODUCT_ERROR:
+        case DELETE_PRODUCT_SUCCESS:
         default:
             return state;
     }
