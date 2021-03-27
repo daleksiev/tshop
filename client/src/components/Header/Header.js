@@ -14,6 +14,23 @@ const Header = ({
 		firebaseService.logout();
 		logoutUser();
 	}
+
+	const guestLinks = () => (
+		<>
+			<Link to="/login" >Login</Link>
+
+			<Link to="/register" >Register</Link>
+		</>
+	)
+
+	const loggedInLinks = () => (
+		<>
+			<Link to="/create" >Create</Link>
+
+			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
+		</>
+	)
+
 	return (
 		<header className="header-wrapper">
 			<ModalError />
@@ -21,14 +38,8 @@ const Header = ({
 			<Link to="/" >Home</Link>
 
 			{user.isLoggedIn
-				? <Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
-				: (
-					<>
-						<Link to="/login" >Login</Link>
-
-						<Link to="/register" >Register</Link>
-					</>
-				)
+				? loggedInLinks()
+				: guestLinks()
 			}
 
 		</header>

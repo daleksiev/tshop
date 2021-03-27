@@ -14,7 +14,7 @@ const ProductsDetails = ({
         if (product._id !== productId) {
             fetchOneProductAsync(productId);
         }
-    }, [fetchOneProductAsync, productId]);
+    }, [fetchOneProductAsync, productId, product]);
 
     return (
         <section className={styles['product-details']}>
