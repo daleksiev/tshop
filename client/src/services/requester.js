@@ -2,11 +2,14 @@ const requester = (method = "GET", url, body = {}) => {
     body = JSON.stringify(body);
 
     const options = {
+        method,
         headers: {
             'Content-type': 'application/json',
-            method,
-            body,
         },
+    }
+
+    if (method !== 'GET') {
+        options.body = body;
     }
 
     return fetch(url, options)

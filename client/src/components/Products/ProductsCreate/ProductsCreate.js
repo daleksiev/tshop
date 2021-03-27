@@ -2,13 +2,16 @@
 import Button from '../../Shared/Button';
 import Input from '../../Shared/Input';
 import Textarea from '../../Shared/Textarea';
-// import { Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import { useState } from 'react';
 import useForm from '../../../hooks/useForm';
 // import { setError } from '../../../actions/messageActions';
 import { connect } from 'react-redux';
+import { createProductAsync } from '../../../actions/productsActions';
 
-const ProductsCreate = () => {
+const ProductsCreate = ({
+    createProductAsync,
+}) => {
     const [state, onChangeInput] = useForm({
         title: '',
         brand: '',
@@ -21,6 +24,12 @@ const ProductsCreate = () => {
 
     const onClickButton = (e) => {
         e.preventDefault();
+        createProductAsync(state)
+            .then(res => setToRedirect(true));
+    }
+
+    if (toRedirect) {
+        return <Redirect to="/" />
     }
 
     return (
@@ -76,7 +85,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-
+    createProductAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsCreate);

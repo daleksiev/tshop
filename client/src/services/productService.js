@@ -4,5 +4,14 @@ import {
 } from './api';
 import requester from './requester';
 
-export const getAll = async () => requester.get(productsUrl());
-export const getOne = async (id) => requester.get(productUrl(id));
+const getAll = async () => requester.get(productsUrl());
+const getOne = async (id) => requester.get(productUrl(id));
+const create = async (data) => requester.post(productsUrl(), data);
+
+const productService = {
+    getAll,
+    getOne,
+    create,
+}
+
+export default productService;

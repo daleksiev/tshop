@@ -5,9 +5,14 @@ import {
     FETCH_ONE_PRODUCT,
     FETCH_ONE_PRODUCT_SUCCESS,
     FETCH_ONE_PRODUCT_ERROR,
+    CREATE_PRODUCT,
+    CREATE_PRODUCT_ERROR,
+    CREATE_PRODUCT_SUCCESS,
 } from '../actionTypes/productsActionTypes';
-import { getAll, getOne } from '../services/productService';
+import productService from '../services/productService';
 
+
+// fetch one product
 export const fetchOneProduct = () => ({
     type: FETCH_ONE_PRODUCT,
 })
@@ -25,11 +30,12 @@ export const fetchOneProductError = (payload) => ({
 export const fetchOneProductAsync = (productId) => (dispatch) => {
     dispatch(fetchOneProduct());
 
-    getOne(productId)
+    productService.getOne(productId)
         .then(product => dispatch(fetchOneProductSuccess(product)))
         .catch(err => dispatch(fetchOneProductError(err)));
 }
 
+// fetch all products
 export const fetchAllProducts = () => ({
     type: FETCH_ALL_PRODUCTS,
 });
@@ -47,7 +53,30 @@ export const fetchAllProductsError = (payload) => ({
 export const fetchAllProductsAsync = () => (dispatch) => {
     dispatch(fetchAllProducts());
 
-    getAll()
+    productService.getAll()
         .then(products => dispatch(fetchAllProductsSuccess(products)))
         .catch(err => dispatch(fetchAllProductsError(err)));
+}
+
+// create product
+export const createProduct = () => ({
+    type: CREATE_PRODUCT,
+})
+
+export const createProductSuccess = (payload) => ({
+    type: CREATE_PRODUCT_SUCCESS,
+    payload,
+})
+
+export const createProductError = (payload) => ({
+    type: CREATE_PRODUCT_ERROR,
+    payload,
+})
+
+export const createProductAsync = (data) => async (dispatch) => {
+    dispatch(createProduct());
+
+    productService.create(data)
+        .then(product => dispatch(createProductSuccess(product)))
+        .catch(err => dispatch(createProductError(err)));
 }

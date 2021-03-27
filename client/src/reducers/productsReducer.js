@@ -5,6 +5,9 @@ import {
     FETCH_ONE_PRODUCT_SUCCESS,
     FETCH_ONE_PRODUCT_ERROR,
     FETCH_ONE_PRODUCT,
+    CREATE_PRODUCT,
+    CREATE_PRODUCT_ERROR,
+    CREATE_PRODUCT_SUCCESS,
 } from '../actionTypes/productsActionTypes';
 
 const productsInitialState = [];
@@ -23,6 +26,9 @@ export const product = (state = productInitialState, action = {}) => {
             return { ...state, ...action.payload };
         case FETCH_ONE_PRODUCT_ERROR:
         case FETCH_ONE_PRODUCT:
+        case CREATE_PRODUCT:
+        case CREATE_PRODUCT_ERROR:
+        case CREATE_PRODUCT_SUCCESS:
         default:
             return state;
     }
