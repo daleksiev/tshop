@@ -2,7 +2,7 @@ import Button from '../../Shared/Button';
 import Input from '../../Shared/Input';
 import Textarea from '../../Shared/Textarea';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
     fetchOneProductAsync,
     updateProductAsync,
@@ -44,57 +44,61 @@ const ProductsEdit = ({
     }
 
     return (
-        <form method="post" className={styles['products-edit']}>
-            <h1>Edit Product</h1>
+        <div className={styles['products-edit']}>
+            <Link to={`/products/${productId}`} >Back to details</Link>
 
-            <img src={product.imageUrl} />
+            <form method="post">
+                <h1>Edit Product</h1>
 
-            <Input
-                id="title"
-                type="text"
-                name="title"
-                title="Title:"
-                onChange={onChangeInput}
-                value={product.title}
-            />
+                <img src={product.imageUrl} alt={product.title} />
 
-            <Input
-                id="brand"
-                type="text"
-                name="brand"
-                title="Brand:"
-                onChange={onChangeInput}
-                value={product.brand}
-            />
+                <Input
+                    id="title"
+                    type="text"
+                    name="title"
+                    title="Title:"
+                    onChange={onChangeInput}
+                    value={product.title}
+                />
 
-            <Input
-                id="imageUrl"
-                type="text"
-                name="imageUrl"
-                title="Image URL:"
-                onChange={onChangeInput}
-                value={product.imageUrl}
-            />
+                <Input
+                    id="brand"
+                    type="text"
+                    name="brand"
+                    title="Brand:"
+                    onChange={onChangeInput}
+                    value={product.brand}
+                />
 
-            <Input
-                id="price"
-                type="number"
-                name="price"
-                title="Price:"
-                onChange={onChangeInput}
-                value={product.price}
-            />
+                <Input
+                    id="imageUrl"
+                    type="text"
+                    name="imageUrl"
+                    title="Image URL:"
+                    onChange={onChangeInput}
+                    value={product.imageUrl}
+                />
 
-            <Textarea
-                id="description"
-                name="description"
-                title="Description:"
-                onChange={onChangeInput}
-                value={product.description}
-            />
+                <Input
+                    id="price"
+                    type="number"
+                    name="price"
+                    title="Price:"
+                    onChange={onChangeInput}
+                    value={product.price}
+                />
 
-            <Button name="Edit" onClick={onClickButton} />
-        </form>
+                <Textarea
+                    id="description"
+                    name="description"
+                    title="Description:"
+                    onChange={onChangeInput}
+                    value={product.description}
+                />
+
+                <Button name="Edit" onClick={onClickButton} />
+            </form>
+        </div>
     )
 }
 

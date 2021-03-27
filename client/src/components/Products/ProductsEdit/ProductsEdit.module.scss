@@ -1,4 +1,9 @@
 .products-edit {
+    & > a {
+        display: block;
+        margin-bottom: 20px;
+    }
+
     img {
         padding: 0 0 30px;
     }

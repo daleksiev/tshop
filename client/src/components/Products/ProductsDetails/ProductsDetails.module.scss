@@ -23,8 +23,8 @@
         text-decoration: none;
         color: #fff;
         border: none;
-        padding: 20px;
-        border-radius: 15px;
+        padding: 10px 20px;
+        border-radius: 25px;
         outline: none;
         cursor: pointer;
         font-size: 20px;
@@ -32,6 +32,7 @@
         transition: 0.4s;
 
         &:hover {
+            text-decoration: none;
             background: #fff;
             border: 3px solid;
         }
@@ -52,6 +53,15 @@
         &:hover {
             color: #594fb6;
             border-color: #594fb6;
+        }
+    }
+    .buy-button {
+        background: #4d963f;
+        margin-right: 20px;
+
+        &:hover {
+            color: #4d963f;
+            border-color: #4d963f;
         }
     }
 }
