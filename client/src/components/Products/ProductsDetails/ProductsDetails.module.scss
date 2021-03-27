@@ -12,9 +12,12 @@
         width: 100%;
     }
 
-    strong,
-    p {
+    strong {
         padding: 20px 0;
+    }
+
+    p {
+        padding: 0 0 20px;
     }
 
     button,
@@ -28,13 +31,13 @@
         outline: none;
         cursor: pointer;
         font-size: 20px;
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         transition: 0.4s;
 
         &:hover {
             text-decoration: none;
             background: #fff;
-            border: 3px solid;
+            border: 2px solid;
         }
     }
 
@@ -47,12 +50,12 @@
         }
     }
     .edit-button {
-        background: #594fb6;
+        background: #8080d2;
         margin-right: 20px;
 
         &:hover {
-            color: #594fb6;
-            border-color: #594fb6;
+            color: #8080d2;
+            border-color: #8080d2;
         }
     }
     .buy-button {
