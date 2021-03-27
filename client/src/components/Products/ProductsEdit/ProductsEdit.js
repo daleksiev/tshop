@@ -9,6 +9,7 @@ import {
 } from '../../../actions/productsActions'
 import { useEffect, useState } from 'react';
 import useForm from '../../../hooks/useForm';
+import styles from './ProductsEdit.module.scss';
 
 const ProductsEdit = ({
     product,
@@ -43,8 +44,10 @@ const ProductsEdit = ({
     }
 
     return (
-        <form method="post">
+        <form method="post" className={styles['products-edit']}>
             <h1>Edit Product</h1>
+
+            <img src={product.imageUrl} />
 
             <Input
                 id="title"
