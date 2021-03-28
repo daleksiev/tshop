@@ -17,7 +17,6 @@ import {
 } from '../actionTypes/productsActionTypes';
 import productService from '../services/productService';
 
-
 // fetch one product
 export const fetchOneProduct = () => ({
     type: FETCH_ONE_PRODUCT,
@@ -109,7 +108,6 @@ export const updateProductAsync = (id, data) => async (dispatch) => {
         .then(product => dispatch(updateProductSuccess(product)))
         .catch(err => dispatch(updateProductError(err)));
 }
-
 
 //delete product
 export const deleteProduct = () => ({

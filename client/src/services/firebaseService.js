@@ -1,6 +1,10 @@
 import { auth } from '../firebase';
+import userService from './userService';
 
-const signup = (email, password) => auth().createUserWithEmailAndPassword(email, password);
+const signup = (email, password) => {
+	return auth().createUserWithEmailAndPassword(email, password)
+		.then(({ user }) => userService.create({ email, firebaseId: user.uid }));
+}
 
 const login = (email, password) => {
 	return auth().signInWithEmailAndPassword(email, password)
