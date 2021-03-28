@@ -13,8 +13,9 @@ const login = (email, password) => {
 
 			return Promise.all([userService.login(userData?.user.za), userData.user,]);
 		})
-		.then(([isLoggedIn, user]) => {
-			if (isLoggedIn) {
+		.then(([res, user]) => {
+			if (res.ok) {
+				user = { ...user, _id: res?.user._id, };
 				localStorage.setItem('user', JSON.stringify(user));
 				return user;
 			}

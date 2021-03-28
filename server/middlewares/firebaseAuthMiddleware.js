@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
             if (!user) throw user;
 
             req.isLoggedIn = true;
+            req.user = user;
             next();
         })
         .catch((err) => {

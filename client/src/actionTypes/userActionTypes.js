@@ -1,2 +1,5 @@
 export const SET_USER_AUTH = 'SET_USER_AUTH';
 export const LOGOUT_USER = 'LOGOUT_USER';
+
+export const BUY_PRODUCT = 'BUY_PRODUCT';
+export const BUY_PRODUCT_SUCCESS = 'BUY_PRODUCT_SUCCESS';

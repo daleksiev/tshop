@@ -5,6 +5,11 @@ import {
     fetchOneProductAsync,
     deleteProductAsync,
 } from '../../../actions/productsActions';
+
+import {
+    buyProductAsync,
+} from '../../../actions/userActions';
+
 import styles from './ProductsDetails.module.scss';
 
 const ProductsDetails = ({
@@ -12,6 +17,8 @@ const ProductsDetails = ({
     fetchOneProductAsync,
     product,
     deleteProductAsync,
+    buyProductAsync,
+    user,
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
     const { productId } = match.params;
@@ -25,9 +32,7 @@ const ProductsDetails = ({
             .then(() => setToRedirect(true));
     }
 
-    const onClickBuyProduct = () => {
-        console.log('buy');
-    }
+    const onClickBuyProduct = () => buyProductAsync(user._id, productId);
 
     if (toRedirect) {
         return <Redirect to='/' />
@@ -62,11 +67,13 @@ const ProductsDetails = ({
 
 const mapStateToProps = (state) => ({
     product: state.product,
+    user: state.user,
 });
 
 const mapDispatchToProps = {
     fetchOneProductAsync,
     deleteProductAsync,
+    buyProductAsync,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsDetails);

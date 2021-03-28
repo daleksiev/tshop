@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
 
 router.get('/', firebaseAuthMiddleware, (req, res) => {
     if (req.isLoggedIn) {
-        return res.json({ ok: true });
+        return res.json({ ok: true, user: req.user, });
     }
 
     return res.json({ ok: false });
