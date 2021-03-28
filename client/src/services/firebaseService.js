@@ -8,12 +8,18 @@ const signup = (email, password) => {
 
 const login = (email, password) => {
 	return auth().signInWithEmailAndPassword(email, password)
-		.then(user => {
-			if (!user) throw user;
+		.then(userData => {
+			if (!userData) throw userData;
 
-			localStorage.setItem('user', JSON.stringify(user));
-			return user;
-		});
+			return Promise.all([userService.login(userData?.user.za), userData.user,]);
+		})
+		.then(([isLoggedIn, user]) => {
+			if (isLoggedIn) {
+				localStorage.setItem('user', JSON.stringify(user));
+				return user;
+			}
+		})
+		.catch(err => console.log(err));
 }
 
 const logout = () => {

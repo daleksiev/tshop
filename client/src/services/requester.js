@@ -1,11 +1,25 @@
-const requester = (method = "GET", url, body = {}) => {
+const allHeaders = {
+    auth: (token) => ({ 'Authorization': `Bearer ${token}` }),
+}
+
+const requester = (method = "GET", url, body = {}, headersOptions = {}) => {
     body = JSON.stringify(body);
+    let headers = {
+        'Content-type': 'application/json',
+    };
+
+    for (const key in headersOptions) {
+        if (Object.hasOwnProperty.call(allHeaders, key)) {
+            const item = headersOptions[key];
+            const resultHeader = allHeaders[key](item);
+            headers = { ...headers, ...resultHeader };
+        }
+    }
+
 
     const options = {
         method,
-        headers: {
-            'Content-type': 'application/json',
-        },
+        headers,
     }
 
     if (method !== 'GET') {
