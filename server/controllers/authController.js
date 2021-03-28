@@ -9,7 +9,11 @@ router.post('/', (req, res) => {
 })
 
 router.get('/', firebaseAuthMiddleware, (req, res) => {
-    res.json({ ok: true, token: req.token });
+    if (req.isLoggedIn) {
+        return res.json({ ok: true });
+    }
+
+    return res.json({ ok: false });
 })
 
 module.exports = router;

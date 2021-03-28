@@ -1,4 +1,5 @@
 const admin = require('../config/firebase');
+const userService = require('../services/userService');
 
 module.exports = (req, res, next) => {
     let { authorization } = req.headers;
@@ -6,8 +7,11 @@ module.exports = (req, res, next) => {
     admin
         .auth()
         .verifyIdToken(authorization)
-        .then((token) => {
-            req.token = token;
+        .then((token) => userService.getOne({ firebaseId: token.uid }))
+        .then(user => {
+            if (!user) throw user;
+
+            req.isLoggedIn = true;
             next();
         })
         .catch((err) => {
