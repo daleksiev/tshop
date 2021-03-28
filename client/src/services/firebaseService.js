@@ -3,7 +3,13 @@ import userService from './userService';
 
 const signup = (email, password) => {
 	return auth().createUserWithEmailAndPassword(email, password)
-		.then(({ user }) => userService.create({ email, firebaseId: user.uid }));
+		.then(({ user }) => userService.create({
+			email,
+			firebaseId: user.uid,
+			refreshToken: user.refreshToken,
+			accessToken: user.za,
+		})
+		);
 }
 
 const login = (email, password) => {
@@ -11,13 +17,12 @@ const login = (email, password) => {
 		.then(userData => {
 			if (!userData) throw userData;
 
-			return Promise.all([userService.login(userData?.user.za), userData.user,]);
+			return userService.login(userData?.user.za);
 		})
-		.then(([res, user]) => {
+		.then(res => {
 			if (res.ok) {
-				user = { ...user, _id: res?.user._id, };
-				localStorage.setItem('user', JSON.stringify(user));
-				return user;
+				localStorage.setItem('user', JSON.stringify(res.user));
+				return res.user;
 			}
 		})
 		.catch(err => console.log(err));
