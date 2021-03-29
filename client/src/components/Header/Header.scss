@@ -9,12 +9,15 @@
 		justify-content: flex-end;
 		padding: 30px;
 		flex-basis: 70%;
+		flex-shrink: 1;
 		flex-grow: 5;
+		flex-wrap: wrap;
 	}
 
 	a.profile {
 		flex-basis: 50%;
 		flex-grow: 1;
+		flex-shrink: 1;
 		text-align: center;
 	}
 
