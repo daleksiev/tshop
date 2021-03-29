@@ -22,8 +22,7 @@ const ProductsDetails = ({
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
     const { productId } = match.params;
-    const isBought = user.bought.includes(productId);
-
+    const isBought = user.bought.find(product => product._id === productId);
 
     useEffect(() => {
         fetchOneProductAsync(productId);
@@ -46,7 +45,7 @@ const ProductsDetails = ({
                 <img src={product.imageUrl} alt={product.title} />
             </article>
 
-            <article>
+            <div>
                 <h1>{product.title}</h1>
 
                 <strong>Brand: {product.brand}</strong>
@@ -57,16 +56,19 @@ const ProductsDetails = ({
                     <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Deinde qui fit, ut ego nesciam, sciant omnes, quicumque Epicurei esse voluerunt? Qui autem esse poteris, nisi te amor ipse ceperit? Idem iste, inquam, de voluptate quid sentit? Huius ego nunc auctoritatem sequens idem faciam. Maximas vero virtutes iacere omnis necesse est voluptate dominante. Roges enim Aristonem, bonane ei videantur haec: vacuitas doloris, divitiae, valitudo; Unum nescio, quo modo possit, si luxuriosus sit, finitas cupiditates habere. Duo Reges: constructio interrete. Non est igitur voluptas bonum. Atque haec coniunctio confusioque virtutum tamen a philosophis ratione quadam distinguitur.
                 </p>
 
-                {isBought
-                    ? <button className={styles['buy-unactive-button']}>You already bought this product!</button>
-                    : <button className={styles['buy-button']} onClick={onClickBuyProduct}>Buy</button>
-                }
+                <div>
+                    {isBought
+                        ? <button className={styles['buy-unactive-button']}>You already bought this product!</button>
+                        : <button className={styles['buy-button']} onClick={onClickBuyProduct}>Buy</button>
+                    }
 
 
-                <Link className={styles['edit-button']} to={`/products/edit/${productId}`} >Edit Product</Link>
+                    <Link className={styles['edit-button']} to={`/products/edit/${productId}`} >Edit Product</Link>
 
-                <button className={styles['delete-button']} onClick={onClickDeleteProduct}>Delete Product</button>
-            </article>
+                    <button className={styles['delete-button']} onClick={onClickDeleteProduct}>Delete Product</button>
+                </div>
+
+            </div>
         </section>
     )
 }

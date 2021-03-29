@@ -8,16 +8,20 @@
         padding: 0 20px;
     }
 
+    & > div {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+        gap: 20px;
+
+        div {
+            display: flex;
+            gap: 20px;
+        }
+    }
+
     img {
         width: 100%;
-    }
-
-    strong {
-        padding: 20px 0;
-    }
-
-    p {
-        padding: 0 0 20px;
     }
 
     button,
@@ -51,7 +55,6 @@
     }
     .edit-button {
         background: #8080d2;
-        margin-right: 20px;
 
         &:hover {
             color: #8080d2;
@@ -60,7 +63,6 @@
     }
     .buy-button {
         background: #4d963f;
-        margin-right: 20px;
 
         &:hover {
             color: #4d963f;
@@ -70,7 +72,6 @@
 
     .buy-unactive-button {
         background-color: grey;
-        margin: 0 20px 20px 0;
         &:hover {
             color: grey;
             border-color: grey;

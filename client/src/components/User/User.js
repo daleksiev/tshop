@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styles from './User.module.scss';
 
 const User = ({
@@ -14,7 +15,7 @@ const User = ({
         <article>
             <h2>Bought products:</h2>
 
-            {user.bought.map(x => <p key={x._id}>{x.title}</p>)}
+            {user.bought.map(x => <Link to={`/products/${x._id}`} key={x._id}>{x.title}</Link>)}
         </article>
     </section>
 )
