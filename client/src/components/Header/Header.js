@@ -25,7 +25,7 @@ const Header = ({
 
 	const loggedInLinks = () => (
 		<>
-			<Link to="/create" >Create</Link>
+			<Link to="/products/create" >Create</Link>
 
 			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
 		</>
@@ -44,7 +44,7 @@ const Header = ({
 				}
 			</nav>
 
-			<Link className="profile" to="/user">{user.email}</Link>
+			<Link className="profile" to="/profile">{user.email}</Link>
 		</header>
 	)
 }

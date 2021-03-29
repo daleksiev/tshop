@@ -19,12 +19,12 @@ const user = (state = userInitialState, action) => {
     switch (action.type) {
         case SET_USER_AUTH:
             return { ...state, ...action.payload, isLoggedIn: true };
-        case LOGOUT_USER:
-            return { ...state, isLoggedIn: false };
         case BUY_PRODUCT_SUCCESS:
             return { ...state, ...action.payload };
+        case LOGOUT_USER:
+            return { ...userInitialState }
         default:
-            return { ...state };
+            return state;
     }
 }
 

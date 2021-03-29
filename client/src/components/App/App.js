@@ -10,8 +10,9 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setUserAuth } from '../../actions/userActions';
 import firebaseService from '../../services/firebaseService';
-import './App.scss';
 import User from '../User/User';
+import AuthRoute from '../AuthRoute';
+import './App.scss';
 
 const App = ({
 	setUserAuth,
@@ -34,13 +35,13 @@ const App = ({
 
 					<Route path="/products" exact component={Products} />
 
-					<Route path="/create" exact component={ProductsCreate} />
+					<AuthRoute path="/products/create" exact component={ProductsCreate} />
 
 					<Route path="/products/:productId" exact component={ProductsDetails} />
 
-					<Route path="/products/edit/:productId" exact component={ProductsEdit} />
+					<AuthRoute path="/products/edit/:productId" exact component={ProductsEdit} />
 
-					<Route path="/user" exact component={User} />
+					<AuthRoute path="/profile" exact component={User} />
 				</Switch>
 			</article>
 		</section>
