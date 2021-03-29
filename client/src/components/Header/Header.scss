@@ -6,8 +6,16 @@
 
 	nav {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
 		padding: 30px;
+		flex-basis: 75%;
+		flex-grow: 5;
+	}
+
+	a.profile {
+		flex-basis: 50%;
+		flex-grow: 1;
+		text-align: center;
 	}
 
 	a {

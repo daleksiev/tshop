@@ -1,5 +1,6 @@
 .products-wrapper {
     display: flex;
-    justify-content: space-evenly;
-    width: 1600px;
+    // width: 1600px;
+    gap: 50px;
+    flex-wrap: wrap;
 }

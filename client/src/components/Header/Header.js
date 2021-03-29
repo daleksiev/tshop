@@ -28,8 +28,6 @@ const Header = ({
 			<Link to="/create" >Create</Link>
 
 			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
-
-			<Link className="profile" to="/user">{user.email}</Link>
 		</>
 	)
 
@@ -45,6 +43,8 @@ const Header = ({
 					: guestLinks()
 				}
 			</nav>
+
+			<Link className="profile" to="/user">{user.email}</Link>
 		</header>
 	)
 }
