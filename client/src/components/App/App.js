@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { setUserAuth } from '../../actions/userActions';
 import firebaseService from '../../services/firebaseService';
 import './App.scss';
+import User from '../User/User';
 
 const App = ({
 	setUserAuth,
@@ -39,7 +40,7 @@ const App = ({
 
 					<Route path="/products/edit/:productId" exact component={ProductsEdit} />
 
-
+					<Route path="/user" exact component={User} />
 				</Switch>
 			</article>
 		</section>

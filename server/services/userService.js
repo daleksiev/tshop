@@ -4,7 +4,7 @@ const getAll = () => User.find({});
 
 const getOneById = (_id) => User.findById(_id);
 
-const getOne = (filter) => User.findOne(filter);
+const getOne = (filter) => User.findOne(filter).populate('bought');
 
 const createOne = (data) => new User(data).save();
 

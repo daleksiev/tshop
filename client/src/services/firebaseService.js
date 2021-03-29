@@ -38,7 +38,8 @@ const verifyAuth = (updateState) => {
 	firebase.auth().onAuthStateChanged(async (user) => {
 		if (user) {
 			userService.login(user.za)
-				.then(userInfo => updateState(userInfo));
+				.then(userInfo => updateState(userInfo.user))
+				.catch(err => console.log(err));
 		}
 	});
 }
