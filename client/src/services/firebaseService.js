@@ -37,7 +37,8 @@ const logout = () => {
 const verifyAuth = (updateState) => {
 	firebase.auth().onAuthStateChanged(async (user) => {
 		if (user) {
-			userService.login(user.za)
+			user.getIdToken()
+				.then(userService.login)
 				.then(userInfo => updateState(userInfo.user))
 				.catch(err => console.log(err));
 		}
