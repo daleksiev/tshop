@@ -1,5 +1,11 @@
 .user-page-wrapper {
+    display: flex;
+    flex-basis: 50%;
+
     article {
-        padding: 0 0 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: auto;
     }
 }
