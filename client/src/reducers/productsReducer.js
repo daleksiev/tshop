@@ -29,7 +29,7 @@ const productInitialState = {
 export const product = (state = productInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ONE_PRODUCT_SUCCESS:
-            return { ...state, ...action.payload };
+            return { ...productInitialState, ...action.payload };
         case FETCH_ONE_PRODUCT_ERROR:
         case FETCH_ONE_PRODUCT:
         case CREATE_PRODUCT:
