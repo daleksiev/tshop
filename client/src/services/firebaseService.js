@@ -1,8 +1,9 @@
-import { auth } from '../firebase';
+import firebase, { auth } from '../firebase';
 import userService from './userService';
 
 const signup = (email, password) => {
-	return auth().createUserWithEmailAndPassword(email, password)
+	return auth()
+		.createUserWithEmailAndPassword(email, password)
 		.then(({ user }) => userService.create({
 			email,
 			firebaseId: user.uid,
@@ -33,10 +34,20 @@ const logout = () => {
 	return auth().signOut();
 }
 
+const verifyAuth = (updateState) => {
+	firebase.auth().onAuthStateChanged(async (user) => {
+		if (user) {
+			userService.login(user.za)
+				.then(userInfo => updateState(userInfo));
+		}
+	});
+}
+
 const firebaseService = {
 	signup,
 	login,
 	logout,
+	verifyAuth,
 };
 
 export default firebaseService

@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import 'firebase/auth';
 
 const firebaseConfig = {
-	apiKey: "AIzaSyCy-8-d-BYSBu1c_I-xZ3JlBxJt6HJQmCE",
+    apiKey: "AIzaSyCy-8-d-BYSBu1c_I-xZ3JlBxJt6HJQmCE",
     authDomain: "t-shop-e1948.firebaseapp.com",
     projectId: "t-shop-e1948",
     storageBucket: "t-shop-e1948.appspot.com",
@@ -11,5 +11,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+export default firebase;
 
 export const auth = firebase.auth;

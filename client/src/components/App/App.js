@@ -6,32 +6,48 @@ import Products from '../Products';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setUserAuth } from '../../actions/userActions';
+import firebaseService from '../../services/firebaseService';
 import './App.scss';
 
-const App = () => (
-	<section className="app-wrapper">
-		<Header />
+const App = ({
+	setUserAuth,
+}) => {
+	useEffect(() => {
+		firebaseService.verifyAuth(setUserAuth);
+	}, [setUserAuth]);
 
-		<article className="app-container">
-			<Switch>
-				<Route path="/login" component={Login} />
+	return (
+		<section className="app-wrapper">
+			<Header />
 
-				<Route path="/register" component={Register} />
+			<article className="app-container">
+				<Switch>
+					<Route path="/login" component={Login} />
 
-				<Route path="/" exact render={() => <Redirect to="/products" />} />
+					<Route path="/register" component={Register} />
 
-				<Route path="/products" exact component={Products} />
+					<Route path="/" exact render={() => <Redirect to="/products" />} />
 
-				<Route path="/create" exact component={ProductsCreate} />
+					<Route path="/products" exact component={Products} />
 
-				<Route path="/products/:productId" exact component={ProductsDetails} />
+					<Route path="/create" exact component={ProductsCreate} />
 
-				<Route path="/products/edit/:productId" exact component={ProductsEdit} />
+					<Route path="/products/:productId" exact component={ProductsDetails} />
+
+					<Route path="/products/edit/:productId" exact component={ProductsEdit} />
 
 
-			</Switch>
-		</article>
-	</section>
-);
+				</Switch>
+			</article>
+		</section>
+	);
+}
 
-export default App;
+const mapDispatchToProps = {
+	setUserAuth,
+}
+
+export default connect(undefined, mapDispatchToProps)(App);

@@ -35,13 +35,19 @@ const Header = ({
 		<header className="header-wrapper">
 			<ModalError />
 
-			<Link to="/" >Home</Link>
+			<nav>
+				<Link to="/" >Home</Link>
 
-			{user.isLoggedIn
-				? loggedInLinks()
-				: guestLinks()
-			}
+				{user.isLoggedIn
+					? loggedInLinks()
+					: guestLinks()
+				}
 
+			</nav>
+
+			{/* {user.isLoggedIn
+				&& <Link className="profile">{user.email}</Link>
+			} */}
 		</header>
 	)
 }

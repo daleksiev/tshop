@@ -1,11 +1,16 @@
 .header-wrapper {
-	display:flex;
+	display: flex;
 	justify-content: center;
-	padding:30px;
-    box-shadow: 0 -15px 28px;
-	
-	a {
-		margin:0 10px;
+	align-items: center;
+	box-shadow: 0 -15px 28px;
+
+	nav {
+		display: flex;
+		justify-content: center;
+		padding: 30px;
 	}
 
+	a {
+		margin: 0 10px;
+	}
 }
