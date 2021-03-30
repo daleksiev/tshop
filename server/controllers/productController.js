@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const productService = require('../services/productService');
+const authorizeMiddleware = require('../middlewares/authorizeMiddleware');
 
 router.get('/', (req, res) => {
     productService.getAll()
@@ -13,19 +14,19 @@ router.get('/:productId', (req, res) => {
         .catch(err => console.log(err));
 })
 
-router.post('/', (req, res) => {
+router.post('/', authorizeMiddleware, (req, res) => {
     productService.createOne(req.body)
         .then(product => res.json(product))
         .catch(err => console.log(err));
 })
 
-router.patch('/:productId', (req, res) => {
+router.patch('/:productId', authorizeMiddleware, (req, res) => {
     productService.updateOne(req.params.productId, req.body)
         .then(product => res.json(product))
         .catch(err => console.log(err));
 })
 
-router.delete('/:productId', (req, res) => {
+router.delete('/:productId', authorizeMiddleware, (req, res) => {
     productService.removeOne(req.params.productId)
         .then(response => res.send(response))
         .catch(err => console.log(err));

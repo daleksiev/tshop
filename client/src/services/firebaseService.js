@@ -51,7 +51,7 @@ const verifyAuth = (updateUserInfo, setError) => {
 
 		if (user) {
 			user.getIdToken()
-				.then(userService.login)
+				.then((token) => userService.login(token))
 				.then(userInfo => {
 					if (!userInfo.ok) {
 						throw userInfo;

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const firebaseAuthMiddleware = require('../middlewares/firebaseAuthMiddleware');
+const authenticateMiddleware = require('../middlewares/authenticateMiddleware');
 const userService = require('../services/userService');
 
 router.post('/', (req, res) => {
@@ -8,12 +8,8 @@ router.post('/', (req, res) => {
         .catch(err => console.log(err));
 })
 
-router.get('/', firebaseAuthMiddleware, (req, res) => {
-    if (req.isLoggedIn) {
-        return res.json({ ok: true, user: req.user, });
-    }
-
-    return res.json({ ok: false });
+router.get('/', authenticateMiddleware, (req, res) => {
+    return res.json({ ok: true, user: req.user, });
 })
 
 module.exports = router;
