@@ -24,9 +24,10 @@ const login = (email, password) => {
 			return userService.login(userData?.user.za);
 		})
 		.then(res => {
-			if (res.ok) {
-				return res.user;
+			if (!res.ok) {
+				throw res;
 			}
+			return res.user;
 		})
 }
 
@@ -39,8 +40,15 @@ const verifyAuth = (updateState, setError) => {
 		if (user) {
 			user.getIdToken()
 				.then(userService.login)
-				.then(userInfo => updateState(userInfo.user))
-				.catch(err => setError(err.message));
+				.then(userInfo => {
+					if (!userInfo.ok) {
+						throw userInfo;
+					}
+					updateState(userInfo.user)
+				})
+				.catch(err => {
+					setError(err.message)
+				});
 		}
 	});
 }

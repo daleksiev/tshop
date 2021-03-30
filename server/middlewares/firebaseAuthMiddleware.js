@@ -9,13 +9,11 @@ module.exports = (req, res, next) => {
         .verifyIdToken(authorization)
         .then((token) => userService.getOne({ firebaseId: token.uid }))
         .then(user => {
-            if (!user) throw user;
+            if (!user) throw { ok: false, message: 'No user found!' };
 
             req.isLoggedIn = true;
             req.user = user;
             next();
         })
-        .catch((err) => {
-            res.json({ ok: false, ...err })
-        });
+        .catch((err) => res.status(404).json(err));
 }

@@ -5,7 +5,7 @@ import {
     fetchOneProductAsync,
     deleteProductAsync,
 } from '../../../actions/productsActions';
-
+import { setError, setMessage } from '../../../actions/messageActions';
 import {
     buyProductAsync,
 } from '../../../actions/userActions';
@@ -19,6 +19,8 @@ const ProductsDetails = ({
     deleteProductAsync,
     buyProductAsync,
     user,
+    setError,
+    setMessage,
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
     const { productId } = match.params;
@@ -31,10 +33,17 @@ const ProductsDetails = ({
 
     const onClickDeleteProduct = () => {
         deleteProductAsync(productId)
-            .then(() => setToRedirect(true));
+            .then(() => {
+                setToRedirect(true);
+                setMessage('You deleted your product successfully!');
+            })
+            .catch(err => setError(err.message));
     }
 
-    const onClickBuyProduct = () => buyProductAsync(user._id, productId);
+    const onClickBuyProduct = () => {
+        buyProductAsync(user._id, productId);
+        setMessage('You bought this product successfully!');
+    }
 
     const authorView = (
         <>
@@ -92,6 +101,8 @@ const mapDispatchToProps = {
     fetchOneProductAsync,
     deleteProductAsync,
     buyProductAsync,
+    setError,
+    setMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsDetails);

@@ -10,12 +10,15 @@ import {
 import { useEffect, useState } from 'react';
 import useForm from '../../../hooks/useForm';
 import styles from './ProductsEdit.module.scss';
+import { setError, setMessage } from '../../../actions/messageActions';
 
 const ProductsEdit = ({
     product,
     match,
     fetchOneProductAsync,
     updateProductAsync,
+    setError,
+    setMessage,
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
 
@@ -36,7 +39,11 @@ const ProductsEdit = ({
     const onClickButton = (e) => {
         e.preventDefault();
         updateProductAsync(productId, state)
-        setToRedirect(true);
+            .then(res => {
+                setToRedirect(true);
+                setMessage('You updated your product successfully!');
+            })
+            .catch(err => setError(err.message));
     }
 
     if (toRedirect) {
@@ -109,6 +116,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     fetchOneProductAsync,
     updateProductAsync,
+    setError,
+    setMessage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsEdit);

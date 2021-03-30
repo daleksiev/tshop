@@ -6,11 +6,14 @@ import { useState } from 'react';
 import useForm from '../../../hooks/useForm';
 // import { setError } from '../../../actions/messageActions';
 import { connect } from 'react-redux';
+import { setError, setMessage } from '../../../actions/messageActions';
 import { createProductAsync } from '../../../actions/productsActions';
 
 const ProductsCreate = ({
     createProductAsync,
     user,
+    setMessage,
+    setError,
 }) => {
     const [state, onChangeInput] = useForm({
         title: '',
@@ -26,7 +29,11 @@ const ProductsCreate = ({
     const onClickButton = (e) => {
         e.preventDefault();
         createProductAsync(state)
-            .then(res => setToRedirect(true));
+            .then(res => {
+                setToRedirect(true);
+                setMessage('You created new product successfully!');
+            })
+            .catch(err => setError(err.message));
     }
 
     if (toRedirect) {
@@ -87,6 +94,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     createProductAsync,
+    setMessage,
+    setError,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsCreate);
