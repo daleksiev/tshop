@@ -109,9 +109,13 @@ export const updateProductError = (payload) => ({
 export const updateProductAsync = (id, data, token) => async (dispatch) => {
     dispatch(updateProduct());
 
-    productService.update(id, data, token)
-        .then(product => dispatch(updateProductSuccess(product)))
-        .catch(err => dispatch(updateProductError(err)));
+    return productService.update(id, data, token)
+        .then(res => {
+            if (!res?.ok) {
+                throw res;
+            }
+            dispatch(updateProductSuccess(res))
+        })
 }
 
 //delete product
@@ -131,7 +135,11 @@ export const deleteProductError = (payload) => ({
 export const deleteProductAsync = (id, token) => async (dispatch) => {
     dispatch(deleteProduct());
 
-    productService.remove(id, token)
-        .then(res => dispatch(deleteProductSuccess(res)))
-        .catch(err => dispatch(deleteProductError(err)));
+    return productService.remove(id, token)
+        .then(res => {
+            if (!res?.ok) {
+                throw res;
+            }
+            return dispatch(deleteProductSuccess(res))
+        });
 }

@@ -41,7 +41,7 @@ const ProductsDetails = ({
     }
 
     const onClickBuyProduct = () => {
-        buyProductAsync(user._id, productId);
+        buyProductAsync(user._id, productId, user.accessToken);
         setMessage('You bought this product successfully!');
     }
 

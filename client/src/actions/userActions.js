@@ -32,10 +32,14 @@ export const buyProductSuccess = (payload) => ({
     payload,
 })
 
-export const buyProductAsync = (userId, productId) => async (dispatch) => {
+export const buyProductAsync = (userId, productId, token) => async (dispatch) => {
     dispatch(buyProduct());
 
-    userService.buyProduct(userId, productId)
-        .then(user => dispatch(buyProductSuccess(user)))
-        .catch(err => console.log(err));
+    return userService.buyProduct(userId, productId, token)
+        .then(res => {
+            if (!res.ok) {
+                throw res;
+            }
+            return dispatch(buyProductSuccess(res))
+        })
 }
