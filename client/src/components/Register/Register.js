@@ -4,11 +4,12 @@ import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-import { setError } from '../../actions/messageActions'
+import { setError, setMessage } from '../../actions/messageActions'
 import { connect } from 'react-redux';
 
 const Register = ({
-	setError
+	setError,
+	setMessage,
 }) => {
 	const [state, onChangeInput] = useForm({
 		email: '',
@@ -27,7 +28,10 @@ const Register = ({
 
 		firebaseService
 			.signup(state.email, state.password)
-			.then(res => setToRedirect(true))
+			.then(res => {
+				setToRedirect(true);
+				setMessage('You registered successfully!');
+			})
 			.catch(err => setError(err.message));
 	}
 
@@ -73,6 +77,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 	setError,
+	setMessage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

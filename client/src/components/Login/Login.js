@@ -4,12 +4,13 @@ import { useState } from 'react';
 import firebaseService from '../../services/firebaseService';
 import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
-import { setError } from '../../actions/messageActions';
+import { setError, setMessage } from '../../actions/messageActions';
 import { setUserAuth } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 const Login = ({
 	setError,
+	setMessage,
 	setUserAuth,
 }) => {
 	const [state, onChangeInput] = useForm({
@@ -22,13 +23,18 @@ const Login = ({
 	const onClickButton = (e) => {
 		e.preventDefault();
 
-		firebaseService
-			.login(state.email, state.password)
-			.then(userInfo => {
-				setUserAuth(userInfo);
-				setToRedirect(true)
-			})
-			.catch(err => setError(err.message));
+		if (state.email && state.password) {
+			firebaseService
+				.login(state.email, state.password)
+				.then(userInfo => {
+					setUserAuth(userInfo);
+					setMessage('You logged in successfully!');
+					setToRedirect(true);
+				})
+				.catch(err => setError(err.message));
+		} else {
+			setError('Email and password fields are required!');
+		}
 	}
 
 	if (toRedirect) {
@@ -66,6 +72,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	setError,
 	setUserAuth,
+	setMessage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

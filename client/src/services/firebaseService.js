@@ -1,17 +1,19 @@
 import firebase, { auth } from '../firebase';
 import userService from './userService';
 
+const logout = () => auth().signOut();
+
 const signup = (email, password) => {
 	return auth()
 		.createUserWithEmailAndPassword(email, password)
-		.then(({ user }) => (
-			userService.create({
+		.then(({ user }) => {
+			return userService.create({
 				email,
 				firebaseId: user.uid,
 				refreshToken: user.refreshToken,
 				accessToken: user.za,
 			})
-		));
+		});
 }
 
 const login = (email, password) => {
@@ -26,18 +28,19 @@ const login = (email, password) => {
 				return res.user;
 			}
 		})
-		.catch(err => console.log(err));
 }
 
-const logout = () => auth().signOut();
-
-const verifyAuth = (updateState) => {
+const verifyAuth = (updateState, setError) => {
 	firebase.auth().onAuthStateChanged(async (user) => {
+		if (user?.metadata?.lastSignInTime === user?.metadata?.creationTime) {
+			return;
+		}
+
 		if (user) {
 			user.getIdToken()
 				.then(userService.login)
 				.then(userInfo => updateState(userInfo.user))
-				.catch(err => console.log(err));
+				.catch(err => setError(err.message));
 		}
 	});
 }

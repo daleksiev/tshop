@@ -9,6 +9,7 @@ import ProductsEdit from '../Products/ProductsEdit';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setUserAuth } from '../../actions/userActions';
+import { setError } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import User from '../User/User';
 import AuthRoute from '../AuthRoute';
@@ -16,10 +17,11 @@ import './App.scss';
 
 const App = ({
 	setUserAuth,
+	setError,
 }) => {
 	useEffect(() => {
-		firebaseService.verifyAuth(setUserAuth);
-	}, [setUserAuth]);
+		firebaseService.verifyAuth(setUserAuth, setError);
+	}, [setUserAuth, setError]);
 
 	return (
 		<section className="app-wrapper">
@@ -50,6 +52,7 @@ const App = ({
 
 const mapDispatchToProps = {
 	setUserAuth,
+	setError,
 }
 
 export default connect(undefined, mapDispatchToProps)(App);

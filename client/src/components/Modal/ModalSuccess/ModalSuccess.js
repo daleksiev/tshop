@@ -7,7 +7,7 @@ import './ModalSuccess.scss';
 const ModalSuccess = ({
     success,
     setMessage,
-    time = 3000
+    time = 5000,
 }) => {
     useEffect(() => {
         setTimeout(() => setMessage(''), time)
