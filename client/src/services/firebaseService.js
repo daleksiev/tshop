@@ -23,17 +23,13 @@ const login = (email, password) => {
 		})
 		.then(res => {
 			if (res.ok) {
-				localStorage.setItem('user', JSON.stringify(res.user));
 				return res.user;
 			}
 		})
 		.catch(err => console.log(err));
 }
 
-const logout = () => {
-	localStorage.removeItem('user');
-	return auth().signOut();
-}
+const logout = () => auth().signOut();
 
 const verifyAuth = (updateState) => {
 	firebase.auth().onAuthStateChanged(async (user) => {

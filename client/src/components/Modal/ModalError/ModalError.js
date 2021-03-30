@@ -7,9 +7,10 @@ import './ModalError.scss';
 const ModalError = ({
     error,
     setError,
+    time = 5000,
 }) => {
     useEffect(() => {
-        setTimeout(() => setError(''), 3000)
+        setTimeout(() => setError(''), time)
     });
 
     return (

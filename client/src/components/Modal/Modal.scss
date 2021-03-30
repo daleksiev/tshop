@@ -1,8 +1,9 @@
 .modal-wrapper {
     position: absolute;
     top: -1000px;
-    right: 200px;
+    left: 200px;
     width: auto;
+    min-width: 200px;
     max-width: 500px;
     cursor: pointer;
     opacity: 0;

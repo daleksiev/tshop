@@ -1,18 +1,22 @@
 import { Link } from "react-router-dom";
 import ModalError from "../Modal/ModalError";
+import ModalSuccess from "../Modal/ModalSuccess";
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/userActions';
+import { setMessage } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import './Header.scss';
 
 const Header = ({
 	user,
 	logoutUser,
+	setMessage,
 }) => {
 	const onClickLogoutUser = e => {
 		e.preventDefault();
 		firebaseService.logout();
 		logoutUser();
+		setMessage('You logout successfully!');
 	}
 
 	const guestLinks = () => (
@@ -34,6 +38,7 @@ const Header = ({
 	return (
 		<header className="header-wrapper">
 			<ModalError />
+			<ModalSuccess />
 
 			<nav>
 				<Link to="/" >Home</Link>
@@ -55,6 +60,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 	logoutUser,
+	setMessage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
