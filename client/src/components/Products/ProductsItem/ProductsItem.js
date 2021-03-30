@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styles from './ProductsItem.module.scss';
-
 const ProductsItem = ({
     title,
     brand,

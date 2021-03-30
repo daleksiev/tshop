@@ -14,7 +14,7 @@ const Products = ({
 
     return (
         <section className={styles['products-wrapper']}>
-            {products.list.isLoading
+            {products.isLoading
                 ? '...Loading'
                 : products.list.map((product) =>
                     <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
