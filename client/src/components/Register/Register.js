@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 const Register = ({
 	setError,
 	setMessage,
+	user,
 }) => {
 	const [state, onChangeInput] = useForm({
 		email: '',
@@ -35,7 +36,7 @@ const Register = ({
 			.catch(err => setError(err.message));
 	}
 
-	if (toRedirect) {
+	if (user.isLoggedIn || toRedirect) {
 		return <Redirect to='login' />
 	}
 
@@ -73,6 +74,7 @@ const Register = ({
 }
 
 const mapStateToProps = (state) => ({
+	user: state.user,
 })
 
 const mapDispatchToProps = {

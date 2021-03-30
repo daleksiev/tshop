@@ -1,7 +1,7 @@
 import firebase, { auth } from '../firebase';
 import userService from './userService';
 
-const logout = () => auth().signOut();
+
 
 const signup = (email, password) => {
 	return auth()
@@ -27,11 +27,23 @@ const login = (email, password) => {
 			if (!res.ok) {
 				throw res;
 			}
+			localStorage.setItem('user', JSON.stringify(res.user));
 			return res.user;
 		})
 }
 
-const verifyAuth = (updateState, setError) => {
+const logout = () => {
+	localStorage.removeItem('user');
+	return auth().signOut();
+}
+
+const verifyAuth = (updateUserInfo, setError) => {
+	const localStorageUser = JSON.parse(localStorage.getItem('user'));
+
+	if (localStorageUser?.email) {
+		updateUserInfo({ ...localStorageUser, isLoggedIn: true });
+	}
+
 	firebase.auth().onAuthStateChanged(async (user) => {
 		if (user?.metadata?.lastSignInTime === user?.metadata?.creationTime) {
 			return;
@@ -44,11 +56,9 @@ const verifyAuth = (updateState, setError) => {
 					if (!userInfo.ok) {
 						throw userInfo;
 					}
-					updateState(userInfo.user)
+					updateUserInfo(userInfo.user)
 				})
-				.catch(err => {
-					setError(err.message)
-				});
+				.catch(err => setError(err.message));
 		}
 	});
 }

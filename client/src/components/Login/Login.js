@@ -12,6 +12,7 @@ const Login = ({
 	setError,
 	setMessage,
 	setUserAuth,
+	user,
 }) => {
 	const [state, onChangeInput] = useForm({
 		email: '',
@@ -37,7 +38,7 @@ const Login = ({
 		}
 	}
 
-	if (toRedirect) {
+	if (user.isLoggedIn || toRedirect) {
 		return <Redirect to='/' />
 	}
 
@@ -67,6 +68,7 @@ const Login = ({
 }
 
 const mapStateToProps = (state) => ({
+	user: state.user,
 })
 
 const mapDispatchToProps = {
