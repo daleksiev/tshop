@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    email: String,
+    email: {
+        type: String,
+        required: [true, 'Email is required!'],
+        validate: {
+            validator: (email) => /\S+@\S+\.\S+/.test(email),
+            message: ({ value }) => `${value} is not a valid email address!`
+        },
+    },
     firebaseId: String,
     accessToken: String,
     refreshToken: String,
