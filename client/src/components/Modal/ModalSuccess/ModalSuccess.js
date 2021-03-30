@@ -9,12 +9,13 @@ const ModalSuccess = ({
     setMessage,
     time = 5000,
 }) => {
+
     useEffect(() => {
         setTimeout(() => setMessage(''), time)
-    });
+    }, [setMessage, time]);
 
     return (
-        <Modal onClick={setMessage.bind(undefined, '')} active={Boolean(success)}>
+        <Modal onClick={() => setMessage('')} active={Boolean(success)}>
             <div className="modal-success-container">
                 {success}
             </div>

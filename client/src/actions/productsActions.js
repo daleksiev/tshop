@@ -41,7 +41,7 @@ export const fetchOneProductAsync = (productId) => (dispatch) => {
 }
 
 // fetch all products
-export const fetchAllProducts = () => ({
+export const fetchAllProductsPending = () => ({
     type: FETCH_ALL_PRODUCTS,
 });
 
@@ -56,7 +56,7 @@ export const fetchAllProductsError = (payload) => ({
 })
 
 export const fetchAllProductsAsync = () => (dispatch) => {
-    dispatch(fetchAllProducts());
+    dispatch(fetchAllProductsPending());
 
     productService.getAll()
         .then(products => dispatch(fetchAllProductsSuccess(products)))

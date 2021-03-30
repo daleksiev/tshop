@@ -14,7 +14,7 @@ const ModalError = ({
     });
 
     return (
-        <Modal onClick={setError.bind(undefined, '')} active={Boolean(error)}>
+        <Modal onClick={() => setError('')} active={Boolean(error)}>
             <div className="modal-error-container">
                 {error}
             </div>

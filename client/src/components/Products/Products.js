@@ -14,9 +14,12 @@ const Products = ({
 
     return (
         <section className={styles['products-wrapper']}>
-            {products.map((product) =>
-                <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
-            )}
+            {products.list.isLoading
+                ? '...Loading'
+                : products.list.map((product) =>
+                    <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
+                )
+            }
         </section>
     )
 }

@@ -16,7 +16,10 @@ import {
     DELETE_PRODUCT_SUCCESS
 } from '../actionTypes/productsActionTypes';
 
-const productsInitialState = [];
+const productsInitialState = {
+    list: [],
+    isLoading: true,
+};
 
 const productInitialState = {
     _id: '',
@@ -49,9 +52,10 @@ export const product = (state = productInitialState, action = {}) => {
 export const products = (state = productsInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ALL_PRODUCTS_SUCCESS:
-            return [...action.payload];
+            return { ...state, list: [...action.payload], isLoading: false };
         case FETCH_ALL_PRODUCTS_ERROR:
         case FETCH_ALL_PRODUCTS:
+            return { ...state, isLoading: true };
         default:
             return state;
     }
