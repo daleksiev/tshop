@@ -10,6 +10,7 @@ import { createProductAsync } from '../../../actions/productsActions';
 
 const ProductsCreate = ({
     createProductAsync,
+    user,
 }) => {
     const [state, onChangeInput] = useForm({
         title: '',
@@ -17,6 +18,7 @@ const ProductsCreate = ({
         imageUrl: '',
         price: '',
         description: '',
+        author: user._id,
     });
 
     const [toRedirect, setToRedirect] = useState(false);
@@ -80,7 +82,7 @@ const ProductsCreate = ({
 }
 
 const mapStateToProps = (state) => ({
-
+    user: state.user,
 })
 
 const mapDispatchToProps = {

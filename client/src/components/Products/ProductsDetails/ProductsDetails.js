@@ -23,6 +23,7 @@ const ProductsDetails = ({
     const [toRedirect, setToRedirect] = useState(false);
     const { productId } = match.params;
     const isBought = user.bought.find(product => product._id === productId);
+    const isAuthor = product.author === user._id;
 
     useEffect(() => {
         fetchOneProductAsync(productId);
@@ -34,6 +35,20 @@ const ProductsDetails = ({
     }
 
     const onClickBuyProduct = () => buyProductAsync(user._id, productId);
+
+    const authorView = (
+        <>
+            <Link className={styles['edit-button']} to={`/products/edit/${productId}`} >Edit Product</Link>
+
+            <button className={styles['delete-button']} onClick={onClickDeleteProduct}>Delete Product</button>
+        </>
+    );
+
+    const userView = (
+        isBought
+            ? <button className={styles['buy-unactive-button']} > You already bought this product!</button>
+            : <button className={styles['buy-button']} onClick={onClickBuyProduct}>Buy</button>
+    )
 
     if (toRedirect) {
         return <Redirect to='/' />
@@ -59,21 +74,12 @@ const ProductsDetails = ({
                 </p>
 
                 {user.isLoggedIn &&
-                    <div>
-                        {isBought
-                            ? <button className={styles['buy-unactive-button']}>You already bought this product!</button>
-                            : <button className={styles['buy-button']} onClick={onClickBuyProduct}>Buy</button>
-                        }
-
-
-                        <Link className={styles['edit-button']} to={`/products/edit/${productId}`} >Edit Product</Link>
-
-                        <button className={styles['delete-button']} onClick={onClickDeleteProduct}>Delete Product</button>
+                    <div >
+                        {!isAuthor ? userView : authorView}
                     </div>
                 }
-
-            </div>
-        </section>
+            </div >
+        </section >
     )
 }
 
