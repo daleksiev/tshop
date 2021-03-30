@@ -12,6 +12,12 @@ export const setUserAuth = (userInfo) => ({
     payload: userInfo,
 })
 
+export const fetchUserAuthAsync = (userId) => (dispatch) => {
+    userService.getOne(userId)
+        .then(userInfo => dispatch(setUserAuth(userInfo)))
+        .catch(err => console.log(err));
+}
+
 export const logoutUser = () => ({
     type: LOGOUT_USER,
 })

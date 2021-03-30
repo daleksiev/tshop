@@ -8,8 +8,9 @@ const ProductsItem = ({
     imageUrl,
     href,
 }) => (
-    <article className={styles['product-item']}>
-        <Link to={href}>
+    <Link to={href} className={styles['product-item']}>
+        <article>
+
             <img
                 src={imageUrl}
                 alt={title}
@@ -20,8 +21,8 @@ const ProductsItem = ({
             <strong>{brand}</strong>
 
             <em>Price ${price}</em>
-        </Link>
-    </article>
+        </article>
+    </Link >
 )
 
 export default ProductsItem;

@@ -24,7 +24,7 @@ const ProductsDetails = ({
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
     const { productId } = match.params;
-    const isBought = user.bought.find(product => product._id === productId);
+    const isBought = user.bought.find(product => product === productId || product._id === productId);
     const isAuthor = product.author === user._id;
 
     useEffect(() => {
