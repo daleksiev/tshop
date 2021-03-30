@@ -16,19 +16,19 @@ router.get('/:productId', (req, res, next) => {
 
 router.post('/', authorizeMiddleware, (req, res, next) => {
     productService.createOne(req.body)
-        .then(product => res.json(product))
+        .then(product => res.json({ ...product, ok: true }))
         .catch(err => next(err));
 })
 
 router.patch('/:productId', authorizeMiddleware, (req, res, next) => {
     productService.updateOne(req.params.productId, req.body)
-        .then(product => res.json(product))
+        .then(product => res.json({ ...product, ok: true }))
         .catch(err => next(err));
 })
 
 router.delete('/:productId', authorizeMiddleware, (req, res, next) => {
     productService.removeOne(req.params.productId)
-        .then(response => res.send(response))
+        .then(response => res.send({ ...response, ok: true }))
         .catch(err => next(err));
 })
 

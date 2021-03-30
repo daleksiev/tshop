@@ -78,12 +78,17 @@ export const createProductError = (payload) => ({
     payload,
 })
 
-export const createProductAsync = (data) => async (dispatch) => {
+export const createProductAsync = (data, token) => async (dispatch) => {
     dispatch(createProduct());
 
-    productService.create(data)
-        .then(product => dispatch(createProductSuccess(product)))
-        .catch(err => dispatch(createProductError(err)));
+    return productService.create(data, token)
+        .then(res => {
+            if (!res?.ok) {
+                throw res;
+            }
+
+            return dispatch(createProductSuccess(res))
+        })
 }
 
 // update product
@@ -101,10 +106,10 @@ export const updateProductError = (payload) => ({
     payload,
 })
 
-export const updateProductAsync = (id, data) => async (dispatch) => {
+export const updateProductAsync = (id, data, token) => async (dispatch) => {
     dispatch(updateProduct());
 
-    productService.update(id, data)
+    productService.update(id, data, token)
         .then(product => dispatch(updateProductSuccess(product)))
         .catch(err => dispatch(updateProductError(err)));
 }
@@ -123,10 +128,10 @@ export const deleteProductError = (payload) => ({
     payload,
 })
 
-export const deleteProductAsync = (id) => async (dispatch) => {
+export const deleteProductAsync = (id, token) => async (dispatch) => {
     dispatch(deleteProduct());
 
-    productService.remove(id)
+    productService.remove(id, token)
         .then(res => dispatch(deleteProductSuccess(res)))
         .catch(err => dispatch(deleteProductError(err)));
 }

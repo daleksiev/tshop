@@ -15,7 +15,7 @@ const User = ({
         <article>
             <h2>Bought products:</h2>
 
-            {user.bought.map(x => <Link to={`/products/${x._id}`} key={x._id}>{x.title}</Link>)}
+            {user?.bought.map(product => <Link to={`/products/${product._id}`} key={product._id}>{product.title}</Link>)}
         </article>
     </section>
 )

@@ -6,9 +6,9 @@ import requester from './requester';
 
 const getAll = async () => requester.get(productsUrl());
 const getOne = async (id) => requester.get(productUrl(id));
-const create = async (data) => requester.post(productsUrl(), data);
-const update = async (id, data) => requester.patch(productUrl(id), data);
-const remove = async (id) => requester.delete(productUrl(id));
+const create = async (data, token) => requester.post(productsUrl(), data, { auth: token });
+const update = async (id, data, token) => requester.patch(productUrl(id), data, { auth: token });
+const remove = async (id, token) => requester.delete(productUrl(id), {}, { auth: token });
 
 const productService = {
     getAll,

@@ -4,7 +4,7 @@ import Textarea from '../../Shared/Textarea';
 import { Redirect } from 'react-router';
 import { useState } from 'react';
 import useForm from '../../../hooks/useForm';
-// import { setError } from '../../../actions/messageActions';
+import validateProduct from '../../../utils/validateProduct';
 import { connect } from 'react-redux';
 import { setError, setMessage } from '../../../actions/messageActions';
 import { createProductAsync } from '../../../actions/productsActions';
@@ -28,12 +28,20 @@ const ProductsCreate = ({
 
     const onClickButton = (e) => {
         e.preventDefault();
-        createProductAsync(state)
-            .then(res => {
+
+        const checked = validateProduct(state);
+
+        if (!checked.ok) {
+            return setError(checked.message);
+        }
+
+        createProductAsync(state, user.accessToken)
+            .then(() => {
                 setToRedirect(true);
                 setMessage('You created new product successfully!');
             })
             .catch(err => setError(err.message));
+
     }
 
     if (toRedirect) {

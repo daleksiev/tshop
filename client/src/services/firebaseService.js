@@ -1,8 +1,6 @@
 import firebase, { auth } from '../firebase';
 import userService from './userService';
 
-
-
 const signup = (email, password) => {
 	return auth()
 		.createUserWithEmailAndPassword(email, password)
@@ -51,11 +49,12 @@ const verifyAuth = (updateUserInfo, setError) => {
 
 		if (user) {
 			user.getIdToken()
-				.then((token) => userService.login(token))
+				.then(userService.login)
 				.then(userInfo => {
 					if (!userInfo.ok) {
 						throw userInfo;
 					}
+
 					updateUserInfo(userInfo.user)
 				})
 				.catch(err => setError(err.message));

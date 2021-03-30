@@ -16,7 +16,6 @@ const requester = (method = "GET", url, body = {}, headersOptions = {}) => {
         }
     }
 
-
     const options = {
         method,
         headers,

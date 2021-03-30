@@ -32,7 +32,7 @@ const ProductsDetails = ({
     }, [fetchOneProductAsync, productId]);
 
     const onClickDeleteProduct = () => {
-        deleteProductAsync(productId)
+        deleteProductAsync(productId, user.accessToken)
             .then(() => {
                 setToRedirect(true);
                 setMessage('You deleted your product successfully!');
