@@ -13,6 +13,10 @@ import { setError, setMessage } from '../../../actions/messageActions';
 import validateProduct from '../../../utils/validateProduct';
 import styles from './ProductsEdit.module.scss';
 import emptyImageSrc from '../../../assets/empty.jpg';
+import {
+    getCurrentProduct,
+    getUser,
+} from '../../../reducers';
 
 const ProductsEdit = ({
     product,
@@ -129,8 +133,8 @@ const ProductsEdit = ({
 }
 
 const mapStateToProps = (state) => ({
-    product: state.product,
-    user: state.user,
+    product: getCurrentProduct(state),
+    user: getUser(state),
 })
 
 const mapDispatchToProps = {

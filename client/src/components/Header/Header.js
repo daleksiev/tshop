@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/userActions';
 import { setMessage } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
+import { getUser } from '../../reducers';
 import './Header.scss';
 
 const Header = ({
@@ -55,7 +56,7 @@ const Header = ({
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user
+	user: getUser(state),
 })
 
 const mapDispatchToProps = {

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from './User.module.scss';
+import { getUser } from '../../reducers';
 
 const User = ({
     user,
@@ -21,7 +22,7 @@ const User = ({
 )
 
 const mapStateToProps = (state) => ({
-    user: state.user,
+    user: getUser(state),
 })
 
 export default connect(mapStateToProps)(User);

@@ -34,20 +34,20 @@ const Login = ({
 				.login(state.email, state.password)
 				.then(userInfo => {
 					setUserAuth(userInfo);
-					setMessage('You logged in successfully!');
 					setToRedirect(true);
 					setIsLoading(false);
+					setMessage('You logged in successfully!');
 				})
 				.catch(err => {
-					setError(err.message);
 					setIsLoading(false);
+					setError(err.message);
 				});
 		} else {
 			setError('Email and password fields are required!');
 		}
 	}
 
-	if (user.isLoggedIn || toRedirect) {
+	if (user?.isLoggedIn || toRedirect) {
 		return <Redirect to='/' />
 	}
 

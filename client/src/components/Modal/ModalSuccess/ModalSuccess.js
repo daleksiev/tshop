@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { setMessage } from '../../../actions/messageActions';
 import Modal from '..';
+import { getMessageSuccess } from '../../../reducers';
 import './ModalSuccess.scss';
 
 const ModalSuccess = ({
@@ -9,9 +10,12 @@ const ModalSuccess = ({
     setMessage,
     time = 5000,
 }) => {
-
     useEffect(() => {
-        setTimeout(() => setMessage(''), time)
+        const timeout = setTimeout(() => setMessage(''), time);
+
+        return () => {
+            clearTimeout(timeout)
+        }
     }, [setMessage, time]);
 
     return (
@@ -24,7 +28,7 @@ const ModalSuccess = ({
 }
 
 const mapStateToProps = (state) => ({
-    success: state.message.success,
+    success: getMessageSuccess(state),
 })
 
 const mapDispatchToProps = {

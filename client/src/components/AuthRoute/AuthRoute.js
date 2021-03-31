@@ -1,5 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getUser } from '../../reducers';
 
 const AuthRoute = (props) => (
     <>
@@ -10,9 +11,8 @@ const AuthRoute = (props) => (
     </>
 )
 
-
 const mapStateToProps = (state) => ({
-    user: state.user,
+    user: getUser(state),
 })
 
 export default connect(mapStateToProps)(AuthRoute);

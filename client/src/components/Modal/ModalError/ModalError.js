@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { setError } from '../../../actions/messageActions';
 import Modal from '..';
+import { getMessageError } from '../../../reducers';
 import './ModalError.scss';
 
 const ModalError = ({
@@ -9,9 +10,14 @@ const ModalError = ({
     setError,
     time = 5000,
 }) => {
+
     useEffect(() => {
-        setTimeout(() => setError(''), time)
-    });
+        const timeout = setTimeout(() => setError(''), time);
+
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [setError, time]);
 
     return (
         <Modal onClick={() => setError('')} active={Boolean(error)}>
@@ -23,7 +29,7 @@ const ModalError = ({
 }
 
 const mapStateToProps = (state) => ({
-    error: state.message.error,
+    error: getMessageError(state),
 })
 
 const mapDispatchToProps = {

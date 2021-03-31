@@ -15,13 +15,9 @@ import {
     DELETE_PRODUCT_ERROR,
     DELETE_PRODUCT_SUCCESS
 } from '../actionTypes/productsActionTypes';
+import { combineReducers } from 'redux';
 
-const productsInitialState = {
-    list: [],
-    isLoading: true,
-};
-
-const productInitialState = {
+const currentProductInitialState = {
     _id: '',
     title: '',
     price: 0,
@@ -29,10 +25,10 @@ const productInitialState = {
     brand: '',
 };
 
-export const product = (state = productInitialState, action = {}) => {
+const currentProduct = (state = currentProductInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ONE_PRODUCT_SUCCESS:
-            return { ...productInitialState, ...action.payload };
+            return { ...currentProductInitialState, ...action.payload };
         case FETCH_ONE_PRODUCT_ERROR:
         case FETCH_ONE_PRODUCT:
         case CREATE_PRODUCT:
@@ -49,7 +45,11 @@ export const product = (state = productInitialState, action = {}) => {
     }
 }
 
-export const products = (state = productsInitialState, action = {}) => {
+const productsInitialState = {
+    list: [],
+};
+
+const products = (state = productsInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ALL_PRODUCTS_SUCCESS:
             return { ...state, list: [...action.payload], isLoading: false };
@@ -60,3 +60,13 @@ export const products = (state = productsInitialState, action = {}) => {
             return state;
     }
 }
+
+export default combineReducers({
+    products,
+    current: currentProduct,
+})
+
+export const getProducts = (state) => state.products.products
+export const getProductsIsLoading = (state) => state.products.products.isLoading
+export const getProductsList = (state) => state.products.products.list
+export const getCurrentProduct = (state) => state.products.current

@@ -11,6 +11,10 @@ import {
 } from '../../../actions/userActions';
 import emptyImageSrc from '../../../assets/empty.jpg';
 import styles from './ProductsDetails.module.scss';
+import {
+    getCurrentProduct,
+    getUser,
+} from '../../../reducers';
 
 const ProductsDetails = ({
     match,
@@ -103,8 +107,8 @@ const ProductsDetails = ({
 }
 
 const mapStateToProps = (state) => ({
-    product: state.product,
-    user: state.user,
+    product: getCurrentProduct(state),
+    user: getUser(state),
 });
 
 const mapDispatchToProps = {

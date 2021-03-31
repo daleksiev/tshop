@@ -21,4 +21,6 @@ const messageReducer = (state = messageInitialState, action = {}) => {
 
 export default messageReducer;
 
-
+export const getMessages = (state) => state.message;
+export const getMessageSuccess = (state) => state.message.success;
+export const getMessageError = (state) => state.message.error;

@@ -36,12 +36,6 @@ const logout = () => {
 }
 
 const verifyAuth = (updateUserInfo, setError) => {
-	const localStorageUser = JSON.parse(localStorage.getItem('user'));
-
-	if (localStorageUser?.email) {
-		updateUserInfo({ ...localStorageUser, isLoggedIn: true });
-	}
-
 	firebase.auth().onAuthStateChanged(async (user) => {
 		if (user?.metadata?.lastSignInTime === user?.metadata?.creationTime) {
 			return;

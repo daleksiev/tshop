@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import { fetchAllProductsAsync } from '../../actions/productsActions';
 import { useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
+import {
+    getProductsList,
+    getProductsIsLoading,
+} from '../../reducers';
 
 const Products = ({
     fetchAllProductsAsync,
     products,
+    isLoading,
 }) => {
     useEffect(() => {
         fetchAllProductsAsync();
@@ -15,9 +20,9 @@ const Products = ({
 
     return (
         <section className={styles['products-wrapper']}>
-            {products.isLoading
+            {isLoading
                 ? <Spinner animation="border" variant="primary" />
-                : products.list.map((product) =>
+                : products.map((product) =>
                     <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
                 )
             }
@@ -25,9 +30,9 @@ const Products = ({
     )
 }
 
-
 const mapStateToProps = (state) => ({
-    products: state.products,
+    products: getProductsList(state),
+    isLoading: getProductsIsLoading(state),
 })
 
 const mapDispatchToProps = {
