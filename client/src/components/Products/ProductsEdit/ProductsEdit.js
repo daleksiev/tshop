@@ -12,6 +12,7 @@ import useForm from '../../../hooks/useForm';
 import { setError, setMessage } from '../../../actions/messageActions';
 import validateProduct from '../../../utils/validateProduct';
 import styles from './ProductsEdit.module.scss';
+import emptyImageSrc from '../../../assets/empty.jpg';
 
 const ProductsEdit = ({
     product,
@@ -23,6 +24,8 @@ const ProductsEdit = ({
     user,
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
+
+    const [didLoad, setDidLoad] = useState(false);
 
     const [state, onChangeInput] = useForm({
         title: product.title,
@@ -66,7 +69,14 @@ const ProductsEdit = ({
             <form method="post">
                 <h1>Edit Product</h1>
 
-                <img src={product.imageUrl} alt={product.title} />
+                <img
+                    style={didLoad ? {} : { 'visibility': 'hidden' }}
+                    src={product.imageUrl}
+                    onLoad={e => setDidLoad(true)}
+                    onError={e => e.target.src = emptyImageSrc}
+                    alt={product.title}
+
+                />
 
                 <Input
                     id="title"

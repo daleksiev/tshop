@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import Image from 'react-bootstrap/Image'
 import emptyImageSrc from '../../../assets/empty.jpg';
 import styles from './ProductsItem.module.scss';
+import { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 const ProductsItem = ({
     title,
@@ -9,25 +10,31 @@ const ProductsItem = ({
     price,
     imageUrl,
     href,
-}) => (
-    <Link to={href} className={styles['product-item']}>
-        <article>
+}) => {
+    const [didLoad, setDidLoad] = useState(false);
+    return (
+        <Link to={href} className={styles['product-item']}>
+            <article>
 
-            <Image
-                src={emptyImageSrc}
-                alt={title}
-                rounded
-                onLoad={e => e.target.src = imageUrl}
-                onError={e => e.target.src = imageUrl}
-            />
+                <img
+                    style={didLoad ? {} : { 'visibility': 'hidden' }}
+                    src={imageUrl}
+                    alt={title}
+                    onLoad={e => setDidLoad(true)}
+                    onError={e => e.target.src = emptyImageSrc}
+                />
 
-            <h1>{title}</h1>
+                {!didLoad &&
+                    <Spinner animation="border" variant="primary" />
+                }
 
-            <strong>{brand}</strong>
+                <h1>{title}</h1>
 
-            <em>Price ${price}</em>
-        </article>
-    </Link >
-)
+                <strong>{brand}</strong>
 
+                <em>Price ${price}</em>
+            </article>
+        </Link >
+    )
+}
 export default ProductsItem;

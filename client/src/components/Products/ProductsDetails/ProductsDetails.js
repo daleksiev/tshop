@@ -9,7 +9,6 @@ import { setError, setMessage } from '../../../actions/messageActions';
 import {
     buyProductAsync,
 } from '../../../actions/userActions';
-import Image from 'react-bootstrap/Image'
 import emptyImageSrc from '../../../assets/empty.jpg';
 import styles from './ProductsDetails.module.scss';
 
@@ -24,6 +23,7 @@ const ProductsDetails = ({
     setMessage,
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
+    const [didLoad, setDidLoad] = useState(false);
     const { productId } = match.params;
     const isBought = user.bought.find(product => product === productId || product._id === productId);
     const isAuthor = product.author === user._id;
@@ -70,11 +70,11 @@ const ProductsDetails = ({
     return (
         <section className={styles['product-details']}>
             <article>
-                <Image
-                    src={emptyImageSrc}
+                <img
+                    style={didLoad ? {} : { 'visibility': 'hidden' }}
+                    src={product.imageUrl}
                     alt={product.title}
-                    rounded
-                    onLoad={e => e.target.src = product.imageUrl}
+                    onLoad={e => setDidLoad(true)}
                     onError={e => e.target.src = emptyImageSrc}
                 />
             </article>
