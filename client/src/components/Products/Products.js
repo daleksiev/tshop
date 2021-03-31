@@ -3,6 +3,7 @@ import styles from './Products.module.scss';
 import { connect } from 'react-redux';
 import { fetchAllProductsAsync } from '../../actions/productsActions';
 import { useEffect } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 const Products = ({
     fetchAllProductsAsync,
@@ -15,7 +16,7 @@ const Products = ({
     return (
         <section className={styles['products-wrapper']}>
             {products.isLoading
-                ? '...Loading'
+                ? <Spinner animation="border" variant="primary" />
                 : products.list.map((product) =>
                     <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
                 )

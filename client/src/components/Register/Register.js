@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import useForm from '../../hooks/useForm';
 import { setError, setMessage } from '../../actions/messageActions'
 import { connect } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 
 const Register = ({
 	setError,
@@ -20,10 +21,14 @@ const Register = ({
 
 	const [toRedirect, setToRedirect] = useState(false);
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const onClickSubmit = (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 
 		if (state.password !== state.repeatPassword) {
+			setIsLoading(false);
 			return setError('The passwords do not match.');
 		}
 
@@ -32,8 +37,12 @@ const Register = ({
 			.then(res => {
 				setToRedirect(true);
 				setMessage('You registered successfully!');
+				setIsLoading(false);
 			})
-			.catch(err => setError(err.message));
+			.catch(err => {
+				setError(err.message);
+				setIsLoading(false);
+			});
 	}
 
 	if (user.isLoggedIn || toRedirect) {
@@ -67,8 +76,21 @@ const Register = ({
 				title="Repeat Password:"
 				onChange={onChangeInput}
 			/>
+			{isLoading
+				? (
+					<Button name="Loading...">
+						<Spinner
+							as="span"
+							animation="grow"
+							size="sm"
+							role="status"
+							aria-hidden="true"
+						/>
+					</Button>
+				)
+				: <Button name="Sign Up" onClick={onClickSubmit} />
+			}
 
-			<Button name="Sign Up" onClick={onClickSubmit} />
 		</form>
 	)
 }

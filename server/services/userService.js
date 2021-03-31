@@ -8,7 +8,9 @@ const getOne = (filter) => User.findOne(filter).populate('bought');
 
 const createOne = (data) => new User(data).save();
 
-const updateOne = (_id, data, push) => User.findByIdAndUpdate(_id, { $set: data, $push: push, }, { new: true });
+const updateOne = (_id, data, push) => User.findByIdAndUpdate(_id, { $set: data, $push: push, }, { new: true })
+    .populate('bought')
+    .lean();
 
 const updateOneByFilter = (filter, data, push) => User
     .findOneAndUpdate(filter, { $set: data, $push: push, }, { new: true })

@@ -15,7 +15,10 @@ const userInitialState = {
     isLoggedIn: false,
 }
 
-const user = (state = userInitialState, action) => {
+let localStorageUserState = JSON.parse(localStorage.getItem('user'));
+localStorageUserState = localStorageUserState?.email ? { ...localStorageUserState, isLoggedIn: true } : userInitialState;
+
+const user = (state = localStorageUserState, action) => {
     switch (action.type) {
         case SET_USER_AUTH:
             return { ...state, ...action.payload, isLoggedIn: true };

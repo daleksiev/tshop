@@ -7,6 +7,7 @@ import useForm from '../../hooks/useForm';
 import { setError, setMessage } from '../../actions/messageActions';
 import { setUserAuth } from '../../actions/userActions';
 import { connect } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 
 const Login = ({
 	setError,
@@ -21,8 +22,12 @@ const Login = ({
 
 	const [toRedirect, setToRedirect] = useState(false);
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const onClickButton = (e) => {
 		e.preventDefault();
+
+		setIsLoading(true);
 
 		if (state.email && state.password) {
 			firebaseService
@@ -31,8 +36,12 @@ const Login = ({
 					setUserAuth(userInfo);
 					setMessage('You logged in successfully!');
 					setToRedirect(true);
+					setIsLoading(false);
 				})
-				.catch(err => setError(err.message));
+				.catch(err => {
+					setError(err.message);
+					setIsLoading(false);
+				});
 		} else {
 			setError('Email and password fields are required!');
 		}
@@ -62,7 +71,20 @@ const Login = ({
 				onChange={onChangeInput}
 			/>
 
-			<Button name="Login" onClick={onClickButton} />
+			{isLoading
+				? (
+					<Button name="Loading...">
+						<Spinner
+							as="span"
+							animation="grow"
+							size="sm"
+							role="status"
+							aria-hidden="true"
+						/>
+					</Button>
+				)
+				: <Button name="Login" onClick={onClickButton} />}
+
 		</form>
 	)
 }

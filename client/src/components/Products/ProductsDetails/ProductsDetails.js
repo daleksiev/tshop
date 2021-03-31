@@ -9,7 +9,8 @@ import { setError, setMessage } from '../../../actions/messageActions';
 import {
     buyProductAsync,
 } from '../../../actions/userActions';
-
+import Image from 'react-bootstrap/Image'
+import emptyImageSrc from '../../../assets/empty.jpg';
 import styles from './ProductsDetails.module.scss';
 
 const ProductsDetails = ({
@@ -41,8 +42,11 @@ const ProductsDetails = ({
     }
 
     const onClickBuyProduct = () => {
-        buyProductAsync(user._id, productId, user.accessToken);
-        setMessage('You bought this product successfully!');
+        buyProductAsync(user._id, productId, user.accessToken)
+            .then(res => {
+                console.log(res)
+                setMessage('You bought this product successfully!')
+            });
     }
 
     const authorView = (
@@ -66,7 +70,13 @@ const ProductsDetails = ({
     return (
         <section className={styles['product-details']}>
             <article>
-                <img src={product.imageUrl} alt={product.title} />
+                <Image
+                    src={emptyImageSrc}
+                    alt={product.title}
+                    rounded
+                    onLoad={e => e.target.src = product.imageUrl}
+                    onError={e => e.target.src = emptyImageSrc}
+                />
             </article>
 
             <div>

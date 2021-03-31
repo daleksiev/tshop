@@ -8,6 +8,7 @@ import validateProduct from '../../../utils/validateProduct';
 import { connect } from 'react-redux';
 import { setError, setMessage } from '../../../actions/messageActions';
 import { createProductAsync } from '../../../actions/productsActions';
+import { Spinner } from 'react-bootstrap';
 
 const ProductsCreate = ({
     createProductAsync,
@@ -25,22 +26,29 @@ const ProductsCreate = ({
     });
 
     const [toRedirect, setToRedirect] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const onClickButton = (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         const checked = validateProduct(state);
 
         if (!checked.ok) {
+            setIsLoading(false);
             return setError(checked.message);
         }
 
         createProductAsync(state, user.accessToken)
             .then(() => {
+                setIsLoading(false);
                 setToRedirect(true);
                 setMessage('You created new product successfully!');
             })
-            .catch(err => setError(err.message));
+            .catch(err => {
+                setIsLoading(false);
+                setError(err.message)
+            });
 
     }
 
@@ -90,8 +98,20 @@ const ProductsCreate = ({
                 title="Description:"
                 onChange={onChangeInput}
             />
+            {isLoading
+                ? (
+                    <Button name="Loading...">
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                    </Button>
+                )
+                : <Button name="Create" onClick={onClickButton} />}
 
-            <Button name="Create" onClick={onClickButton} />
         </form>
     )
 }

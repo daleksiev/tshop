@@ -6,8 +6,7 @@ router.patch('/:userId/buy/:productId', authorizeMiddleware, (req, res, next) =>
     const { userId, productId } = req.params;
     userService
         .updateOne(userId, {}, { bought: productId })
-        .populate('bought')
-        .then(user => res.json(user))
+        .then(user => res.json({ ...user, ok: true }))
         .catch(err => next(err));
 })
 

@@ -14,6 +14,7 @@ import firebaseService from '../../services/firebaseService';
 import User from '../User/User';
 import AuthRoute from '../AuthRoute';
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = ({
 	setUserAuth,
