@@ -65,3 +65,21 @@ form {
 		margin: 10px 0 35px;
 	}
 }
+button.filter {
+	border: none;
+	outline: none;
+	background: transparent;
+	border: 2px solid #8080d2;
+	font-weight: 600;
+	color: #8080d2;
+	border-radius: 15px;
+	margin: 0 0 20px 20px;
+	vertical-align: top;
+	line-height: 20px;
+	transition: 0.4s;
+
+	&:hover {
+		color: #fff;
+		background-color: #8080d2;
+	}
+}

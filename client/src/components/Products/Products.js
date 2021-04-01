@@ -1,5 +1,4 @@
 import ProductsItem from './ProductsItem';
-import styles from './Products.module.scss';
 import { connect } from 'react-redux';
 import { fetchAllProductsAsync } from '../../actions/productsActions';
 import { fetchOneCategoryAsync } from '../../actions/categoriesActions';
@@ -11,6 +10,7 @@ import {
     getCurrentCategory,
 } from '../../reducers';
 import { Link } from 'react-router-dom';
+import './Products.scss';
 
 const Products = ({
     fetchAllProductsAsync,
@@ -23,19 +23,23 @@ const Products = ({
     const { categoryId } = match.params;
 
     useEffect(() => {
-        fetchOneCategoryAsync(categoryId);
-        fetchAllProductsAsync(categoryId);
-    }, [fetchAllProductsAsync, categoryId, fetchOneCategoryAsync])
+        if (categoryId !== currentCategory?._id) {
+            fetchOneCategoryAsync(categoryId);
+            fetchAllProductsAsync(categoryId);
+        }
+    }, [fetchAllProductsAsync, categoryId, fetchOneCategoryAsync, currentCategory, products])
+
+    const onClickRefreshProducts = () => fetchAllProductsAsync(categoryId);
 
     return (
-        <section className={styles['products-wrapper']}>
+        <section className='products-wrapper'>
 
             <div>
                 <Link to="/categories">Back</Link>
 
-                <h2>
-                    Products from category "{currentCategory.name}"
-                </h2>
+                <button className="filter" onClick={onClickRefreshProducts}>Refresh products</button>
+
+                <h2>Products from category "{currentCategory.name}"</h2>
             </div>
 
             <section>
