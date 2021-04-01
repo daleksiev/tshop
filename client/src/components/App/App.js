@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router';
 import Login from '../Login';
 import Register from '../Register';
 import Products from '../Products';
+import Categories from '../Categories';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
@@ -34,9 +35,11 @@ const App = ({
 
 					<Route path="/register" component={Register} />
 
-					<Route path="/" exact render={() => <Redirect to="/products" />} />
+					<Route path="/" exact render={() => <Redirect to="/categories" />} />
 
-					<Route path="/products" exact component={Products} />
+					<Route path="/categories/:categoryId" exact component={Products} />
+
+					<Route path="/categories" exact component={Categories} />
 
 					<AuthRoute path="/products/create" exact component={ProductsCreate} />
 

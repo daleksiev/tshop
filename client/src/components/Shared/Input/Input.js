@@ -10,7 +10,7 @@ const Input = ({
 }) => (
 	<div className="input-container">
 		<label htmlFor={id}>{title}</label>
-		<input id={id} type={type} name={name} defaultValue={value} onChange={onChange} />
+		<input id={id} type={type} name={name} value={value} onChange={onChange} />
 	</div>
 )
 

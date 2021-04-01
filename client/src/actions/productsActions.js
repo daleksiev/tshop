@@ -35,7 +35,7 @@ export const fetchOneProductError = (payload) => ({
 export const fetchOneProductAsync = (productId) => (dispatch) => {
     dispatch(fetchOneProduct());
 
-    productService.getOne(productId)
+    return productService.getOne(productId)
         .then(product => dispatch(fetchOneProductSuccess(product)))
         .catch(err => dispatch(fetchOneProductError(err)));
 }
@@ -55,10 +55,10 @@ export const fetchAllProductsError = (payload) => ({
     payload,
 })
 
-export const fetchAllProductsAsync = () => (dispatch) => {
+export const fetchAllProductsAsync = (categoryId) => (dispatch) => {
     dispatch(fetchAllProductsPending());
 
-    productService.getAll()
+    productService.getAll(categoryId)
         .then(products => dispatch(fetchAllProductsSuccess(products)))
         .catch(err => dispatch(fetchAllProductsError(err)));
 }

@@ -3,6 +3,7 @@ const validateProduct = ({
     brand,
     price,
     imageUrl,
+    category,
 }) => {
     const imageUrlPattern = /^https?:\/\/(.*)/;
 
@@ -21,6 +22,11 @@ const validateProduct = ({
     if (!imageUrl.length) {
         return { ok: false, message: 'Image Url is required!' }
     }
+
+    if (!category) {
+        return { ok: false, message: 'Category is required!' }
+    }
+
     if (price <= 0) {
         return { ok: false, message: 'The price should be positive number!' }
     }

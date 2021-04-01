@@ -33,7 +33,12 @@ const productSchema = new mongoose.Schema({
     buyers: [{
         type: mongoose.Types.ObjectId,
         ref: 'User',
-    }]
+    }],
+    category: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Category',
+        required: [true, 'Category is required!'],
+    }
 
 });
 
