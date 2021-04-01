@@ -1,8 +1,9 @@
-import styles from './Categories.module.scss';
 import { connect } from 'react-redux';
 import { getCategoriesList } from "../../reducers";
 import { fetchAllCategoriesAsync } from "../../actions/categoriesActions";
 import { useEffect } from 'react';
+import CategoriesItem from './CategoriesItem';
+import styles from './Categories.module.scss';
 
 const Categories = ({
     fetchAllCategoriesAsync,
@@ -16,12 +17,15 @@ const Categories = ({
         <div className={styles.categories}>
             <h1>Categories</h1>
 
-            {categories.map(category => (
-                <div>
-                    <h2>{category.name}</h2>
-                    <img src={category.imageUrl} alt="" />
-                </div>
-            ))}
+            <section>
+                {categories
+                    .map(category =>
+                        <CategoriesItem
+                            key={category._id}
+                            {...category}
+                        />)
+                }
+            </section>
         </div>
     )
 }
