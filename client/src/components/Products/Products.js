@@ -10,6 +10,7 @@ import {
     getProductsIsLoading,
     getCurrentCategory,
 } from '../../reducers';
+import { Link } from 'react-router-dom';
 
 const Products = ({
     fetchAllProductsAsync,
@@ -28,7 +29,15 @@ const Products = ({
 
     return (
         <section className={styles['products-wrapper']}>
-            <h2>Products from category "{currentCategory.name}"</h2>
+
+            <div>
+                <Link to="/categories">Back</Link>
+
+                <h2>
+                    Products from category "{currentCategory.name}"
+                </h2>
+            </div>
+
             <section>
                 {isLoading
                     ? <Spinner animation="border" variant="primary" />
