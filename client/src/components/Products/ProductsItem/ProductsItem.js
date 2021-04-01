@@ -30,7 +30,7 @@ const ProductsItem = ({
 
                 <h1>{title}</h1>
 
-                <strong>{brand}</strong>
+                <strong>{brand.name}</strong>
 
                 <em>Price ${price}</em>
             </article>

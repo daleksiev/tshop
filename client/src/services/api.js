@@ -10,4 +10,7 @@ export const userUrl = (userId) => `${usersUrl()}/${userId}`;
 export const buyUrl = (userId, productId) => `${userUrl(userId)}/buy/${productId}`;
 
 export const categoriesUrl = () => `${baseUrl}/categories`;
-export const categoryUrl = (id) => `${baseUrl}/categories/${id}`;
+export const categoryUrl = (id) => `${categoriesUrl()}/${id}`;
+
+export const brandsUrl = () => `${baseUrl}/brands`;
+export const brandUrl = (id) => `${brandsUrl()}/${id}`;

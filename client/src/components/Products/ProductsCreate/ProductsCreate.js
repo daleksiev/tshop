@@ -8,10 +8,12 @@ import validateProduct from '../../../utils/validateProduct';
 import { connect } from 'react-redux';
 import { setError, setMessage } from '../../../actions/messageActions';
 import { createProductAsync } from '../../../actions/productsActions';
+import { fetchAllBrandsAsync } from '../../../actions/brandsActions';
 import { Spinner } from 'react-bootstrap';
 import {
     getUser,
     getCategoriesList,
+    getBrandsList,
 } from '../../../reducers';
 import { fetchAllCategoriesAsync } from '../../../actions/categoriesActions';
 import Select from '../../Shared/Select';
@@ -23,12 +25,17 @@ const ProductsCreate = ({
     setError,
     categories,
     fetchAllCategoriesAsync,
+    fetchAllBrandsAsync,
+    brands,
 }) => {
     useEffect(() => {
+        if (!brands.length) {
+            fetchAllBrandsAsync();
+        }
         if (!categories.length) {
             fetchAllCategoriesAsync();
         }
-    }, [fetchAllCategoriesAsync, categories]);
+    }, [fetchAllCategoriesAsync, categories, fetchAllBrandsAsync, brands]);
 
     const [state, onChangeInput] = useForm({
         title: '',
@@ -83,13 +90,13 @@ const ProductsCreate = ({
                 onChange={onChangeInput}
             />
 
-            <Input
-                id="brand"
-                type="text"
+            <Select id="brand"
                 name="brand"
                 title="Brand:"
                 onChange={onChangeInput}
-            />
+            >
+                {brands.map(brand => <option value={brand._id} key={brand._id}>{brand.name}</option>)}
+            </Select>
 
             <Input
                 id="imageUrl"
@@ -143,6 +150,7 @@ const ProductsCreate = ({
 const mapStateToProps = (state) => ({
     user: getUser(state),
     categories: getCategoriesList(state),
+    brands: getBrandsList(state),
 })
 
 const mapDispatchToProps = {
@@ -150,6 +158,7 @@ const mapDispatchToProps = {
     setMessage,
     setError,
     fetchAllCategoriesAsync,
+    fetchAllBrandsAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsCreate);

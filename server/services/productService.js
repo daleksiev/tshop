@@ -1,10 +1,10 @@
 const Product = require('../models/Product');
 
-const getAll = (filter) => Product.find(filter);
+const getAll = (filter) => Product.find(filter).populate('brand');
 
-const getOneById = (_id) => Product.findById(_id);
+const getOneById = (_id) => Product.findById(_id).populate('brand');
 
-const getOne = (filter) => Product.findOne(filter);
+const getOne = (filter) => Product.findOne(filter).populate('brand');
 
 const createOne = (data) => new Product(data).save();
 

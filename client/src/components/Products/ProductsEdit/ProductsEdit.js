@@ -17,9 +17,11 @@ import {
     getCurrentProduct,
     getUser,
     getCategoriesList,
+    getBrandsList,
 } from '../../../reducers';
 import { fetchAllCategoriesAsync } from '../../../actions/categoriesActions';
 import Select from '../../Shared/Select';
+import { fetchAllBrandsAsync } from '../../../actions/brandsActions';
 
 const ProductsEdit = ({
     product,
@@ -30,21 +32,27 @@ const ProductsEdit = ({
     setError,
     setMessage,
     user,
+    brands,
+    fetchAllBrandsAsync,
     categories,
 }) => {
     const { productId } = match.params;
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
-    const [state, onChangeInput, setState] = useForm(product);
+    const [state, onChangeInput, setState] = useForm({ ...product, brand: product.brand._id });
 
     useEffect(() => {
         fetchOneProductAsync(productId)
-            .then(() => setState(product));
+            .then(() => setState({ ...product, brand: product.brand._id }));
+
+        if (!brands.length) {
+            fetchAllBrandsAsync();
+        }
 
         if (!categories.length) {
             fetchAllCategoriesAsync();
         }
-    }, [fetchOneProductAsync, productId, setState, fetchAllCategoriesAsync, categories])
+    }, [fetchOneProductAsync, productId, setState, fetchAllCategoriesAsync, categories, fetchAllBrandsAsync, brands])
 
     const onClickButton = (e) => {
         e.preventDefault();
@@ -62,7 +70,6 @@ const ProductsEdit = ({
             })
             .catch(err => setError(err.message));
     }
-
 
     if (toRedirect) {
         return <Redirect to={`/products/${productId}`} />
@@ -93,14 +100,14 @@ const ProductsEdit = ({
                     value={state.title || product.title}
                 />
 
-                <Input
-                    id="brand"
-                    type="text"
+                <Select id="brand"
                     name="brand"
                     title="Brand:"
                     onChange={onChangeInput}
-                    value={state.brand || product.brand}
-                />
+                    value={state?.brand || product?.brand}
+                >
+                    {brands.map(brand => <option value={brand?._id?.toString()} key={brand._id}>{brand.name}</option>)}
+                </Select>
 
                 <Input
                     id="imageUrl"
@@ -154,6 +161,7 @@ const mapStateToProps = (state) => ({
     product: getCurrentProduct(state),
     user: getUser(state),
     categories: getCategoriesList(state),
+    brands: getBrandsList(state),
 })
 
 const mapDispatchToProps = {
@@ -162,6 +170,7 @@ const mapDispatchToProps = {
     fetchAllCategoriesAsync,
     setError,
     setMessage,
+    fetchAllBrandsAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsEdit);
