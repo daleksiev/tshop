@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { setError, setMessage } from '../../../actions/messageActions';
 import { createProductAsync } from '../../../actions/productsActions';
 import { Spinner } from 'react-bootstrap';
+import Select from '../../Shared/Select';
 
 const ProductsCreate = ({
     createProductAsync,
@@ -22,6 +23,7 @@ const ProductsCreate = ({
         imageUrl: '',
         price: '',
         description: '',
+        category: '',
         author: user._id,
     });
 
@@ -84,6 +86,12 @@ const ProductsCreate = ({
                 onChange={onChangeInput}
             />
 
+            <Select id="category"
+                name="category"
+                title="Category:"
+                onChange={onChangeInput}
+            />
+
             <Input
                 id="price"
                 type="number"
@@ -98,6 +106,7 @@ const ProductsCreate = ({
                 title="Description:"
                 onChange={onChangeInput}
             />
+
             {isLoading
                 ? (
                     <Button name="Loading...">
