@@ -8,13 +8,17 @@ beforeEach(() => {
 
 describe('Testing dom', () => {
     it('Should has login texts', () => {
-        screen.queryAllByText('Login').map(text => expect(text).toBeInTheDocument());
-    })
+        screen
+            .queryAllByText('Login')
+            .map(text => expect(text).toBeInTheDocument());
+    });
+
     it('Should has email label text', () => {
         expect(screen.getByLabelText('Email:')).toBeInTheDocument();
-    })
+    });
+
     it('Should has password label text', () => {
         expect(screen.getByLabelText('Password:')).toBeInTheDocument();
-    })
+    });
 });
 
