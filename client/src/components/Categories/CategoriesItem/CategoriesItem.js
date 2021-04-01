@@ -21,6 +21,7 @@ const CategoriesItem = ({
                 animation="border"
                 variant="primary"
             />
+
             <img
                 style={didLoad ? {} : { 'visibility': 'hidden' }}
                 src={imageUrl}

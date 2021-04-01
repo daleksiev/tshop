@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     fetchOneProductAsync,
+    clearOneProduct,
     deleteProductAsync,
 } from '../../../actions/productsActions';
 import { setError, setMessage } from '../../../actions/messageActions';
@@ -19,6 +20,7 @@ import {
 const ProductsDetails = ({
     match,
     fetchOneProductAsync,
+    clearOneProduct,
     product,
     deleteProductAsync,
     buyProductAsync,
@@ -34,6 +36,8 @@ const ProductsDetails = ({
 
     useEffect(() => {
         fetchOneProductAsync(productId);
+
+        return () => clearOneProduct();
     }, [fetchOneProductAsync, productId]);
 
     const onClickDeleteProduct = () => {
@@ -116,6 +120,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+    clearOneProduct,
     fetchOneProductAsync,
     deleteProductAsync,
     buyProductAsync,

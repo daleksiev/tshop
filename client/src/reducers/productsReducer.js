@@ -13,7 +13,8 @@ import {
     UPDATE_PRODUCT_ERROR,
     DELETE_PRODUCT,
     DELETE_PRODUCT_ERROR,
-    DELETE_PRODUCT_SUCCESS
+    DELETE_PRODUCT_SUCCESS,
+    CLEAR_ONE_PRODUCT,
 } from '../actionTypes/productsActionTypes';
 import { combineReducers } from 'redux';
 
@@ -28,7 +29,9 @@ const currentProductInitialState = {
 const currentProduct = (state = currentProductInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ONE_PRODUCT_SUCCESS:
-            return { ...currentProductInitialState, ...action.payload };
+            return { ...state, ...action.payload };
+        case CLEAR_ONE_PRODUCT:
+            return { ...currentProductInitialState };
         case FETCH_ONE_PRODUCT_ERROR:
         case FETCH_ONE_PRODUCT:
         case CREATE_PRODUCT:
@@ -41,7 +44,7 @@ const currentProduct = (state = currentProductInitialState, action = {}) => {
         case DELETE_PRODUCT_ERROR:
         case DELETE_PRODUCT_SUCCESS:
         default:
-            return state;
+            return { ...state };
     }
 }
 

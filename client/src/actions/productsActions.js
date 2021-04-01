@@ -14,8 +14,13 @@ import {
     DELETE_PRODUCT,
     DELETE_PRODUCT_ERROR,
     DELETE_PRODUCT_SUCCESS,
+    CLEAR_ONE_PRODUCT,
 } from '../actionTypes/productsActionTypes';
 import productService from '../services/productService';
+
+export const clearOneProduct = () => ({
+    type: CLEAR_ONE_PRODUCT,
+})
 
 // fetch one product
 export const fetchOneProduct = () => ({
