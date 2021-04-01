@@ -84,6 +84,10 @@ const ProductsDetails = ({
             </article>
 
             <div>
+                <div>
+                    <Link to={`/categories/${product.category}`} >Back</Link>
+                </div>
+
                 <h1>{product.title}</h1>
 
                 <strong>Brand: {product.brand}</strong>

@@ -39,11 +39,10 @@ const Header = ({
 	return (
 		<header className="header-wrapper">
 			<ModalError />
+
 			<ModalSuccess />
 
 			<nav>
-				<Link to="/" >Products</Link>
-
 				<Link to="/categories" >Categories</Link>
 
 				{user.isLoggedIn

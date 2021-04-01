@@ -6,9 +6,9 @@ const CategoriesItem = ({
     name,
     imageUrl,
 }) => (
-    <Link to={`/categories/${_id}/products`}>
+    <Link to={`/categories/${_id}`}>
         <img src={imageUrl} alt="" />
-        <h2>{name}</h2>
+        <h3>{name}</h3>
     </Link>
 )
 

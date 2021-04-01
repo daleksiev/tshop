@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 
-const getAll = () => Product.find({});
+const getAll = (filter) => Product.find(filter);
 
 const getOneById = (_id) => Product.findById(_id);
 

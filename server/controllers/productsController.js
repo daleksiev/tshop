@@ -4,7 +4,7 @@ const authorizeMiddleware = require('../middlewares/authorizeMiddleware');
 const isAuthorMiddleware = require('../middlewares/isAuthorMiddleware');
 
 router.get('/', (req, res, next) => {
-    productService.getAll()
+    productService.getAll(req.query)
         .then(products => res.json(products))
         .catch(err => next(err));
 })

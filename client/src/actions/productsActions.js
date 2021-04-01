@@ -55,10 +55,10 @@ export const fetchAllProductsError = (payload) => ({
     payload,
 })
 
-export const fetchAllProductsAsync = () => (dispatch) => {
+export const fetchAllProductsAsync = (categoryId) => (dispatch) => {
     dispatch(fetchAllProductsPending());
 
-    productService.getAll()
+    productService.getAll(categoryId)
         .then(products => dispatch(fetchAllProductsSuccess(products)))
         .catch(err => dispatch(fetchAllProductsError(err)));
 }
