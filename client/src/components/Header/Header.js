@@ -42,7 +42,9 @@ const Header = ({
 			<ModalSuccess />
 
 			<nav>
-				<Link to="/" >Home</Link>
+				<Link to="/" >Products</Link>
+
+				<Link to="/categories" >Categories</Link>
 
 				{user.isLoggedIn
 					? loggedInLinks()

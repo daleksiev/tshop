@@ -4,6 +4,7 @@ const allHeaders = {
 
 const requester = (method = "GET", url, body = {}, headersOptions = {}) => {
     body = JSON.stringify(body);
+
     let headers = {
         'Content-type': 'application/json',
     };
