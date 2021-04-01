@@ -6,8 +6,8 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Title is required!'],
     },
     brand: {
-        type: String,
-        required: [true, 'Brand is required!'],
+        type: mongoose.Types.ObjectId,
+        ref: 'Brand',
     },
     price: {
         type: Number,

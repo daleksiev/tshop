@@ -38,7 +38,7 @@ const ProductsDetails = ({
         fetchOneProductAsync(productId);
 
         return () => clearOneProduct();
-    }, [fetchOneProductAsync, productId]);
+    }, [fetchOneProductAsync, productId, clearOneProduct]);
 
     const onClickDeleteProduct = () => {
         deleteProductAsync(productId, user.accessToken)
@@ -94,7 +94,7 @@ const ProductsDetails = ({
 
                 <h1>{product.title}</h1>
 
-                <strong>Brand: {product.brand}</strong>
+                <strong>Brand: {product.brand.name}</strong>
 
                 <em>Price: ${product.price}</em>
 
