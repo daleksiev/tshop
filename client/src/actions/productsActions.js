@@ -35,7 +35,7 @@ export const fetchOneProductError = (payload) => ({
 export const fetchOneProductAsync = (productId) => (dispatch) => {
     dispatch(fetchOneProduct());
 
-    productService.getOne(productId)
+    return productService.getOne(productId)
         .then(product => dispatch(fetchOneProductSuccess(product)))
         .catch(err => dispatch(fetchOneProductError(err)));
 }

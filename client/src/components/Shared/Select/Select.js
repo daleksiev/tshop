@@ -11,7 +11,8 @@ const Select = ({
 }) => (
 	<div className="input-container select-container">
 		<label htmlFor={id}>{title}</label>
-		<select id={id} type={type} name={name} defaultValue={value} onChange={onChange} >
+		<select id={id} type={type} name={name} value={value} onChange={onChange} >
+			<option value="" >Please choose {name}</option>
 			{children}
 		</select>
 	</div>

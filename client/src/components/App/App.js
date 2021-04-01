@@ -35,7 +35,7 @@ const App = ({
 
 					<Route path="/register" component={Register} />
 
-					<Route path="/" exact render={() => <Redirect to="/categories/:categoryId" />} />
+					<Route path="/" exact render={() => <Redirect to="/categories" />} />
 
 					<Route path="/categories/:categoryId" exact component={Products} />
 

@@ -16,34 +16,35 @@ import emptyImageSrc from '../../../assets/empty.jpg';
 import {
     getCurrentProduct,
     getUser,
+    getCategoriesList,
 } from '../../../reducers';
+import { fetchAllCategoriesAsync } from '../../../actions/categoriesActions';
+import Select from '../../Shared/Select';
 
 const ProductsEdit = ({
     product,
     match,
     fetchOneProductAsync,
+    fetchAllCategoriesAsync,
     updateProductAsync,
     setError,
     setMessage,
     user,
+    categories,
 }) => {
-    const [toRedirect, setToRedirect] = useState(false);
-
-    const [didLoad, setDidLoad] = useState(false);
-
-    const [state, onChangeInput] = useForm({
-        title: product.title,
-        brand: product.brand,
-        imageUrl: product.imageUrl,
-        price: product.price,
-        description: product.description,
-    });
-
     const { productId } = match.params;
+    const [toRedirect, setToRedirect] = useState(false);
+    const [didLoad, setDidLoad] = useState(false);
+    const [state, onChangeInput, setState] = useForm(product);
 
     useEffect(() => {
         fetchOneProductAsync(productId)
-    }, [fetchOneProductAsync, productId])
+            .then(() => setState(product));
+
+        if (!categories.length) {
+            fetchAllCategoriesAsync();
+        }
+    }, [fetchOneProductAsync, productId, setState, fetchAllCategoriesAsync, categories])
 
     const onClickButton = (e) => {
         e.preventDefault();
@@ -61,6 +62,7 @@ const ProductsEdit = ({
             })
             .catch(err => setError(err.message));
     }
+
 
     if (toRedirect) {
         return <Redirect to={`/products/${productId}`} />
@@ -88,7 +90,7 @@ const ProductsEdit = ({
                     name="title"
                     title="Title:"
                     onChange={onChangeInput}
-                    value={product.title}
+                    value={state.title || product.title}
                 />
 
                 <Input
@@ -97,7 +99,7 @@ const ProductsEdit = ({
                     name="brand"
                     title="Brand:"
                     onChange={onChangeInput}
-                    value={product.brand}
+                    value={state.brand || product.brand}
                 />
 
                 <Input
@@ -106,8 +108,24 @@ const ProductsEdit = ({
                     name="imageUrl"
                     title="Image URL:"
                     onChange={onChangeInput}
-                    value={product.imageUrl}
+                    value={state.imageUrl || product.imageUrl}
                 />
+
+                <Select id="category"
+                    name="category"
+                    title="Category:"
+                    onChange={onChangeInput}
+                    value={state.category || product.category}
+                >
+                    {categories.map(category =>
+                        <option
+                            value={category._id}
+                            key={category._id}
+                        >
+                            {category.name}
+                        </option>
+                    )}
+                </Select>
 
                 <Input
                     id="price"
@@ -115,7 +133,7 @@ const ProductsEdit = ({
                     name="price"
                     title="Price:"
                     onChange={onChangeInput}
-                    value={product.price}
+                    value={state.price || product.price}
                 />
 
                 <Textarea
@@ -123,7 +141,7 @@ const ProductsEdit = ({
                     name="description"
                     title="Description:"
                     onChange={onChangeInput}
-                    value={product.description}
+                    value={state.description || product.description}
                 />
 
                 <Button name="Edit" onClick={onClickButton} />
@@ -135,11 +153,13 @@ const ProductsEdit = ({
 const mapStateToProps = (state) => ({
     product: getCurrentProduct(state),
     user: getUser(state),
+    categories: getCategoriesList(state),
 })
 
 const mapDispatchToProps = {
     fetchOneProductAsync,
     updateProductAsync,
+    fetchAllCategoriesAsync,
     setError,
     setMessage,
 }

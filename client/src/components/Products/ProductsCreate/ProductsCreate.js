@@ -2,13 +2,18 @@ import Button from '../../Shared/Button';
 import Input from '../../Shared/Input';
 import Textarea from '../../Shared/Textarea';
 import { Redirect } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useForm from '../../../hooks/useForm';
 import validateProduct from '../../../utils/validateProduct';
 import { connect } from 'react-redux';
 import { setError, setMessage } from '../../../actions/messageActions';
 import { createProductAsync } from '../../../actions/productsActions';
 import { Spinner } from 'react-bootstrap';
+import {
+    getUser,
+    getCategoriesList,
+} from '../../../reducers';
+import { fetchAllCategoriesAsync } from '../../../actions/categoriesActions';
 import Select from '../../Shared/Select';
 
 const ProductsCreate = ({
@@ -16,7 +21,15 @@ const ProductsCreate = ({
     user,
     setMessage,
     setError,
+    categories,
+    fetchAllCategoriesAsync,
 }) => {
+    useEffect(() => {
+        if (!categories.length) {
+            fetchAllCategoriesAsync();
+        }
+    }, [fetchAllCategoriesAsync, categories]);
+
     const [state, onChangeInput] = useForm({
         title: '',
         brand: '',
@@ -55,7 +68,7 @@ const ProductsCreate = ({
     }
 
     if (toRedirect) {
-        return <Redirect to="/" />
+        return <Redirect to={`/categories/${state.category}`} />
     }
 
     return (
@@ -90,7 +103,9 @@ const ProductsCreate = ({
                 name="category"
                 title="Category:"
                 onChange={onChangeInput}
-            />
+            >
+                {categories.map(category => <option value={category._id} key={category._id}>{category.name}</option>)}
+            </Select>
 
             <Input
                 id="price"
@@ -126,13 +141,15 @@ const ProductsCreate = ({
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user,
+    user: getUser(state),
+    categories: getCategoriesList(state),
 })
 
 const mapDispatchToProps = {
     createProductAsync,
     setMessage,
     setError,
+    fetchAllCategoriesAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsCreate);
