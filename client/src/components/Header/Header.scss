@@ -14,8 +14,8 @@
 		flex-wrap: wrap;
 	}
 
-	a.profile {
-		flex-basis: 50%;
+	& > div {
+		flex-basis: 49%;
 		flex-grow: 1;
 		flex-shrink: 1;
 		text-align: center;

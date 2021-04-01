@@ -50,8 +50,10 @@ const Header = ({
 				}
 			</nav>
 
-			<Link className="profile" to="/profile">{user.email}</Link>
-		</header>
+			<div>
+				<Link to="/profile">{user.email}</Link>
+			</div>
+		</header >
 	)
 }
 
