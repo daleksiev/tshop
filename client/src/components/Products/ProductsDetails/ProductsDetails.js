@@ -38,7 +38,7 @@ const ProductsDetails = ({
         fetchOneProductAsync(productId);
 
         return () => clearOneProduct();
-    }, [fetchOneProductAsync, productId]);
+    }, [fetchOneProductAsync, productId, clearOneProduct]);
 
     const onClickDeleteProduct = () => {
         deleteProductAsync(productId, user.accessToken)

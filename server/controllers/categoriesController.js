@@ -5,30 +5,30 @@ const isAuthorMiddleware = require('../middlewares/isAuthorMiddleware');
 
 router.get('/', (req, res, next) => {
     categoryService.getAll()
-        .then(products => res.json(products))
+        .then(categories => res.json(categories))
         .catch(err => next(err));
 })
 
-router.get('/:productId', (req, res, next) => {
-    categoryService.getOneById(req.params.productId)
-        .then(product => res.json(product))
+router.get('/:categoryId', (req, res, next) => {
+    categoryService.getOneById(req.params.categoryId)
+        .then(category => res.json(category))
         .catch(err => next(err));
 })
 
 router.post('/', (req, res, next) => {
     categoryService.createOne(req.body)
-        .then(product => res.json({ ...product, ok: true }))
+        .then(category => res.json({ ...category, ok: true }))
         .catch(err => next(err));
 })
 
-router.patch('/:productId', (req, res, next) => {
-    categoryService.updateOne(req.params.productId, req.body)
-        .then(product => res.json({ ...product, ok: true }))
+router.patch('/:categoryId', (req, res, next) => {
+    categoryService.updateOne(req.params.categoryId, req.body)
+        .then(category => res.json({ ...category, ok: true }))
         .catch(err => next(err));
 })
 
-router.delete('/:productId', (req, res, next) => {
-    categoryService.removeOne(req.params.productId)
+router.delete('/:categoryId', (req, res, next) => {
+    categoryService.removeOne(req.params.categoryId)
         .then(response => {
             res.send({ ...response, ok: true })
         })
