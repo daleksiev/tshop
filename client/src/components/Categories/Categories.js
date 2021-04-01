@@ -3,17 +3,20 @@ import { getCategoriesList } from "../../reducers";
 import { fetchAllCategoriesAsync } from "../../actions/categoriesActions";
 import { useEffect } from 'react';
 import CategoriesItem from './CategoriesItem';
+import { getCategoriesIsLoading } from '../../reducers/categoriesReducer';
+import { Spinner } from 'react-bootstrap';
 import styles from './Categories.module.scss';
 
 const Categories = ({
     fetchAllCategoriesAsync,
     categories,
+    isLoading,
 }) => {
     useEffect(() => {
         if (!categories.length) {
             fetchAllCategoriesAsync();
         }
-    }, [fetchAllCategoriesAsync]);
+    }, [fetchAllCategoriesAsync, categories]);
 
     const onClickRefreshProducts = () => fetchAllCategoriesAsync();
 
@@ -26,12 +29,14 @@ const Categories = ({
             </div>
 
             <section>
-                {categories
-                    .map(category =>
-                        <CategoriesItem
-                            key={category._id}
-                            {...category}
-                        />)
+                {isLoading
+                    ? <Spinner animation="border" variant="primary" />
+                    : categories
+                        .map(category =>
+                            <CategoriesItem
+                                key={category._id}
+                                {...category}
+                            />)
                 }
             </section>
         </div>
@@ -40,6 +45,7 @@ const Categories = ({
 
 const mapStateToProps = (state) => ({
     categories: getCategoriesList(state),
+    isLoading: getCategoriesIsLoading(state),
 })
 
 const mapDispatchToProps = {

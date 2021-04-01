@@ -24,6 +24,7 @@ export const getProductsIsLoading = fromProducts.getProductsIsLoading;
 export const getCategories = fromCategories.getCategories;
 export const getCategoriesList = fromCategories.getCategoriesList;
 export const getCurrentCategory = fromCategories.getCurrentCategory;
+export const getCategoriesIsLoading = fromCategories.getCategoriesIsLoading;
 
 // message selectors
 export const getMessages = fromMessage.getMessages;

@@ -44,25 +44,29 @@ const currentCategory = (state = currentCategoryInitialState, action = {}) => {
     }
 }
 
-const categoriesInitialState = []
+const categoriesInitialState = {
+    list: [],
+    isLoading: false,
+}
 
 const categories = (state = categoriesInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ALL_CATEGORIES_SUCCESS:
-            return [...action.payload];
-        case FETCH_ALL_CATEGORIES_ERROR:
+            return { ...state, list: [...action.payload], isLoading: false };
         case FETCH_ALL_CATEGORIES:
-            return [...state];
+            return { ...state, isLoading: true };
+        case FETCH_ALL_CATEGORIES_ERROR:
         default:
-            return state;
+            return { ...state };
     }
 }
 
 export default combineReducers({
-    list: categories,
+    categories,
     current: currentCategory,
 })
 
 export const getCategories = (state) => state.categories
-export const getCategoriesList = (state) => state.categories.list
+export const getCategoriesList = (state) => state.categories.categories.list
+export const getCategoriesIsLoading = (state) => state.categories.categories.isLoading
 export const getCurrentCategory = (state) => state.categories.current
