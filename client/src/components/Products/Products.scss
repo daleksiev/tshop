@@ -24,11 +24,10 @@
 
     div.input-container {
         display: inline-block;
-        width: 150px;
         vertical-align: baseline;
+    }
 
-        label {
-            display: none;
-        }
+    aside {
+        left: 36px;
     }
 }

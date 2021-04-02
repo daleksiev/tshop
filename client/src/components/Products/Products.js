@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import Input from '../Shared/Input';
 import './Products.scss';
+import ProductsAside from './ProductsAside/ProductsAside';
 
 const Products = ({
     fetchAllProductsAsync,
@@ -35,6 +36,8 @@ const Products = ({
 
     return (
         <section className='products-wrapper'>
+
+            <ProductsAside />
 
             <div>
                 <Link to="/categories">Back</Link>

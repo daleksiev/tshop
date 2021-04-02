@@ -9,7 +9,7 @@ const Input = ({
 	placeholder,
 	onChange,
 }) => (
-	<div className="input-container">
+	<div className={"input-container " + type + ' type-' + type}>
 		<label htmlFor={id}>{title}</label>
 		<input id={id} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} />
 	</div>
