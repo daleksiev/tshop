@@ -27,6 +27,20 @@
 			background-color: #8080d2;
 			color: #fff;
 			border-radius: 25px;
+			::-webkit-input-placeholder {
+				color: #fff;
+			}
 		}
+	}
+
+	input::placeholder {
+		color: #8080d2;
+	}
+
+	input::-webkit-input-placeholder {
+		color: #8080d2;
+	}
+	input:focus::-webkit-input-placeholder {
+		color: #fff;
 	}
 }

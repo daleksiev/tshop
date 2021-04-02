@@ -2,7 +2,7 @@ import ProductsItem from './ProductsItem';
 import { connect } from 'react-redux';
 import { fetchAllProductsAsync } from '../../actions/productsActions';
 import { fetchOneCategoryAsync } from '../../actions/categoriesActions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import {
     getProductsList,
@@ -10,6 +10,7 @@ import {
     getCurrentCategory,
 } from '../../reducers';
 import { Link } from 'react-router-dom';
+import Input from '../Shared/Input';
 import './Products.scss';
 
 const Products = ({
@@ -21,7 +22,7 @@ const Products = ({
     fetchOneCategoryAsync,
 }) => {
     const { categoryId } = match.params;
-
+    const [searchValue, setSearchValue] = useState('');
     useEffect(() => {
         if (categoryId !== currentCategory?._id) {
             fetchOneCategoryAsync(categoryId);
@@ -30,6 +31,7 @@ const Products = ({
     }, [fetchAllProductsAsync, categoryId, fetchOneCategoryAsync, currentCategory, products])
 
     const onClickRefreshProducts = () => fetchAllProductsAsync(categoryId);
+    const onSearchChange = (e) => setSearchValue(e.target.value);
 
     return (
         <section className='products-wrapper'>
@@ -39,15 +41,25 @@ const Products = ({
 
                 <button className="filter" onClick={onClickRefreshProducts}>Refresh products</button>
 
+                <Input
+                    id="search"
+                    name="search"
+                    type="text"
+                    placeholder="Search Products"
+                    onChange={onSearchChange}
+                />
+
                 <h2>Products from category "{currentCategory.name}"</h2>
             </div>
 
             <section>
                 {isLoading
                     ? <Spinner animation="border" variant="primary" />
-                    : products.map((product) =>
-                        <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
-                    )
+                    : products
+                        .filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
+                        .map((product) =>
+                            <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
+                        )
                 }
             </section>
         </section>

@@ -6,11 +6,12 @@ const Input = ({
 	title,
 	type,
 	value,
+	placeholder,
 	onChange,
 }) => (
 	<div className="input-container">
 		<label htmlFor={id}>{title}</label>
-		<input id={id} type={type} name={name} value={value} onChange={onChange} />
+		<input id={id} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} />
 	</div>
 )
 

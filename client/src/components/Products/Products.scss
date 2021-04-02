@@ -9,4 +9,26 @@
         gap: 50px;
         flex-wrap: wrap;
     }
+
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        h2 {
+            flex-basis: 100%;
+            flex-grow: 1;
+        }
+    }
+
+    div.input-container {
+        display: inline-block;
+        width: 150px;
+        vertical-align: baseline;
+
+        label {
+            display: none;
+        }
+    }
 }
