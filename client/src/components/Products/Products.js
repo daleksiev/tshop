@@ -11,8 +11,9 @@ import {
 } from '../../reducers';
 import { Link } from 'react-router-dom';
 import Input from '../Shared/Input';
-import './Products.scss';
 import ProductsAside from './ProductsAside/ProductsAside';
+import useForm from '../../hooks/useForm'
+import './Products.scss';
 
 const Products = ({
     fetchAllProductsAsync,
@@ -24,6 +25,10 @@ const Products = ({
 }) => {
     const { categoryId } = match.params;
     const [searchValue, setSearchValue] = useState('');
+    const [filterBy, setFilterBy] = useForm({
+        brand: '',
+    })
+
     useEffect(() => {
         if (categoryId !== currentCategory?._id) {
             fetchOneCategoryAsync(categoryId);
@@ -37,7 +42,9 @@ const Products = ({
     return (
         <section className='products-wrapper'>
 
-            <ProductsAside />
+            <ProductsAside
+                onChangeFilter={setFilterBy}
+            />
 
             <div>
                 <Link to="/categories">Back</Link>
@@ -60,8 +67,13 @@ const Products = ({
                     ? <Spinner animation="border" variant="primary" />
                     : products
                         .filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
+                        .filter(x => filterBy.brand ? x.brand._id === filterBy.brand : true)
                         .map((product) =>
-                            <ProductsItem key={product._id} href={`/products/${product._id}`} {...product} />
+                            <ProductsItem
+                                key={product._id}
+                                href={`/products/${product._id}`}
+                                {...product}
+                            />
                         )
                 }
             </section>
