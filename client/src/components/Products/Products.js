@@ -28,6 +28,9 @@ const Products = ({
     const [filterBy, setFilterBy] = useForm({
         brand: '',
     })
+    const [sortBy, setSortBy] = useForm({
+        price: '',
+    })
 
     useEffect(() => {
         fetchOneCategoryAsync(categoryId);
@@ -42,6 +45,8 @@ const Products = ({
             <ProductsAside
                 onChangeFilter={setFilterBy}
                 filterBy={filterBy}
+                onChangeSort={setSortBy}
+                sortBy={sortBy}
             />
 
             <div>
@@ -64,6 +69,13 @@ const Products = ({
                     : products
                         .filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
                         .filter(x => filterBy.brand ? x.brand._id === filterBy.brand : true)
+                        .sort((a, b) => {
+                            if (!sortBy.price) return 0;
+
+                            return sortBy.price === 'asc'
+                                ? a.price - b.price
+                                : b.price - a.price
+                        })
                         .map((product) =>
                             <ProductsItem
                                 key={product._id}

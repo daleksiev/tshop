@@ -1,15 +1,18 @@
-import Input from '../../Shared/Input';
 import { connect } from 'react-redux';
 import { getBrandsList } from '../../../reducers';
 import { fetchAllBrandsAsync } from '../../../actions/brandsActions';
-import './ProductsAside.scss';
 import { useEffect } from 'react';
+import './ProductsAside.scss';
+import ProductsAsideBrands from './ProductsAsideBrands/ProductsAsideBrands';
+import ProductsAsidePrice from './ProductsAsidePrice/ProductsAsidePrice';
 
 const ProductsAside = ({
-    brands,
     fetchAllBrandsAsync,
+    brands,
     onChangeFilter,
     filterBy,
+    onChangeSort,
+    sortBy,
 }) => {
     useEffect(() => {
         fetchAllBrandsAsync();
@@ -19,35 +22,26 @@ const ProductsAside = ({
         <aside className="aside-wrapper">
             <h4>Filter by:</h4>
 
-            <section className="aside-filter-by">
+            <section className="aside-items">
                 <h5>Brand</h5>
 
-                <article>
-                    <Input
-                        onChange={onChangeFilter}
-                        id="all"
-                        name="brand"
-                        title="All brands"
-                        value=""
-                        type="radio"
-                        checked={filterBy.brand === ""}
-                    />
-
-                    {brands.map(brand => (
-                        <Input
-                            onChange={onChangeFilter}
-                            key={brand._id}
-                            id={brand.name}
-                            name="brand"
-                            title={brand.name}
-                            value={brand._id}
-                            type="radio"
-                        />
-                    ))}
-                </article>
+                <ProductsAsideBrands
+                    brands={brands}
+                    onChangeFilter={onChangeFilter}
+                    filterBy={filterBy}
+                />
             </section>
 
-            {/* <h4>Sort by:</h4> */}
+            <h4>Sort by:</h4>
+
+            <section className="aside-items">
+                <h5>Price</h5>
+
+                <ProductsAsidePrice
+                    onChangeSort={onChangeSort}
+                    sortBy={sortBy}
+                />
+            </section>
         </aside>
     )
 }
