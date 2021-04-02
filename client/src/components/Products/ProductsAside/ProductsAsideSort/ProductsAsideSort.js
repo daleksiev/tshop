@@ -3,36 +3,37 @@ import Input from '../../../Shared/Input';
 const ProductsAsidePrice = ({
     onChangeSort,
     sortBy,
+    name,
 }) => (
     <article>
         <Input
             onChange={onChangeSort}
-            id="none"
-            name="price"
+            id={"none-" + name}
+            name={name}
             title="None"
             value={''}
             type="radio"
-            checked={sortBy.price === ''}
+            checked={sortBy[name] === ''}
         />
 
         <Input
             onChange={onChangeSort}
-            id="min"
-            name="price"
+            id={"min-" + name}
+            name={name}
             title="Ascending"
             value={'asc'}
             type="radio"
-            checked={sortBy.price === 'asc'}
+            checked={sortBy[name] === 'asc'}
         />
 
         <Input
             onChange={onChangeSort}
-            id="max"
-            name="price"
+            id={"max-" + name}
+            name={name}
             title="Descending"
             value={'desc'}
             type="radio"
-            checked={sortBy.price === 'desc'}
+            checked={sortBy[name] === 'desc'}
         />
     </article>
 )

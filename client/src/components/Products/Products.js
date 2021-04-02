@@ -30,6 +30,7 @@ const Products = ({
     })
     const [sortBy, setSortBy] = useForm({
         price: '',
+        title: '',
     })
 
     useEffect(() => {
@@ -70,11 +71,16 @@ const Products = ({
                         .filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
                         .filter(x => filterBy.brand ? x.brand._id === filterBy.brand : true)
                         .sort((a, b) => {
-                            if (!sortBy.price) return 0;
+                            let priceSort, titleSort;
+                            !sortBy.price
+                                ? priceSort = 0
+                                : priceSort = sortBy.price === 'asc' ? a.price - b.price : b.price - a.price;
 
-                            return sortBy.price === 'asc'
-                                ? a.price - b.price
-                                : b.price - a.price
+                            !sortBy.title
+                                ? titleSort = 0
+                                : titleSort = sortBy.title === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+
+                            return priceSort ^ titleSort;
                         })
                         .map((product) =>
                             <ProductsItem
