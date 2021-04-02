@@ -13,10 +13,8 @@ const ModalSuccess = ({
     useEffect(() => {
         const timeout = setTimeout(() => setMessage(''), time);
 
-        return () => {
-            clearTimeout(timeout)
-        }
-    }, [setMessage, time]);
+        return clearTimeout.bind(undefined, timeout);
+    }, [setMessage, time, success]);
 
     return (
         <Modal onClick={() => setMessage('')} active={Boolean(success)}>

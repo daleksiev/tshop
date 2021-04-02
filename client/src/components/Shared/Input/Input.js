@@ -8,10 +8,11 @@ const Input = ({
 	value,
 	placeholder,
 	onChange,
+	checked,
 }) => (
 	<div className={"input-container " + type + ' type-' + type}>
 		<label htmlFor={id}>{title}</label>
-		<input id={id} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} />
+		<input checked={checked} id={id} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} />
 	</div>
 )
 

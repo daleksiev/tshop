@@ -13,20 +13,12 @@ const Categories = ({
     isLoading,
 }) => {
     useEffect(() => {
-        if (!categories.length) {
-            fetchAllCategoriesAsync();
-        }
-    }, [fetchAllCategoriesAsync, categories]);
-
-    const onClickRefreshProducts = () => fetchAllCategoriesAsync();
+        fetchAllCategoriesAsync();
+    }, [fetchAllCategoriesAsync]);
 
     return (
         <div className={styles.categories}>
-            <div>
-                <button className={"filter " + styles.filter} onClick={onClickRefreshProducts}>Refresh Categories</button>
-
-                <h1>Categories</h1>
-            </div>
+            <h1>Categories</h1>
 
             <section>
                 {isLoading

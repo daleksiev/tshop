@@ -30,13 +30,10 @@ const Products = ({
     })
 
     useEffect(() => {
-        if (categoryId !== currentCategory?._id) {
-            fetchOneCategoryAsync(categoryId);
-            fetchAllProductsAsync(categoryId);
-        }
-    }, [fetchAllProductsAsync, categoryId, fetchOneCategoryAsync, currentCategory, products])
+        fetchOneCategoryAsync(categoryId);
+        fetchAllProductsAsync(categoryId);
+    }, [fetchAllProductsAsync, categoryId, fetchOneCategoryAsync])
 
-    const onClickRefreshProducts = () => fetchAllProductsAsync(categoryId);
     const onSearchChange = (e) => setSearchValue(e.target.value);
 
     return (
@@ -44,12 +41,11 @@ const Products = ({
 
             <ProductsAside
                 onChangeFilter={setFilterBy}
+                filterBy={filterBy}
             />
 
             <div>
                 <Link to="/categories">Back</Link>
-
-                <button className="filter" onClick={onClickRefreshProducts}>Refresh products</button>
 
                 <Input
                     id="search"

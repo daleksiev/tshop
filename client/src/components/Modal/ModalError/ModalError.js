@@ -14,10 +14,8 @@ const ModalError = ({
     useEffect(() => {
         const timeout = setTimeout(() => setError(''), time);
 
-        return () => {
-            clearTimeout(timeout)
-        }
-    }, [setError, time]);
+        return clearTimeout.bind(undefined, timeout);
+    }, [setError, time, error]);
 
     return (
         <Modal onClick={() => setError('')} active={Boolean(error)}>

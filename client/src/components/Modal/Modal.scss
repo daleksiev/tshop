@@ -7,11 +7,11 @@
     max-width: 500px;
     cursor: pointer;
     opacity: 0;
-    transition: 0.5s;
+    transition: 0.6s;
 
     &.active {
         top: 13px;
-        transition: 0.5s;
+        transition: 0.6s;
         opacity: 1;
     }
 }

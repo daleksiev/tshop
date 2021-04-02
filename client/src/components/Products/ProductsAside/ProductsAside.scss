@@ -7,4 +7,16 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    section,
+    article {
+        width: auto;
+        padding-left: 30px;
+    }
+
+    section.aside-filter-by {
+        width: auto;
+        gap: 10px;
+        flex-direction: column;
+    }
 }
