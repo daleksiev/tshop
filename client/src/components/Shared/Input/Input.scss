@@ -58,6 +58,27 @@ div.input-container {
 		}
 	}
 
+	&.file.type-file {
+		input {
+			display: none;
+		}
+		label {
+			position: relative;
+			padding-bottom: 150px;
+
+			&::before {
+				position: absolute;
+				content: "Click here to choose file or Drag and drop your file here";
+				display: block;
+				bottom: 30px;
+				border: 3px dashed;
+				padding: 10px;
+				box-sizing: border-box;
+				border-radius: 15px;
+			}
+		}
+	}
+
 	input::placeholder {
 		color: #8080d2;
 	}
