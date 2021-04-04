@@ -52,10 +52,32 @@ const productsInitialState = {
     list: [],
 };
 
+const productInitialState = {
+    _id: '',
+    title: '',
+    price: 0,
+    imagUrl: '',
+    image: '',
+    description: '',
+    buyers: [],
+    category: '',
+    brand: {},
+}
+
+const product = (state = productInitialState, action = {}) => {
+    switch (action.type) {
+        case FETCH_ALL_PRODUCTS_SUCCESS:
+            return { ...state, ...action.payload };
+        default:
+            return state;
+
+    }
+}
+
 const products = (state = productsInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ALL_PRODUCTS_SUCCESS:
-            return { ...state, list: [...action.payload], isLoading: false };
+            return { ...state, list: action.payload.map(x => product(undefined, { ...action, payload: x })), isLoading: false };
         case FETCH_ALL_PRODUCTS_ERROR:
         case FETCH_ALL_PRODUCTS:
             return { ...state, isLoading: true };
@@ -63,6 +85,7 @@ const products = (state = productsInitialState, action = {}) => {
             return state;
     }
 }
+
 
 export default combineReducers({
     products,

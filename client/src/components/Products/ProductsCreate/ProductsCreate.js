@@ -37,15 +37,17 @@ const ProductsCreate = ({
         }
     }, [fetchAllCategoriesAsync, categories, fetchAllBrandsAsync, brands]);
 
-    const [state, onChangeInput] = useForm({
+    const [state, onChangeInput, setState] = useForm({
         title: '',
         brand: '',
-        imageUrl: '',
         price: '',
         description: '',
         category: '',
+        image: '',
         author: user._id,
     });
+
+    const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] })
 
     const [toRedirect, setToRedirect] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -99,11 +101,11 @@ const ProductsCreate = ({
             </Select>
 
             <Input
-                id="imageUrl"
-                type="text"
-                name="imageUrl"
-                title="Image URL:"
-                onChange={onChangeInput}
+                id="image"
+                type="file"
+                name="image"
+                title="Upload an image:"
+                onChange={onImageUpload}
             />
 
             <Select id="category"

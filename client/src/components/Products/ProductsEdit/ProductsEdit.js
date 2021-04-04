@@ -39,7 +39,7 @@ const ProductsEdit = ({
     const { productId } = match.params;
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
-    const [state, onChangeInput, setState] = useForm({ ...product, brand: product.brand._id });
+    const [state, onChangeInput, setState] = useForm({ ...product, brand: product.brand._id, image: product.image || '' });
 
     useEffect(() => {
         fetchOneProductAsync(productId)
@@ -53,6 +53,8 @@ const ProductsEdit = ({
             fetchAllCategoriesAsync();
         }
     }, [fetchOneProductAsync, productId, setState, fetchAllCategoriesAsync, categories, fetchAllBrandsAsync, brands])
+
+    const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] })
 
     const onClickButton = (e) => {
         e.preventDefault();
@@ -110,12 +112,11 @@ const ProductsEdit = ({
                 </Select>
 
                 <Input
-                    id="imageUrl"
-                    type="text"
-                    name="imageUrl"
-                    title="Image URL:"
-                    onChange={onChangeInput}
-                    value={state.imageUrl || product.imageUrl}
+                    id="image"
+                    type="file"
+                    name="image"
+                    title="Upload an image:"
+                    onChange={onImageUpload}
                 />
 
                 <Select id="category"
