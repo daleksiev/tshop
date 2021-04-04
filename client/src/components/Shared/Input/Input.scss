@@ -66,11 +66,18 @@ div.input-container {
 			position: relative;
 			padding-bottom: 150px;
 
+			&:hover {
+				&::before {
+					cursor: pointer;
+					opacity: 0.6;
+				}
+			}
+
 			&::before {
 				position: absolute;
 				content: "Click here to choose file or Drag and drop your file here";
 				display: block;
-				bottom: 30px;
+				bottom: 15px;
 				border: 3px dashed;
 				padding: 10px;
 				box-sizing: border-box;
