@@ -30,7 +30,7 @@ const Header = ({
 
 	const loggedInLinks = () => (
 		<>
-			<Link to="/products/create" >Create</Link>
+			<Link to="/products/create" >Create Product</Link>
 
 			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
 		</>

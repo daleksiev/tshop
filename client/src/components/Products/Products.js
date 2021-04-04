@@ -67,28 +67,29 @@ const Products = ({
             <section>
                 {isLoading
                     ? <Spinner animation="border" variant="primary" />
-                    : products
-                        .filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
-                        .filter(x => filterBy.brand ? x.brand._id === filterBy.brand : true)
-                        .sort((a, b) => {
-                            let priceSort/* , titleSort */;
-                            !sortBy.price
-                                ? priceSort = 0
-                                : priceSort = sortBy.price === 'asc' ? a.price - b.price : b.price - a.price;
-                            return priceSort;
-                            // !sortBy.title
-                            //     ? titleSort = 0
-                            //     : titleSort = sortBy.title === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+                    : products.length
+                        ? products.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
+                            .filter(x => filterBy.brand ? x.brand._id === filterBy.brand : true)
+                            .sort((a, b) => {
+                                let priceSort/* , titleSort */;
+                                !sortBy.price
+                                    ? priceSort = 0
+                                    : priceSort = sortBy.price === 'asc' ? a.price - b.price : b.price - a.price;
+                                return priceSort;
+                                // !sortBy.title
+                                //     ? titleSort = 0
+                                //     : titleSort = sortBy.title === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
 
-                            // return priceSort ^ titleSort;
-                        })
-                        .map((product) =>
-                            <ProductsItem
-                                key={product._id}
-                                href={`/products/${product._id}`}
-                                {...product}
-                            />
-                        )
+                                // return priceSort ^ titleSort;
+                            })
+                            .map((product) =>
+                                <ProductsItem
+                                    key={product._id}
+                                    href={`/products/${product._id}`}
+                                    {...product}
+                                />
+                            )
+                        : 'No products found!'
                 }
             </section>
         </section>

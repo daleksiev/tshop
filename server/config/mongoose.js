@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { dbUrl } = require('./config');
 
-mongoose.connect('mongodb://localhost/tshop', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, });
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, });
 
 const db = mongoose.connection;
 

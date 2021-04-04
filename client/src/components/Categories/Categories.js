@@ -23,12 +23,15 @@ const Categories = ({
             <section>
                 {isLoading
                     ? <Spinner animation="border" variant="primary" />
-                    : categories
-                        .map(category =>
-                            <CategoriesItem
-                                key={category._id}
-                                {...category}
-                            />)
+                    : categories.length
+                        ? categories
+                            .map(category =>
+                                <CategoriesItem
+                                    key={category._id}
+                                    {...category}
+                                />
+                            )
+                        : 'No categories found!'
                 }
             </section>
         </div>
