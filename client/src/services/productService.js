@@ -11,20 +11,12 @@ const getOne = async (id) => requester.get(productUrl(id))
 
 const create = async (data, token) => {
     return saveImage(data.image)
-        .then(imageUrl => {
-            data.image = data.image.name;
-            data.imageUrl = imageUrl;
-            return requester.post(productsUrl(), data, { auth: token })
-        });
+        .then(imageUrl => requester.post(productsUrl(), { ...data, image: data.image.name, imageUrl }, { auth: token }));
 };
 
 const update = async (id, data, token) => {
     return saveImage(data.image)
-        .then(imageUrl => {
-            data.image = data.image.name;
-            data.imageUrl = imageUrl;
-            return requester.patch(productUrl(id), data, { auth: token });
-        });
+        .then(imageUrl => requester.patch(productUrl(id), { ...data, image: data.image.name, imageUrl }, { auth: token }))
 }
 const remove = async (id, token) => {
     return getOne(id)
