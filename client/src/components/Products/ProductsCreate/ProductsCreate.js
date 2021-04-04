@@ -104,6 +104,7 @@ const ProductsCreate = ({
                 id="image"
                 type="file"
                 name="image"
+                fileName={state.image.name}
                 title="Upload an image:"
                 onChange={onImageUpload}
             />

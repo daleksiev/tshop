@@ -59,6 +59,9 @@ div.input-container {
 	}
 
 	&.file.type-file {
+		p {
+			padding: 5px 0 15px;
+		}
 		input {
 			display: none;
 		}

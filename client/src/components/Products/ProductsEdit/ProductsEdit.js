@@ -116,6 +116,7 @@ const ProductsEdit = ({
                     type="file"
                     name="image"
                     title="Upload an image:"
+                    fileName={state?.image?.name}
                     onChange={onImageUpload}
                 />
 

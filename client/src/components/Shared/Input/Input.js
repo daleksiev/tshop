@@ -9,10 +9,26 @@ const Input = ({
 	placeholder,
 	onChange,
 	checked,
+	fileName,
 }) => (
 	<div className={"input-container " + type + ' type-' + type}>
 		<label htmlFor={id}>{title}</label>
-		<input checked={checked} id={id} type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} />
+
+		{fileName &&
+			<p>
+				{fileName} is loaded.
+			</p>
+		}
+
+		<input
+			checked={checked}
+			id={id}
+			type={type}
+			name={name}
+			placeholder={placeholder}
+			value={value}
+			onChange={onChange}
+		/>
 	</div>
 )
 
