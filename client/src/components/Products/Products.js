@@ -71,16 +71,16 @@ const Products = ({
                         .filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
                         .filter(x => filterBy.brand ? x.brand._id === filterBy.brand : true)
                         .sort((a, b) => {
-                            let priceSort, titleSort;
+                            let priceSort/* , titleSort */;
                             !sortBy.price
                                 ? priceSort = 0
                                 : priceSort = sortBy.price === 'asc' ? a.price - b.price : b.price - a.price;
+                            return priceSort;
+                            // !sortBy.title
+                            //     ? titleSort = 0
+                            //     : titleSort = sortBy.title === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
 
-                            !sortBy.title
-                                ? titleSort = 0
-                                : titleSort = sortBy.title === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
-
-                            return priceSort ^ titleSort;
+                            // return priceSort ^ titleSort;
                         })
                         .map((product) =>
                             <ProductsItem

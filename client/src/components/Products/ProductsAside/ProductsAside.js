@@ -44,7 +44,7 @@ const ProductsAside = ({
                 />
             </section>
 
-            <section className="aside-items">
+            {/* <section className="aside-items">
                 <h5>Name</h5>
 
                 <ProductsAsideSort
@@ -52,7 +52,7 @@ const ProductsAside = ({
                     sortBy={sortBy}
                     name={'title'}
                 />
-            </section>
+            </section> */}
         </aside>
     )
 }
