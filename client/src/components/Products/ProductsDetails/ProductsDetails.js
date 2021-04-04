@@ -88,8 +88,8 @@ const ProductsDetails = ({
             </article>
 
             <div>
-                <div>
-                    <Link to={`/categories/${product.category}`} >Back</Link>
+                <div className={styles['back-link']}>
+                    <Link to={`/categories/${product.category}`}>Back</Link>
                 </div>
 
                 <h1>{product.title}</h1>
