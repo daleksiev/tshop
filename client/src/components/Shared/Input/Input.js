@@ -10,9 +10,14 @@ const Input = ({
 	onChange,
 	checked,
 	fileName,
+	fileTitle = "Click here to choose file or Drag and drop your file here",
 }) => (
 	<div className={"input-container " + type + ' type-' + type}>
-		<label htmlFor={id}>{title}</label>
+		<label
+			htmlFor={id}
+			title={fileTitle}>
+			{title}
+		</label>
 
 		{fileName &&
 			<p>

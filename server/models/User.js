@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
     }],
+    imageUrl: {
+        type: String,
+        default: 'https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=74155150-7f47-4efc-a4a3-694d982e25ca',
+    },
+    image: {
+        type: String,
+        default: 'unnamed.png',
+    }
 });
 
 module.exports = mongoose.model('User', userSchema);

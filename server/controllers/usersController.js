@@ -11,9 +11,16 @@ router.patch('/:userId/buy/:productId', authorizeMiddleware, (req, res, next) =>
 })
 
 
-router.get('/:userId', authorizeMiddleware, (req, res, nect) => {
+router.get('/:userId', authorizeMiddleware, (req, res, next) => {
     const { userId } = req.params;
     userService.getOneById(userId)
+        .then(user => res.json(user))
+        .catch(err => next(err));
+})
+
+router.patch('/:userId', authorizeMiddleware, (req, res, next) => {
+    const { userId } = req.params;
+    userService.updateOneById(userId, req.body)
         .then(user => res.json(user))
         .catch(err => next(err));
 })

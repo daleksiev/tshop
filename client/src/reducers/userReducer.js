@@ -2,6 +2,9 @@ import {
     SET_USER_AUTH,
     LOGOUT_USER,
     BUY_PRODUCT_SUCCESS,
+    UPDATE_USER_INFO,
+    UPDATE_USER_INFO_SUCCESS,
+    UPDATE_USER_INFO_ERROR,
 } from '../actionTypes/userActionTypes';
 
 const userInitialState = {
@@ -13,6 +16,9 @@ const userInitialState = {
     refreshToken: '',
     bought: [],
     isLoggedIn: false,
+    imageUrl: '',
+    image: '',
+    isLoading: false,
 }
 
 let localStorageUserState = JSON.parse(localStorage.getItem('user'));
@@ -20,10 +26,14 @@ localStorageUserState = localStorageUserState?.email ? { ...localStorageUserStat
 
 const user = (state = localStorageUserState, action = {}) => {
     switch (action.type) {
+        case UPDATE_USER_INFO:
+            return { ...state, ...action.payload, isLoading: true }
         case SET_USER_AUTH:
             return { ...state, ...action.payload, isLoggedIn: true };
+        case UPDATE_USER_INFO_ERROR:
         case BUY_PRODUCT_SUCCESS:
-            return { ...state, ...action.payload };
+        case UPDATE_USER_INFO_SUCCESS:
+            return { ...state, ...action.payload, isLoading: false };
         case LOGOUT_USER:
             return { ...userInitialState }
         default:

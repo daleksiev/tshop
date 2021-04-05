@@ -52,7 +52,10 @@ const Header = ({
 			</nav>
 
 			<div>
-				<Link to="/profile">{user.email}</Link>
+
+				<Link to="/profile">
+					<img src={user.imageUrl} alt={user.image} />
+				</Link>
 			</div>
 		</header >
 	)

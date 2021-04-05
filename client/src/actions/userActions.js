@@ -3,6 +3,9 @@ import {
     LOGOUT_USER,
     BUY_PRODUCT,
     BUY_PRODUCT_SUCCESS,
+    UPDATE_USER_INFO,
+    UPDATE_USER_INFO_ERROR,
+    UPDATE_USER_INFO_SUCCESS,
 } from '../actionTypes/userActionTypes';
 
 import userService from '../services/userService';
@@ -42,4 +45,26 @@ export const buyProductAsync = (userId, productId, token) => async (dispatch) =>
             }
             return dispatch(buyProductSuccess(res))
         })
+}
+
+export const updateUserInfo = () => ({
+    type: UPDATE_USER_INFO,
+})
+
+export const updateUserInfoSuccess = (payload) => ({
+    type: UPDATE_USER_INFO_SUCCESS,
+    payload,
+})
+
+export const updateUserInfoError = (payload) => ({
+    type: UPDATE_USER_INFO_ERROR,
+    payload,
+})
+
+export const updateUserInfoAsync = (userId, userInfo, token) => (dispatch) => {
+    dispatch(updateUserInfo());
+
+    return userService.update(userId, userInfo, token)
+        .then(res => dispatch(updateUserInfoSuccess(res)))
+    // .catch(err => dispatch(updateUserInfoError(err)));
 }
