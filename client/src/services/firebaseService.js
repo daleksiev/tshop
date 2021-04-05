@@ -56,11 +56,19 @@ const verifyAuth = (updateUserInfo, setError) => {
 	});
 }
 
+const user = () => auth().currentUser;
+
+const updateEmail = (email) => user().updateEmail(email)
+
+const update = (data) => user().updateProfile(data)
+
 const firebaseService = {
 	signup,
 	login,
 	logout,
 	verifyAuth,
+	update,
+	updateEmail,
 };
 
 export default firebaseService
