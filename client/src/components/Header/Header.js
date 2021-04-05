@@ -6,13 +6,17 @@ import { logoutUser } from '../../actions/userActions';
 import { setMessage } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import { getUser } from '../../reducers';
+import { Spinner } from 'react-bootstrap';
 import './Header.scss';
+import { useState } from "react";
 
 const Header = ({
 	user,
 	logoutUser,
 	setMessage,
 }) => {
+	const [isLoaded, setIsLoaded] = useState(false);
+
 	const onClickLogoutUser = e => {
 		e.preventDefault();
 		firebaseService.logout();
@@ -54,7 +58,14 @@ const Header = ({
 			<div>
 
 				<Link to="/profile">
-					<img src={user.imageUrl} alt={user.image} />
+					<img
+						src={user.imageUrl}
+						alt={user.image}
+						onLoad={() => setIsLoaded(true)}
+						style={!isLoaded ? { display: 'none' } : {}}
+					/>
+
+					<Spinner style={isLoaded ? { display: 'none' } : {}} animation="border" variant="primary" />
 				</Link>
 			</div>
 		</header >
