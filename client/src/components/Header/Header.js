@@ -56,21 +56,22 @@ const Header = ({
 			</nav>
 
 			<div>
+				{user.email &&
+					<Link to="/profile">
+						<img
+							src={user.imageUrl}
+							alt={user.image}
+							onLoad={() => setIsLoaded(true)}
+							style={!isLoaded ? { display: 'none' } : {}}
+							onError={(e) => {
+								setIsLoaded(true);
+								e.target.src = "https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=6adb23b1-b1bc-41ae-9c03-10a38b086a9b"
+							}}
+						/>
 
-				<Link to="/profile">
-					<img
-						src={user.imageUrl}
-						alt={user.image}
-						onLoad={() => setIsLoaded(true)}
-						style={!isLoaded ? { display: 'none' } : {}}
-						onError={(e) => {
-							setIsLoaded(true);
-							e.target.src ="https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=6adb23b1-b1bc-41ae-9c03-10a38b086a9b"
-						}}
-					/>
-
-					<Spinner style={isLoaded ? { display: 'none' } : {}} animation="border" variant="primary" />
-				</Link>
+						<Spinner style={isLoaded ? { display: 'none' } : {}} animation="border" variant="primary" />
+					</Link>
+				}
 			</div>
 		</header >
 	)
