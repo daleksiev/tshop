@@ -43,6 +43,7 @@ const Login = ({
 					setError(err.message);
 				});
 		} else {
+			setIsLoading(false);
 			setError('Email and password fields are required!');
 		}
 	}

@@ -31,18 +31,22 @@ const Register = ({
 			setIsLoading(false);
 			return setError('The passwords do not match.');
 		}
-
-		firebaseService
-			.signup(state.email, state.password)
-			.then(res => {
-				setToRedirect(true);
-				setMessage('You registered successfully!');
-				setIsLoading(false);
-			})
-			.catch(err => {
-				setError(err.message);
-				setIsLoading(false);
-			});
+		if (state.email && state.password) {
+			firebaseService
+				.signup(state.email, state.password)
+				.then(res => {
+					setToRedirect(true);
+					setMessage('You registered successfully!');
+					setIsLoading(false);
+				})
+				.catch(err => {
+					setError(err.message);
+					setIsLoading(false);
+				});
+		} else {
+			setIsLoading(false);
+			setError('Email, password and repeat password fields are required!');
+		}
 	}
 
 	if (user.isLoggedIn || toRedirect) {
