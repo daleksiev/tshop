@@ -76,7 +76,7 @@ const ProductsCreate = ({
 
     }
 
-    if (toRedirect) {
+    if (toRedirect || user.role === 'user') {
         return <Redirect to={`/categories/${state.category}`} />
     }
 

@@ -19,6 +19,7 @@ const userInitialState = {
     imageUrl: '',
     image: '',
     isLoading: false,
+    role: 'user',
 }
 
 let localStorageUserState = JSON.parse(localStorage.getItem('user'));

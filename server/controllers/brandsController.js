@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const brandService = require('../services/brandService');
 const authorizeMiddleware = require('../middlewares/authorizeMiddleware');
-const isAuthorMiddleware = require('../middlewares/isAuthorMiddleware');
+const isAdminMiddleware = require('../middlewares/isAdminMiddleware');
 
 router.get('/', (req, res, next) => {
     brandService.getAll()
@@ -15,19 +15,19 @@ router.get('/:brandId', (req, res, next) => {
         .catch(err => next(err));
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', authorizeMiddleware, isAdminMiddleware, (req, res, next) => {
     brandService.createOne(req.body)
         .then(brand => res.json({ ...brand, ok: true }))
         .catch(err => next(err));
 })
 
-router.patch('/:brandId', (req, res, next) => {
+router.patch('/:brandId', authorizeMiddleware, isAdminMiddleware, (req, res, next) => {
     brandService.updateOne(req.params.brandId, req.body)
         .then(brand => res.json({ ...brand, ok: true }))
         .catch(err => next(err));
 })
 
-router.delete('/:brandId', (req, res, next) => {
+router.delete('/:brandId', authorizeMiddleware, isAdminMiddleware, (req, res, next) => {
     brandService.removeOne(req.params.brandId)
         .then(response => {
             res.send({ ...response, ok: true })

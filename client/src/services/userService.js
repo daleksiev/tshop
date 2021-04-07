@@ -26,7 +26,7 @@ const updateProfileEmail = (id, data, token) => {
 }
 
 const update = (id, data, token) => {
-    if (data?.image) {
+    if (data?.image?.name) {
         return updateProfileImage(id, data, token)
     }
 

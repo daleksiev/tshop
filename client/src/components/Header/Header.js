@@ -34,7 +34,9 @@ const Header = ({
 
 	const loggedInLinks = () => (
 		<>
-			<Link to="/products/create" >Create Product</Link>
+			{user?.role === 'admin' &&
+				<Link to="/products/create" >Create Product</Link>
+			}
 
 			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
 		</>

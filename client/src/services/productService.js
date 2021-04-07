@@ -9,14 +9,25 @@ const getAll = (categoryId) => requester.get(productsUrl(categoryId));
 
 const getOne = async (id) => requester.get(productUrl(id))
 
-const create = async (data, token) => {
+const uploadImageAndFetch = async (data, token, url, method) => {
     return saveImage(data.image)
-        .then(imageUrl => requester.post(productsUrl(), { ...data, image: data.image.name, imageUrl }, { auth: token }));
+        .then(imageUrl => method(url, { ...data, image: data.image.name, imageUrl }, { auth: token }));
+}
+
+const create = async (data, token) => {
+    if (data?.image) {
+        return uploadImageAndFetch(data, token, productsUrl(), requester.post);
+    }
+
+    return requester.post(productsUrl(), { ...data }, { auth: token });
 };
 
 const update = async (id, data, token) => {
-    return saveImage(data.image)
-        .then(imageUrl => requester.patch(productUrl(id), { ...data, image: data.image.name, imageUrl }, { auth: token }))
+    if (data?.image?.name) {
+        return uploadImageAndFetch(data, token, productUrl(id), requester.patch);
+    }
+
+    return requester.patch(productUrl(id), { ...data }, { auth: token })
 }
 const remove = async (id, token) => {
     return getOne(id)

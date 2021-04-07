@@ -39,11 +39,10 @@ const ProductsEdit = ({
     const { productId } = match.params;
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
-    const [state, onChangeInput, setState] = useForm({ ...product, brand: product.brand._id, image: product.image || '' });
+    const [state, onChangeInput, setState] = useForm({ ...product, brand: product.brand._id, image: product.image || '', imageUrl: product.imageUrl || '' });
 
     useEffect(() => {
         fetchOneProductAsync(productId)
-            .then(() => setState({ ...product, brand: product.brand._id }));
 
         if (!brands.length) {
             fetchAllBrandsAsync();
@@ -56,7 +55,7 @@ const ProductsEdit = ({
 
     const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] })
 
-    const onClickButton = (e) => {
+    const onClickEdit = (e) => {
         e.preventDefault();
 
         const checked = validateProduct(state);
@@ -73,7 +72,7 @@ const ProductsEdit = ({
             .catch(err => setError(err.message));
     }
 
-    if (toRedirect) {
+    if (toRedirect || user.role === 'user') {
         return <Redirect to={`/products/${productId}`} />
     }
 
@@ -153,7 +152,7 @@ const ProductsEdit = ({
                     value={state.description || product.description}
                 />
 
-                <Button name="Edit" onClick={onClickButton} />
+                <Button name="Edit" onClick={onClickEdit} />
             </form>
         </div>
     )

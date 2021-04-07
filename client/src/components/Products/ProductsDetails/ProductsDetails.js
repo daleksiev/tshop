@@ -32,8 +32,7 @@ const ProductsDetails = ({
     const [didLoad, setDidLoad] = useState(false);
     const { productId } = match.params;
     const isBought = user.bought.find(product => product === productId || product._id === productId);
-    const isAuthor = product.author === user._id;
-
+    const redirectUrl = `/categories/${product.category}`;
     useEffect(() => {
         fetchOneProductAsync(productId);
 
@@ -52,12 +51,11 @@ const ProductsDetails = ({
     const onClickBuyProduct = () => {
         buyProductAsync(user._id, productId, user.accessToken)
             .then(res => {
-                console.log(res)
                 setMessage('You bought this product successfully!')
             });
     }
 
-    const authorView = (
+    const adminView = (
         <>
             <Link className={styles['edit-button']} to={`/products/edit/${productId}`} >Edit Product</Link>
 
@@ -72,7 +70,7 @@ const ProductsDetails = ({
     )
 
     if (toRedirect) {
-        return <Redirect to='/' />
+        return <Redirect exact to={redirectUrl} />
     }
 
     return (
@@ -89,7 +87,7 @@ const ProductsDetails = ({
 
             <div>
                 <div className={styles['back-link']}>
-                    <Link to={`/categories/${product.category}`}>Back</Link>
+                    <Link to={redirectUrl}>Back</Link>
                 </div>
 
                 <h1>{product.title}</h1>
@@ -106,7 +104,7 @@ const ProductsDetails = ({
 
                 {user.isLoggedIn &&
                     <div >
-                        {!isAuthor ? userView : authorView}
+                        {user?.role === 'user' ? userView : adminView}
                     </div>
                 }
             </div >

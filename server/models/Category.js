@@ -13,6 +13,11 @@ const categorySchema = new mongoose.Schema({
             message: ({ value }) => `${value} is not a valid url address!`,
         },
     },
+    image: String,
+    visibility: {
+        type: Boolean,
+        default: true,
+    },
     products: [{
         type: mongoose.Types.ObjectId,
         ref: 'Product',

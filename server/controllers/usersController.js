@@ -10,7 +10,6 @@ router.patch('/:userId/buy/:productId', authorizeMiddleware, (req, res, next) =>
         .catch(err => next(err));
 })
 
-
 router.get('/:userId', authorizeMiddleware, (req, res, next) => {
     const { userId } = req.params;
     userService.getOneById(userId)
