@@ -140,6 +140,8 @@ export const deleteCategoryAsync = (id, token) => async (dispatch) => {
             if (!res?.ok) {
                 throw res;
             }
-            return dispatch(deleteCategorySuccess(res))
+
+            dispatch(deleteCategorySuccess(res))
+            return dispatch(fetchAllCategoriesAsync());
         });
 }

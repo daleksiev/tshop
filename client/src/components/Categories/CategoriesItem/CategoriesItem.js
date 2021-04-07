@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { getUser } from '../../../reducers';
 import { connect } from 'react-redux';
 import Button from '../../Shared/Button';
+import { setMessage, setError } from '../../../actions/messageActions'
+import { deleteCategoryAsync } from '../../../actions/categoriesActions'
 import './CategoriesItem.scss';
 
 const CategoriesItem = ({
@@ -11,11 +13,16 @@ const CategoriesItem = ({
     name,
     imageUrl,
     user,
+    setMessage,
+    setError,
+    deleteCategoryAsync,
 }) => {
     const [didLoad, setDidLoad] = useState(false);
 
     const onClickDelete = (e) => {
-
+        deleteCategoryAsync(_id, user.accessToken)
+            .then(() => setMessage('You deleted a category successfully!'))
+            .catch((err) => setError(err.message));
     }
 
     const onLoad = (e) => setDidLoad(true);
@@ -54,7 +61,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-
+    setMessage,
+    setError,
+    deleteCategoryAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesItem);
