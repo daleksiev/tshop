@@ -13,15 +13,6 @@
         flex-wrap: wrap;
         gap: 50px;
         align-items: flex-end;
-
-        a {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 200px;
-            flex-basis: 10%;
-            flex-grow: 1;
-        }
     }
 
     img {

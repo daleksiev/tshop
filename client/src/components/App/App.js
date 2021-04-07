@@ -4,6 +4,7 @@ import Login from '../Login';
 import Register from '../Register';
 import Products from '../Products';
 import Categories from '../Categories';
+import CategoriesCreate from '../Categories/CategoriesCreate';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
@@ -16,7 +17,6 @@ import User from '../User/User';
 import AuthRoute from '../AuthRoute';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CategoriesCraete from '../Categories/CategoriesCraete';
 
 const App = ({
 	setUserAuth,
@@ -38,7 +38,7 @@ const App = ({
 
 					<Route path="/" exact render={() => <Redirect to="/categories" />} />
 
-					<AuthRoute path="/categories/create" exact component={CategoriesCraete} />
+					<AuthRoute path="/categories/create" exact component={CategoriesCreate} />
 
 					<Route path="/categories/:categoryId" exact component={Products} />
 

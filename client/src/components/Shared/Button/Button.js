@@ -4,8 +4,9 @@ const Button = ({
 	name,
 	onClick,
 	children,
+	className,
 }) => (
-	<button onClick={onClick} className="button">
+	<button onClick={onClick} className={"button " + className}>
 		{children}
 		{name}
 	</button>

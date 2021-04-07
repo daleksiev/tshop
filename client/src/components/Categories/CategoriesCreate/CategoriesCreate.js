@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { setMessage, setError } from '../../../actions/messageActions';
 import { createCategoryAsync } from '../../../actions/categoriesActions';
-import { getUser } from '../../../reducers/';
+import { getUser } from '../../../reducers';
 
-const CategoriesCraete = ({
+const CategoriesCreate = ({
     setMessage,
     setError,
     user,
@@ -93,4 +93,4 @@ const mapDispatchToProps = {
     createCategoryAsync,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesCraete);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesCreate);

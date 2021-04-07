@@ -82,3 +82,45 @@ button.filter {
 		background-color: #8080d2;
 	}
 }
+
+.delete-button {
+	font-size: 20px;
+	background: #b64f4f;
+
+	&:hover {
+		color: #b64f4f;
+		border-color: #b64f4f;
+	}
+}
+a.edit-button {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	font-weight: normal;
+	text-decoration: none;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 20px;
+	border: 2px solid transparent;
+	transition: 0.4s;
+	text-align: center;
+
+	&:hover {
+		text-decoration: none;
+		background: #fff;
+		border: 2px solid;
+	}
+}
+.edit-button {
+	background: #8080d2;
+	color: #fff;
+
+	&:hover {
+		color: #8080d2;
+		border-color: #8080d2;
+	}
+}

@@ -11,7 +11,7 @@ import {
     buyProductAsync,
 } from '../../../actions/userActions';
 import emptyImageSrc from '../../../assets/empty.jpg';
-import styles from './ProductsDetails.module.scss';
+import './ProductsDetails.scss';
 import {
     getCurrentProduct,
     getUser,
@@ -57,16 +57,16 @@ const ProductsDetails = ({
 
     const adminView = (
         <>
-            <Link className={styles['edit-button']} to={`/products/edit/${productId}`} >Edit Product</Link>
+            <Link className='edit-button' to={`/products/edit/${productId}`} >Edit Product</Link>
 
-            <button className={styles['delete-button']} onClick={onClickDeleteProduct}>Delete Product</button>
+            <button className='delete-button' onClick={onClickDeleteProduct}>Delete Product</button>
         </>
     );
 
     const userView = (
         isBought
-            ? <button className={styles['buy-unactive-button']} > You already bought this product!</button>
-            : <button className={styles['buy-button']} onClick={onClickBuyProduct}>Buy</button>
+            ? <button className='buy-unactive-button' > You already bought this product!</button>
+            : <button className='buy-button' onClick={onClickBuyProduct}>Buy</button>
     )
 
     if (toRedirect) {
@@ -74,7 +74,7 @@ const ProductsDetails = ({
     }
 
     return (
-        <section className={styles['product-details']}>
+        <section className='product-details'>
             <article>
                 <img
                     style={didLoad ? {} : { 'visibility': 'hidden' }}
@@ -86,7 +86,7 @@ const ProductsDetails = ({
             </article>
 
             <div>
-                <div className={styles['back-link']}>
+                <div className='back-link'>
                     <Link to={redirectUrl}>Back</Link>
                 </div>
 

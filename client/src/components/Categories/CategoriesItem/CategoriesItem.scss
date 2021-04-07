@@ -1,0 +1,19 @@
+.categories-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 200px;
+    flex-basis: 10%;
+    flex-grow: 1;
+
+    article {
+        display: flex;
+        gap: 10px;
+
+        a,
+        button {
+            flex-grow: 1;
+            flex-basis: 10%;
+        }
+    }
+}
