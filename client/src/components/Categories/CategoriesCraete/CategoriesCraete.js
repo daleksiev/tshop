@@ -4,19 +4,44 @@ import Button from '../../Shared/Button';
 import { Spinner } from 'react-bootstrap';
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { setMessage, setError } from '../../../actions/messageActions';
+import { createCategoryAsync } from '../../../actions/categoriesActions';
+import { getUser } from '../../../reducers/';
 
-const CategoriesCraete = () => {
+const CategoriesCraete = ({
+    setMessage,
+    setError,
+    user,
+    createCategoryAsync,
+}) => {
     const [state, onChangeInput, setState] = useForm({
         name: '',
         image: '',
     });
     const [isLoading, setIsLoading] = useState(false);
+    const [toRedirect, setToRedirect] = useState(false);
 
     const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] });
 
     const onClickButton = (e) => {
         e.preventDefault();
         setIsLoading(true);
+
+        createCategoryAsync(state, user.accessToken)
+            .then(() => {
+                setIsLoading(false);
+                setToRedirect(true);
+                setMessage('You created new category successfully!');
+            })
+            .catch(err => {
+                setIsLoading(false);
+                setError(err.message);
+            })
+    }
+
+    if (user?.role !== 'admin' || toRedirect) {
+        return <Redirect to="/" exact />
     }
 
     return (
@@ -59,11 +84,13 @@ const CategoriesCraete = () => {
 }
 
 const mapStateToProps = (state) => ({
-
+    user: getUser(state),
 })
 
 const mapDispatchToProps = {
-
+    setMessage,
+    setError,
+    createCategoryAsync,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesCraete);
