@@ -6,6 +6,7 @@ import CategoriesItem from './CategoriesItem';
 import { getCategoriesIsLoading } from '../../reducers/categoriesReducer';
 import { Spinner } from 'react-bootstrap';
 import styles from './Categories.module.scss';
+import { Link } from 'react-router-dom';
 
 const Categories = ({
     fetchAllCategoriesAsync,
@@ -18,7 +19,11 @@ const Categories = ({
 
     return (
         <div className={styles.categories}>
-            <h1>Categories</h1>
+            <h1>
+                Categories
+
+                <Link to="/categories/create">+ Add category</Link>
+            </h1>
 
             <section>
                 {isLoading
