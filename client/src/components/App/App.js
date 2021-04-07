@@ -15,6 +15,7 @@ import { setError } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import User from '../User/User';
 import AuthRoute from '../AuthRoute';
+import CategoriesEdit from '../Categories/CategoriesEdit/';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -39,6 +40,8 @@ const App = ({
 					<Route path="/" exact render={() => <Redirect to="/categories" />} />
 
 					<AuthRoute path="/categories/create" exact component={CategoriesCreate} />
+
+					<AuthRoute path="/categories/edit/:categoryId" exact component={CategoriesEdit} />
 
 					<Route path="/categories/:categoryId" exact component={Products} />
 
