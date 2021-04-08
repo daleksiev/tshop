@@ -8,6 +8,7 @@ import { Spinner } from 'react-bootstrap';
 import useForm from '../../hooks/useForm';
 import Button from '../Shared/Button';
 import { useState } from 'react';
+import Img from '../Shared/Img/Img';
 
 const User = ({
     user,
@@ -19,7 +20,6 @@ const User = ({
         email: user.email,
     });
     const [isLoading, setIsLoading] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
 
     const onClickUpdateUserInfo = () => {
         updateUserInfoAsync(user._id, state, user.accessToken)
@@ -52,30 +52,18 @@ const User = ({
                     {isLoading
                         ? <Spinner animation="border" variant="primary" />
                         : (
-                            <>
-                                <img
-                                    src={user.imageUrl}
-                                    alt={user.image}
-                                    onLoad={() => setIsLoaded(true)}
-                                    style={!isLoaded ? { display: 'none' } : {}}
-                                    onError={(e) => {
-                                        setIsLoaded(true);
-                                        e.target.src = "https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=6adb23b1-b1bc-41ae-9c03-10a38b086a9b"
-                                    }}
-                                />
-                                <Spinner style={isLoaded ? { display: 'none' } : {}} animation="border" variant="primary" />
-                            </>
+                            <Input
+                                id="imageUrl"
+                                name="imageUrl"
+                                type="file"
+                                fileTitle=""
+                                onChange={onChangeImage}
+                            >
+                                <Img src={user.imageUrl} alt={user.email} />
+                            </Input>
                         )
                     }
                 </div>
-
-                <Input
-                    id="imageUrl"
-                    name="imageUrl"
-                    type="file"
-                    fileTitle="Change profile image"
-                    onChange={onChangeImage}
-                />
 
                 <h2>Email:</h2>
 

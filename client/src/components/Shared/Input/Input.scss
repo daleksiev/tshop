@@ -76,6 +76,9 @@ div.input-container {
 				}
 			}
 
+			&.hidden::after {
+				display: none;
+			}
 			&::after {
 				content: attr(title);
 				display: block;

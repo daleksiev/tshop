@@ -11,12 +11,16 @@ const Input = ({
 	checked,
 	fileName,
 	fileTitle = "Click here to choose file or Drag and drop your file here",
+	children,
 }) => (
 	<div className={"input-container " + type + ' type-' + type}>
 		<label
+			className={fileTitle === "" ? 'hidden' : ''}
 			htmlFor={id}
-			title={fileTitle}>
+			title={fileTitle}
+		>
 			{title}
+			{children}
 		</label>
 
 		{fileName &&

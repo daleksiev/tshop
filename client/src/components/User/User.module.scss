@@ -21,8 +21,11 @@
         }
     }
 
-    div > img {
+    div > label img {
         border-radius: 50%;
+        margin: auto;
+        display: block;
+        cursor: pointer;
     }
 
     img {
