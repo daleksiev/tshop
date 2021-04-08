@@ -4,7 +4,7 @@ import Button from '../../Shared/Button';
 import { Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { setMessage, setError } from '../../../actions/messageActions';
 import { fetchOneCategoryAsync, updateCategoryAsync } from '../../../actions/categoriesActions';
 import { getUser, getCurrentCategory } from '../../../reducers';
@@ -19,19 +19,22 @@ const CategoriesEdit = ({
     fetchOneCategoryAsync,
 }) => {
     const { categoryId } = match.params;
-    const [state, onChangeInput, setState] = useForm({
-        ...category,
-        image: category.image || '',
-        imageUrl: category.imageUrl || '',
-    });
+    const [state, onChangeInput, setState] = useForm({ ...category });
     const [isLoading, setIsLoading] = useState(false);
     const [toRedirect, setToRedirect] = useState(false);
+    const [didLoaded, setDidLoad] = useState(false);
 
     useEffect(() => {
-        fetchOneCategoryAsync(categoryId);
+        fetchOneCategoryAsync(categoryId)
+            .then((category) => {
+                setState({
+                    ...category,
+                    image: category.image || '',
+                    imageUrl: category.imageUrl || '',
+                })
+            })
 
     }, [fetchOneCategoryAsync, categoryId])
-
 
     const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] });
 
@@ -59,12 +62,21 @@ const CategoriesEdit = ({
         <form method="post">
             <h1>Update Category</h1>
 
+            <Spinner style={!didLoaded ? {} : { 'display': 'none' }} animation="border" variant="primary" />
+
+            <img
+                style={didLoaded ? {} : { 'display': 'none' }}
+                src={category.imageUrl}
+                onLoad={e => setDidLoad(true)}
+                onError={e => setDidLoad(false)}
+            />
+
             <Input
                 id="name"
                 type="text"
                 name="name"
                 title="Name:"
-                value={state.name}
+                value={state?.name}
                 onChange={onChangeInput}
             />
 
@@ -72,7 +84,7 @@ const CategoriesEdit = ({
                 id="image"
                 type="file"
                 name="image"
-                fileName={state.image.name}
+                fileName={state?.image?.name}
                 title="Upload an image:"
                 onChange={onImageUpload}
             />

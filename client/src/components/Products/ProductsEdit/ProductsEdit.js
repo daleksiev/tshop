@@ -40,8 +40,10 @@ const ProductsEdit = ({
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
     const [state, onChangeInput, setState] = useForm({ ...product, brand: product.brand._id, image: product.image || '', imageUrl: product.imageUrl || '' });
+
     useEffect(() => {
         fetchOneProductAsync(productId)
+            .then(() => setState({ ...product, brand: product.brand._id, image: product.image || '', imageUrl: product.imageUrl || '' }))
 
         if (!brands.length) {
             fetchAllBrandsAsync();
@@ -88,7 +90,6 @@ const ProductsEdit = ({
                     onLoad={e => setDidLoad(true)}
                     onError={e => e.target.src = emptyImageSrc}
                     alt={product.title}
-
                 />
 
                 <Input

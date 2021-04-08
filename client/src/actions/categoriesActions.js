@@ -35,8 +35,11 @@ export const fetchOneCategoryError = (payload) => ({
 export const fetchOneCategoryAsync = (categoryId) => (dispatch) => {
     dispatch(fetchOneCategory());
 
-    categoryService.getOne(categoryId)
-        .then(category => dispatch(fetchOneCategorySuccess(category)))
+    return categoryService.getOne(categoryId)
+        .then(category => {
+            dispatch(fetchOneCategorySuccess(category))
+            return category;
+        })
         .catch(err => dispatch(fetchOneCategoryError(err)));
 }
 

@@ -27,12 +27,12 @@ const currentCategoryInitialState = {
 const currentCategory = (state = currentCategoryInitialState, action = {}) => {
     switch (action.type) {
         case FETCH_ONE_CATEGORY_SUCCESS:
-        case UPDATE_CATEGORY_SUCCESS:
-            return { ...currentCategoryInitialState, ...action.payload };
-        case UPDATE_CATEGORY:
-        case UPDATE_CATEGORY_ERROR:
         case FETCH_ONE_CATEGORY_ERROR:
         case FETCH_ONE_CATEGORY:
+        case UPDATE_CATEGORY_SUCCESS:
+        case UPDATE_CATEGORY:
+        case UPDATE_CATEGORY_ERROR:
+            return { ...currentCategoryInitialState, ...action.payload };
         case CREATE_CATEGORY:
         case CREATE_CATEGORY_ERROR:
         case CREATE_CATEGORY_SUCCESS:
