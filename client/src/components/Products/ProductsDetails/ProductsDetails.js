@@ -9,6 +9,7 @@ import {
 import { setError, setMessage } from '../../../actions/messageActions';
 import {
     addToFavouritesAsync,
+    removeFromFavouritesAsync,
 } from '../../../actions/userActions';
 import emptyImageSrc from '../../../assets/empty.jpg';
 import './ProductsDetails.scss';
@@ -27,6 +28,7 @@ const ProductsDetails = ({
     user,
     setError,
     setMessage,
+    removeFromFavouritesAsync,
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
@@ -56,7 +58,8 @@ const ProductsDetails = ({
     }
 
     const onClickRemoveFromFavourites = () => {
-        // TODO: remove from favourites
+        removeFromFavouritesAsync(user._id, productId, user.accessToken)
+            .then(() => setMessage('You removed this product from favourites successfully!'))
     }
 
     const adminView = (
@@ -128,6 +131,7 @@ const mapDispatchToProps = {
     addToFavouritesAsync,
     setError,
     setMessage,
+    removeFromFavouritesAsync,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsDetails);

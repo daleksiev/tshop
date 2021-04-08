@@ -8,9 +8,21 @@ const getOne = (filter) => User.findOne(filter).populate('favourites').lean();
 
 const createOne = (data) => new User(data).save();
 
-const updateOne = (_id, data, push) => User.findByIdAndUpdate(_id, { $set: data, $push: push, }, { new: true })
-    .populate('favourites')
-    .lean();
+const updateOne = (_id, data, $push, $pull) => {
+    const updateOptions = { $set: data };
+
+    if ($push?.favourites) {
+        updateOptions.$push = $push;
+    }
+
+    if ($pull?.favourites) {
+        updateOptions.$pull = $pull;
+    }
+
+    return User.findByIdAndUpdate(_id, updateOptions, { new: true })
+        .populate('favourites')
+        .lean();
+}
 
 const updateOneById = (_id, data) => {
     return User.updateOne({ _id }, data, { new: true })

@@ -13,7 +13,7 @@ router.post('/:userId/favourites/:productId', authorizeMiddleware, (req, res, ne
 router.delete('/:userId/favourites/:productId', authorizeMiddleware, (req, res, next) => {
     const { userId, productId } = req.params;
     userService
-        .updateOne(userId, {}, { favourites: productId })
+        .updateOne(userId, {}, {}, { favourites: productId })
         .then(user => res.json({ ...user, ok: true }))
         .catch(err => next(err));
 })

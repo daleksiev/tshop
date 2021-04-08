@@ -2,6 +2,7 @@ import {
     SET_USER_AUTH,
     LOGOUT_USER,
     ADD_TO_FAVOURITES_SUCCESS,
+    REMOVE_FROM_FAVOURITES_SUCCESS,
     UPDATE_USER_INFO,
     UPDATE_USER_INFO_SUCCESS,
     UPDATE_USER_INFO_ERROR,
@@ -33,6 +34,7 @@ const user = (state = localStorageUserState, action = {}) => {
             return { ...state, ...action.payload, isLoggedIn: true };
         case UPDATE_USER_INFO_ERROR:
         case ADD_TO_FAVOURITES_SUCCESS:
+        case REMOVE_FROM_FAVOURITES_SUCCESS:
         case UPDATE_USER_INFO_SUCCESS:
             return { ...state, ...action.payload, isLoading: false };
         case LOGOUT_USER:
