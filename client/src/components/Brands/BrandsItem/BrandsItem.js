@@ -30,9 +30,7 @@ const BrandsItem = ({
                 <p>{brand.name}</p>
             </Link>
 
-            <div>
-                <Button className="delete-button" name="Delete" onClick={onClickDeleteBrand} />
-            </div>
+            <Button className="delete-button" name="Delete" onClick={onClickDeleteBrand} />
         </article>
     )
 }
