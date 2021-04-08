@@ -1,11 +1,22 @@
 .brands-item-container {
+    border: 1px solid #8080d2;
+    border-radius: 15px;
     display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    flex-basis: 20%;
-    text-align: center;
+    align-items: stretch;
+
+    a {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 20%;
+        text-align: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
     img {
         width: 150px;
         margin: auto;
+        border-radius: 15px;
     }
 }
