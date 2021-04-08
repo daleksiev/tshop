@@ -32,11 +32,17 @@ const Header = ({
 		</>
 	)
 
-	const loggedInLinks = () => (
+	const adminLinks = () => (
 		<>
-			{user?.role === 'admin' &&
-				<Link to="/products/create" >Create Product</Link>
-			}
+			<Link to="/products/create" >Create Product</Link>
+
+			<Link to="/brands" >Brands</Link>
+		</>
+	)
+
+	const userLinks = () => (
+		<>
+			{user?.role === 'admin' && adminLinks()}
 
 			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
 		</>
@@ -52,7 +58,7 @@ const Header = ({
 				<Link to="/categories" >Categories</Link>
 
 				{user.isLoggedIn
-					? loggedInLinks()
+					? userLinks()
 					: guestLinks()
 				}
 			</nav>

@@ -1,0 +1,11 @@
+.brands-item-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 20%;
+    text-align: center;
+    img {
+        width: 150px;
+        margin: auto;
+    }
+}

@@ -2,11 +2,12 @@ import Header from '../Header';
 import { Route, Switch, Redirect } from 'react-router';
 import Login from '../Login';
 import Register from '../Register';
-import Products from '../Products';
 import Categories from '../Categories';
 import CategoriesCreate from '../Categories/CategoriesCreate';
 import CategoriesEdit from '../Categories/CategoriesEdit/';
+import Brands from '../Brands/Brands';
 import BrandsCreate from '../Brands/BrandsCreate';
+import Products from '../Products';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
@@ -49,6 +50,7 @@ const App = ({
 					<Route path="/categories" exact component={Categories} />
 
 					<AuthRoute path="/brands/create" exact component={BrandsCreate} />
+					<AuthRoute path="/brands" exact component={Brands} />
 
 					<AuthRoute path="/products/create" exact component={ProductsCreate} />
 
