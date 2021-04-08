@@ -102,9 +102,9 @@ const User = ({
             </article>
 
             <article>
-                <h2>Bought products:</h2>
+                <h2>Favourite products:</h2>
 
-                {user?.bought.map(product => <UserProductItem product={product} />)}
+                {user?.favourites.map(product => <UserProductItem key={product._id} product={product} />)}
             </article>
         </section>
     )

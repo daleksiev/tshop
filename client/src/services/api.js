@@ -8,7 +8,7 @@ export const authUrl = () => `${apiUrl}/auth`;
 
 export const usersUrl = () => `${apiUrl}/users`;
 export const userUrl = (userId) => `${usersUrl()}/${userId}`;
-export const buyUrl = (userId, productId) => `${userUrl(userId)}/buy/${productId}`;
+export const favouritesUrl = (userId, productId) => `${userUrl(userId)}/favourites/${productId}`;
 
 export const categoriesUrl = () => `${apiUrl}/categories`;
 export const categoryUrl = (id) => `${categoriesUrl()}/${id}`;

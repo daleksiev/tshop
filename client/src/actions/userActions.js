@@ -1,8 +1,10 @@
 import {
     SET_USER_AUTH,
     LOGOUT_USER,
-    BUY_PRODUCT,
-    BUY_PRODUCT_SUCCESS,
+    ADD_TO_FAVOURITES,
+    ADD_TO_FAVOURITES_SUCCESS,
+    REMOVE_FROM_FAVOURITES,
+    REMOVE_FROM_FAVOURITES_SUCCESS,
     UPDATE_USER_INFO,
     UPDATE_USER_INFO_ERROR,
     UPDATE_USER_INFO_SUCCESS,
@@ -26,24 +28,45 @@ export const logoutUser = () => ({
 })
 
 
-export const buyProduct = () => ({
-    type: BUY_PRODUCT,
+export const addToFavourites = () => ({
+    type: ADD_TO_FAVOURITES,
 })
 
-export const buyProductSuccess = (payload) => ({
-    type: BUY_PRODUCT_SUCCESS,
+export const addToFavouritesSuccess = (payload) => ({
+    type: ADD_TO_FAVOURITES_SUCCESS,
     payload,
 })
 
-export const buyProductAsync = (userId, productId, token) => async (dispatch) => {
-    dispatch(buyProduct());
+export const addToFavouritesAsync = (userId, productId, token) => async (dispatch) => {
+    dispatch(addToFavourites());
 
-    return userService.buyProduct(userId, productId, token)
+    return userService.addToFavourites(userId, productId, token)
         .then(res => {
             if (!res.ok) {
                 throw res;
             }
-            return dispatch(buyProductSuccess(res))
+            return dispatch(addToFavouritesSuccess(res))
+        })
+}
+
+export const removeFromFavourites = () => ({
+    type: REMOVE_FROM_FAVOURITES,
+})
+
+export const removeFromFavouritesSuccess = (payload) => ({
+    type: REMOVE_FROM_FAVOURITES_SUCCESS,
+    payload,
+})
+
+export const removeFromFavouritesAsync = (userId, productId, token) => async (dispatch) => {
+    dispatch(removeFromFavourites());
+
+    return userService.removeFromFavourites(userId, productId, token)
+        .then(res => {
+            if (!res.ok) {
+                throw res;
+            }
+            return dispatch(removeFromFavouritesSuccess(res))
         })
 }
 

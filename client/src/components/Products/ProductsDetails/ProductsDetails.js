@@ -8,7 +8,7 @@ import {
 } from '../../../actions/productsActions';
 import { setError, setMessage } from '../../../actions/messageActions';
 import {
-    buyProductAsync,
+    addToFavouritesAsync,
 } from '../../../actions/userActions';
 import emptyImageSrc from '../../../assets/empty.jpg';
 import './ProductsDetails.scss';
@@ -23,7 +23,7 @@ const ProductsDetails = ({
     clearOneProduct,
     product,
     deleteProductAsync,
-    buyProductAsync,
+    addToFavouritesAsync,
     user,
     setError,
     setMessage,
@@ -31,7 +31,7 @@ const ProductsDetails = ({
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
     const { productId } = match.params;
-    const isBought = user.bought.find(product => product === productId || product._id === productId);
+    const isFavourite = user.favourites.find(product => product === productId || product._id === productId);
     const redirectUrl = `/categories/${product.category}`;
     useEffect(() => {
         fetchOneProductAsync(productId);
@@ -48,11 +48,15 @@ const ProductsDetails = ({
             .catch(err => setError(err.message));
     }
 
-    const onClickBuyProduct = () => {
-        buyProductAsync(user._id, productId, user.accessToken)
+    const onClickAddToFavourites = () => {
+        addToFavouritesAsync(user._id, productId, user.accessToken)
             .then(res => {
-                setMessage('You bought this product successfully!')
+                setMessage('You added this product to favourites successfully!')
             });
+    }
+
+    const onClickRemoveFromFavourites = () => {
+        // TODO: remove from favourites
     }
 
     const adminView = (
@@ -64,9 +68,9 @@ const ProductsDetails = ({
     );
 
     const userView = (
-        isBought
-            ? <button className='buy-unactive-button' > You already bought this product!</button>
-            : <button className='buy-button' onClick={onClickBuyProduct}>Buy</button>
+        isFavourite
+            ? <button className='remove-favourite-button' onClick={onClickRemoveFromFavourites}> Remove from favourites</button>
+            : <button className='add-favourite-button' onClick={onClickAddToFavourites}>Add to favourites</button>
     )
 
     if (toRedirect) {
@@ -121,7 +125,7 @@ const mapDispatchToProps = {
     clearOneProduct,
     fetchOneProductAsync,
     deleteProductAsync,
-    buyProductAsync,
+    addToFavouritesAsync,
     setError,
     setMessage,
 };

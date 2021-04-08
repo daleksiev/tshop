@@ -62,7 +62,7 @@
         color: #8080d2;
     }
 
-    .buy-button {
+    .add-favourite-button {
         background: #4d963f;
 
         &:hover {
@@ -71,7 +71,7 @@
         }
     }
 
-    .buy-unactive-button {
+    .remove-favourite-button {
         background-color: grey;
         &:hover {
             color: grey;

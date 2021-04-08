@@ -4,12 +4,12 @@ const getAll = () => User.find({});
 
 const getOneById = (_id) => User.findById(_id);
 
-const getOne = (filter) => User.findOne(filter).populate('bought').lean();
+const getOne = (filter) => User.findOne(filter).populate('favourites').lean();
 
 const createOne = (data) => new User(data).save();
 
 const updateOne = (_id, data, push) => User.findByIdAndUpdate(_id, { $set: data, $push: push, }, { new: true })
-    .populate('bought')
+    .populate('favourites')
     .lean();
 
 const updateOneById = (_id, data) => {
@@ -22,7 +22,7 @@ const updateOneById = (_id, data) => {
 
 const updateOneByFilter = (filter, data, push) => User
     .findOneAndUpdate(filter, { $set: data, $push: push, }, { new: true })
-    .populate('bought');
+    .populate('favourites');
 
 const removeOne = (_id) => User.findByIdAndDelete(_id);
 

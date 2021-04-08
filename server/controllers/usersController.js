@@ -2,10 +2,18 @@ const router = require('express').Router();
 const userService = require('../services/userService');
 const authorizeMiddleware = require('../middlewares/authorizeMiddleware');
 
-router.patch('/:userId/buy/:productId', authorizeMiddleware, (req, res, next) => {
+router.post('/:userId/favourites/:productId', authorizeMiddleware, (req, res, next) => {
     const { userId, productId } = req.params;
     userService
-        .updateOne(userId, {}, { bought: productId })
+        .updateOne(userId, {}, { favourites: productId })
+        .then(user => res.json({ ...user, ok: true }))
+        .catch(err => next(err));
+})
+
+router.delete('/:userId/favourites/:productId', authorizeMiddleware, (req, res, next) => {
+    const { userId, productId } = req.params;
+    userService
+        .updateOne(userId, {}, { favourites: productId })
         .then(user => res.json({ ...user, ok: true }))
         .catch(err => next(err));
 })

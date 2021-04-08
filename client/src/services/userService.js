@@ -2,15 +2,21 @@ import {
     authUrl,
     // usersUrl,
     userUrl,
-    buyUrl,
+    favouritesUrl,
 } from './api';
 import firebaseService from './firebaseService';
 import requester from './requester';
 import { saveImage } from './storageService'
+
 const create = async (data) => requester.post(authUrl(), data);
+
 const login = async (token) => requester.get(authUrl(), {}, { auth: token })
+
 const getOne = async (userId, token) => requester.get(userUrl(userId), {}, { auth: token });
-const buyProduct = async (userId, productId, token) => requester.patch(buyUrl(userId, productId), {}, { auth: token });
+
+const addToFavourites = async (userId, productId, token) => requester.post(favouritesUrl(userId, productId), {}, { auth: token });
+
+const removeFromFavourites = async (userId, productId, token) => requester.delete(favouritesUrl(userId, productId), {}, { auth: token });
 
 const updateProfileImage = (id, data, token) => {
     return saveImage(data?.image, 'users/')
@@ -39,9 +45,10 @@ const update = (id, data, token) => {
 const userService = {
     create,
     login,
-    buyProduct,
+    addToFavourites,
     getOne,
     update,
+    removeFromFavourites,
 }
 
 export default userService;

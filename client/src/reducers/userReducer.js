@@ -1,7 +1,7 @@
 import {
     SET_USER_AUTH,
     LOGOUT_USER,
-    BUY_PRODUCT_SUCCESS,
+    ADD_TO_FAVOURITES_SUCCESS,
     UPDATE_USER_INFO,
     UPDATE_USER_INFO_SUCCESS,
     UPDATE_USER_INFO_ERROR,
@@ -32,7 +32,7 @@ const user = (state = localStorageUserState, action = {}) => {
         case SET_USER_AUTH:
             return { ...state, ...action.payload, isLoggedIn: true };
         case UPDATE_USER_INFO_ERROR:
-        case BUY_PRODUCT_SUCCESS:
+        case ADD_TO_FAVOURITES_SUCCESS:
         case UPDATE_USER_INFO_SUCCESS:
             return { ...state, ...action.payload, isLoading: false };
         case LOGOUT_USER:

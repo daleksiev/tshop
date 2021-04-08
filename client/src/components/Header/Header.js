@@ -54,7 +54,7 @@ const Header = ({
 
 			<ModalSuccess />
 
-			<nav>
+			<nav className={user.role}>
 				<Link to="/categories" >Categories</Link>
 
 				{user.isLoggedIn

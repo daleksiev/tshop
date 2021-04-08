@@ -8,10 +8,14 @@
 		display: flex;
 		justify-content: flex-end;
 		padding: 30px;
-		flex-basis: 90%;
+		flex-basis: 70%;
 		flex-shrink: 1;
 		flex-grow: 5;
 		flex-wrap: wrap;
+	}
+
+	nav.admin {
+		flex-basis: 90%;
 	}
 
 	& > div {
