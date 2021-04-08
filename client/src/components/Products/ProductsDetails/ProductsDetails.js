@@ -33,7 +33,7 @@ const ProductsDetails = ({
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
     const { productId } = match.params;
-    const isFavourite = user.favourites.find(product => product === productId || product._id === productId);
+    const isFavourite = user?.favourites?.find(product => product === productId || product._id === productId);
     const redirectUrl = `/categories/${product.category}`;
     useEffect(() => {
         fetchOneProductAsync(productId);
