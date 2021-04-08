@@ -24,7 +24,7 @@ const Brands = ({
 
     return (
         <section className="brands-container">
-            {brands.map(brand => <BrandsItem brand={brand} />)}
+            {brands.map(brand => <BrandsItem key={brand._id} brand={brand} />)}
         </section>
     )
 }

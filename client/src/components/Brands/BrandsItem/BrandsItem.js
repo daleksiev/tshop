@@ -5,7 +5,7 @@ const BrandsItem = ({
     brand,
 }) => (
     <article className='brands-item-container'>
-        <Link to="" >
+        <Link to={`/brands/edit/${brand._id}`} >
             <img src={brand.imageUrl} alt={brand.name} />
             <p>{brand.name}</p>
         </Link>

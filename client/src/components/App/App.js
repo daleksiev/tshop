@@ -7,6 +7,7 @@ import CategoriesCreate from '../Categories/CategoriesCreate';
 import CategoriesEdit from '../Categories/CategoriesEdit/';
 import Brands from '../Brands/Brands';
 import BrandsCreate from '../Brands/BrandsCreate';
+import BrandsEdit from '../Brands/BrandsEdit';
 import Products from '../Products';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
@@ -50,6 +51,9 @@ const App = ({
 					<Route path="/categories" exact component={Categories} />
 
 					<AuthRoute path="/brands/create" exact component={BrandsCreate} />
+
+					<AuthRoute path="/brands/edit/:brandId" exact component={BrandsEdit} />
+
 					<AuthRoute path="/brands" exact component={Brands} />
 
 					<AuthRoute path="/products/create" exact component={ProductsCreate} />

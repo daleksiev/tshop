@@ -20,10 +20,8 @@ import { combineReducers } from 'redux';
 
 const currentBrandInitialState = {
     _id: '',
-    title: '',
-    price: 0,
+    name: '',
     imageUrl: '',
-    brand: '',
 };
 
 const currentBrand = (state = currentBrandInitialState, action = {}) => {
