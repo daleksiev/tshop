@@ -1,10 +1,14 @@
 .header-user-menu {
     position: absolute;
-    background-color: #fff;
-    border: 1px solid #8080d2;
+    background-color: #8080d2;
+    border: 1px solid #fff;
     border-radius: 10px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    a {
+        color: #fff;
+    }
 }
