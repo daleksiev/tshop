@@ -45,7 +45,7 @@ const BrandsEdit = ({
         e.preventDefault();
         setIsLoading(true);
 
-        updateBrandAsync(state, user.accessToken)
+        updateBrandAsync(brandId, state, user.accessToken)
             .then(() => {
                 setIsLoading(false);
                 setToRedirect(true);
@@ -57,8 +57,12 @@ const BrandsEdit = ({
             })
     }
 
-    if (user?.role !== 'admin' || toRedirect) {
+    if (user?.role !== 'admin') {
         return <Redirect to="/" exact />
+    }
+
+    if (toRedirect) {
+        return <Redirect to="/brands" exact />
     }
 
     return (
