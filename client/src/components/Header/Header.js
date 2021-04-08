@@ -24,7 +24,7 @@ const Header = ({
 		e.preventDefault();
 		firebaseService.logout();
 		logoutUser();
-		setMessage('You logout successfully!');
+		setMessage('You logged out successfully!');
 	}
 
 	const guestLinks = () => (
@@ -46,8 +46,6 @@ const Header = ({
 	const userLinks = () => (
 		<>
 			{user?.role === 'admin' && adminLinks()}
-
-			<Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
 		</>
 	)
 
@@ -67,7 +65,7 @@ const Header = ({
 				<div onClick={onClickToggleUserMenu}>
 					{user.isLoggedIn && <Img src={user.imageUrl} alt={user.email} />}
 
-					{toggleUserMenu && <HeaderUserMenu />}
+					{toggleUserMenu && <HeaderUserMenu onClickLogoutUser={onClickLogoutUser} />}
 				</div>
 			</div>
 

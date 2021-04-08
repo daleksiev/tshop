@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import './HeaderUserMenu.scss';
 
-const HeaderUserMenu = () => (
+const HeaderUserMenu = ({
+    onClickLogoutUser,
+}) => (
     <section className="header-user-menu">
         <Link to="/profile">Profile</Link>
 
@@ -10,6 +12,8 @@ const HeaderUserMenu = () => (
         <Link to="/cart">Cart</Link>
 
         <Link to="/orders">Orders</Link>
+
+        <Link to="/logout" onClick={onClickLogoutUser} >Logout</Link>
     </section>
 )
 
