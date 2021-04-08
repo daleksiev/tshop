@@ -33,13 +33,15 @@ const ProductsDetails = ({
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
     const { productId } = match.params;
-    const isFavourite = user?.favourites?.find(product => product === productId || product._id === productId);
-    const redirectUrl = `/categories/${product.category}`;
+
     useEffect(() => {
         fetchOneProductAsync(productId);
 
         return () => clearOneProduct();
     }, [fetchOneProductAsync, productId, clearOneProduct]);
+
+    const isFavourite = user?.favourites?.find(product => product === productId || product._id === productId);
+    const redirectUrl = `/categories/${product.category}`;
 
     const onClickDeleteProduct = () => {
         deleteProductAsync(productId, user.accessToken)

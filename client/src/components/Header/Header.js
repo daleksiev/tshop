@@ -6,16 +6,19 @@ import { logoutUser } from '../../actions/userActions';
 import { setMessage } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import { getUser } from '../../reducers';
-import { Spinner } from 'react-bootstrap';
+import Img from "../Shared/Img/Img";
 import './Header.scss';
 import { useState } from "react";
+import HeaderUserMenu from "./HeaderUserMenu/HeaderUserMenu";
 
 const Header = ({
 	user,
 	logoutUser,
 	setMessage,
 }) => {
-	const [isLoaded, setIsLoaded] = useState(false);
+	const [toggleUserMenu, setToggleUserMenu] = useState(false);
+
+	const onClickToggleUserMenu = (e) => setToggleUserMenu(!toggleUserMenu);
 
 	const onClickLogoutUser = e => {
 		e.preventDefault();
@@ -57,30 +60,17 @@ const Header = ({
 			<nav className={user.role}>
 				<Link to="/categories" >Categories</Link>
 
-				{user.isLoggedIn
-					? userLinks()
-					: guestLinks()
-				}
+				{user.isLoggedIn ? userLinks() : guestLinks()}
 			</nav>
 
-			<div>
-				{user.email &&
-					<Link to="/profile">
-						<img
-							src={user.imageUrl}
-							alt={user.image}
-							onLoad={() => setIsLoaded(true)}
-							style={!isLoaded ? { display: 'none' } : {}}
-							onError={(e) => {
-								setIsLoaded(true);
-								e.target.src = "https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=6adb23b1-b1bc-41ae-9c03-10a38b086a9b"
-							}}
-						/>
+			<div className="header-toggle-user-menu">
+				<div onClick={onClickToggleUserMenu}>
+					{user.isLoggedIn && <Img src={user.imageUrl} alt={user.email} />}
 
-						<Spinner style={isLoaded ? { display: 'none' } : {}} animation="border" variant="primary" />
-					</Link>
-				}
+					{toggleUserMenu && <HeaderUserMenu />}
+				</div>
 			</div>
+
 		</header >
 	)
 }

@@ -12,6 +12,7 @@
 		flex-shrink: 1;
 		flex-grow: 5;
 		flex-wrap: wrap;
+		gap: 30px;
 	}
 
 	nav.admin {
@@ -25,11 +26,21 @@
 		text-align: center;
 	}
 
-	a {
-		margin: 0 10px;
-		img {
-			width: 50px;
-			border-radius: 50%;
+	img {
+		width: 50px;
+		border-radius: 50%;
+	}
+
+	.header-toggle-user-menu {
+		div {
+			position: relative;
+			display: inline-block;
+			cursor: pointer;
+		}
+
+		section {
+			left: -35px;
+			top: 50px;
 		}
 	}
 }
