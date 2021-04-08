@@ -21,6 +21,7 @@ import User from '../User/User';
 import AuthRoute from '../AuthRoute';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UserFavourites from '../User/UserFavourites';
 
 const App = ({
 	setUserAuth,
@@ -63,6 +64,8 @@ const App = ({
 					<AuthRoute path="/products/edit/:productId" exact component={ProductsEdit} />
 
 					<AuthRoute path="/profile" exact component={User} />
+
+					<AuthRoute path="/favourites" exact component={UserFavourites} />
 
 				</Switch>
 			</article>

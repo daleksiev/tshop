@@ -8,7 +8,6 @@ import { Spinner } from 'react-bootstrap';
 import useForm from '../../hooks/useForm';
 import Button from '../Shared/Button';
 import { useState } from 'react';
-import UserProductItem from './UserProductItem';
 
 const User = ({
     user,
@@ -99,12 +98,6 @@ const User = ({
                         />
                     }
                 </Button>
-            </article>
-
-            <article>
-                <h2>Favourite products:</h2>
-
-                {user?.favourites.map(product => <UserProductItem key={product._id} product={product} />)}
             </article>
         </section>
     )
