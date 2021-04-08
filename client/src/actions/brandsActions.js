@@ -41,7 +41,10 @@ export const fetchOneBrandAsync = (brandId) => (dispatch) => {
     dispatch(fetchOneBrand());
 
     return brandService.getOne(brandId)
-        .then(brand => dispatch(fetchOneBrandSuccess(brand)))
+        .then(brand => {
+            dispatch(fetchOneBrandSuccess(brand))
+            return brand;
+        })
         .catch(err => dispatch(fetchOneBrandError(err)));
 }
 

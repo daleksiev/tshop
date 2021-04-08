@@ -2,39 +2,25 @@ import useForm from '../../../hooks/useForm';
 import Input from '../../Shared/Input';
 import Button from '../../Shared/Button';
 import { Spinner } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { setMessage, setError } from '../../../actions/messageActions';
-import { fetchOneCategoryAsync, updateCategoryAsync } from '../../../actions/categoriesActions';
-import { getUser, getCurrentCategory } from '../../../reducers';
+import { createBrandAsync } from '../../../actions/brandsActions';
+import { getUser } from '../../../reducers';
 
-const CategoriesEdit = ({
+const BrandsCreate = ({
     setMessage,
     setError,
     user,
-    updateCategoryAsync,
-    category,
-    match,
-    fetchOneCategoryAsync,
+    createBrandAsync,
 }) => {
-    const { categoryId } = match.params;
-    const [state, onChangeInput, setState] = useForm({ ...category });
+    const [state, onChangeInput, setState] = useForm({
+        name: '',
+        image: '',
+    });
     const [isLoading, setIsLoading] = useState(false);
     const [toRedirect, setToRedirect] = useState(false);
-    const [didLoaded, setDidLoad] = useState(false);
-
-    useEffect(() => {
-        fetchOneCategoryAsync(categoryId)
-            .then((category) => {
-                setState({
-                    ...category,
-                    image: category.image || '',
-                    imageUrl: category.imageUrl || '',
-                })
-            })
-
-    }, [fetchOneCategoryAsync, categoryId, setState])
 
     const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] });
 
@@ -42,11 +28,11 @@ const CategoriesEdit = ({
         e.preventDefault();
         setIsLoading(true);
 
-        updateCategoryAsync(categoryId, state, user.accessToken)
+        createBrandAsync(state, user.accessToken)
             .then(() => {
                 setIsLoading(false);
                 setToRedirect(true);
-                setMessage('You updated a category successfully!');
+                setMessage('You created new brand successfully!');
             })
             .catch(err => {
                 setIsLoading(false);
@@ -60,24 +46,13 @@ const CategoriesEdit = ({
 
     return (
         <form method="post">
-            <h1>Update Category</h1>
-
-            <Spinner style={!didLoaded ? {} : { 'display': 'none' }} animation="border" variant="primary" />
-
-            <img
-                alt={category.name}
-                style={didLoaded ? {} : { 'display': 'none' }}
-                src={category.imageUrl}
-                onLoad={e => setDidLoad(true)}
-                onError={e => setDidLoad(false)}
-            />
+            <h1>Create Brand</h1>
 
             <Input
                 id="name"
                 type="text"
                 name="name"
                 title="Name:"
-                value={state?.name}
                 onChange={onChangeInput}
             />
 
@@ -85,7 +60,7 @@ const CategoriesEdit = ({
                 id="image"
                 type="file"
                 name="image"
-                fileName={state?.image?.name}
+                fileName={state.image.name}
                 title="Upload an image:"
                 onChange={onImageUpload}
             />
@@ -102,7 +77,7 @@ const CategoriesEdit = ({
                         />
                     </Button>
                 )
-                : <Button name="Update" onClick={onClickButton} />}
+                : <Button name="Create" onClick={onClickButton} />}
 
         </form>
     )
@@ -110,14 +85,12 @@ const CategoriesEdit = ({
 
 const mapStateToProps = (state) => ({
     user: getUser(state),
-    category: getCurrentCategory(state),
 })
 
 const mapDispatchToProps = {
     setMessage,
     setError,
-    updateCategoryAsync,
-    fetchOneCategoryAsync,
+    createBrandAsync,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(BrandsCreate);

@@ -5,6 +5,8 @@ import Register from '../Register';
 import Products from '../Products';
 import Categories from '../Categories';
 import CategoriesCreate from '../Categories/CategoriesCreate';
+import CategoriesEdit from '../Categories/CategoriesEdit/';
+import BrandsCreate from '../Brands/BrandsCreate';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
@@ -15,7 +17,6 @@ import { setError } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import User from '../User/User';
 import AuthRoute from '../AuthRoute';
-import CategoriesEdit from '../Categories/CategoriesEdit/';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -46,6 +47,8 @@ const App = ({
 					<Route path="/categories/:categoryId" exact component={Products} />
 
 					<Route path="/categories" exact component={Categories} />
+
+					<AuthRoute path="/brands/create" exact component={BrandsCreate} />
 
 					<AuthRoute path="/products/create" exact component={ProductsCreate} />
 

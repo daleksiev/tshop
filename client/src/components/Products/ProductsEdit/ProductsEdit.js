@@ -43,7 +43,7 @@ const ProductsEdit = ({
 
     useEffect(() => {
         fetchOneProductAsync(productId)
-            .then(() => setState({ ...product, brand: product.brand._id, image: product.image || '', imageUrl: product.imageUrl || '' }))
+            .then((product) => setState({ ...product, brand: product.brand._id, image: product.image || '', imageUrl: product.imageUrl || '' }))
 
         if (!brands.length) {
             fetchAllBrandsAsync();
@@ -52,7 +52,7 @@ const ProductsEdit = ({
         if (!categories.length) {
             fetchAllCategoriesAsync();
         }
-    }, [fetchOneProductAsync, productId, fetchAllCategoriesAsync, categories, fetchAllBrandsAsync, brands])
+    }, [fetchOneProductAsync, productId, fetchAllCategoriesAsync, setState, categories, fetchAllBrandsAsync, brands])
 
     const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] })
 
