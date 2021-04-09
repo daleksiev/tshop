@@ -50,7 +50,7 @@ const ProductsDetails = ({
 
     const onClickAddToCart = () => {
         setMessage('The product was added to the cart successfully!');
-        setCartContext(addToCart(productId, product.price));
+        setCartContext(addToCart(product));
     }
 
     const onClickRemoveFromCart = () => {

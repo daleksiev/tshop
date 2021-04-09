@@ -3,11 +3,10 @@ import {
     REMOVE_FROM_CART,
 } from '../actionTypes/cartActionTypes';
 
-export const addToCart = (productId, price) => ({
+export const addToCart = (product) => ({
     type: ADD_TO_CART,
     payload: {
-        _id: productId,
-        price,
+        ...product,
         count: 1,
     }
 })

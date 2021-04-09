@@ -24,6 +24,7 @@ import AuthRoute from '../AuthRoute';
 import cartReducer, { cartState } from '../../reducers/cartReducer'
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UserCart from '../User/UserCart/UserCart';
 
 const App = ({
 	setUserAuth,
@@ -77,6 +78,8 @@ const App = ({
 						<AuthRoute path="/products/edit/:productId" exact component={ProductsEdit} />
 
 						<AuthRoute path="/profile" exact component={User} />
+
+						<AuthRoute path="/cart" exact component={UserCart} />
 
 						<AuthRoute path="/favourites" exact component={UserFavourites} />
 
