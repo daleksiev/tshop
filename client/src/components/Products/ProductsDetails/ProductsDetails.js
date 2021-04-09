@@ -18,6 +18,7 @@ import {
     getUser,
 } from '../../../reducers';
 import CartContext from '../../../context/CartContext';
+import { addToCart, removeFromCart } from '../../../actions/cartActions';
 
 const ProductsDetails = ({
     match,
@@ -35,7 +36,7 @@ const ProductsDetails = ({
     const [didLoad, setDidLoad] = useState(false);
     const [cartContext, setCartContext] = useContext(CartContext);
     const { productId } = match.params;
-    console.log(cartContext);
+
     useEffect(() => {
         fetchOneProductAsync(productId);
 
@@ -43,25 +44,18 @@ const ProductsDetails = ({
     }, [fetchOneProductAsync, productId, clearOneProduct]);
 
     const isFavourite = user?.favourites?.find(product => product === productId || product._id === productId);
+    const isInCart = cartContext?.find(x => x._id === productId);
+
     const redirectUrl = `/categories/${product.category}`;
 
     const onClickAddToCart = () => {
-        const cartCopy = cartContext.slice();
-        let foundProduct = cartCopy.find(x => x.id === productId);
-
-        if (foundProduct) {
-            foundProduct.count += 1;
-        } else {
-            foundProduct = {
-                id: productId,
-                price: product.price,
-                count: 1,
-            };
-
-            cartCopy.push(foundProduct)
-        }
         setMessage('The product was added to the cart successfully!');
-        setCartContext(cartCopy);
+        setCartContext(addToCart(productId, product.price));
+    }
+
+    const onClickRemoveFromCart = () => {
+        setMessage('The product was removed from the cart successfully!');
+        setCartContext(removeFromCart(productId));
     }
 
     const onClickDeleteProduct = () => {
@@ -99,7 +93,10 @@ const ProductsDetails = ({
                 ? <button className='remove-favourite-button' onClick={onClickRemoveFromFavourites}> Remove from favourites</button>
                 : <button className='add-favourite-button' onClick={onClickAddToFavourites}>Add to favourites</button>
             }
-            <button className='add-favourite-button' onClick={onClickAddToCart}>Add to cart</button>
+            {isInCart
+                ? <button className='remove-favourite-button' onClick={onClickRemoveFromCart}>Remove from cart</button>
+                : <button className='add-favourite-button' onClick={onClickAddToCart}>Add to cart</button>
+            }
         </>
     )
 

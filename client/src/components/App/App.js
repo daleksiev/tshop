@@ -12,7 +12,7 @@ import Products from '../Products';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { setUserAuth } from '../../actions/userActions';
 import { setError } from '../../actions/messageActions';
@@ -21,6 +21,7 @@ import User from '../User/User';
 import UserFavourites from '../User/UserFavourites';
 import CartContext from '../../context/CartContext';
 import AuthRoute from '../AuthRoute';
+import cartReducer, { cartState } from '../../reducers/cartReducer'
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -32,23 +33,18 @@ const App = ({
 		firebaseService.verifyAuth(setUserAuth, setError);
 	}, [setUserAuth, setError]);
 
-	const [cartState, setCartState] = useState([]);
+	const [cartContext, setCartContext] = useReducer(cartReducer, cartState);
 
 	useEffect(() => {
 		const cartLocalStorageState = JSON.parse(localStorage.getItem('cart'));
 
 		if (cartLocalStorageState) {
-			setCartState(cartLocalStorageState);
+			setCartContext(cartLocalStorageState);
 		}
 	}, []);
 
-	const setCartStateWithLocalStorage = (state) => {
-		setCartState(state);
-		localStorage.setItem('cart', JSON.stringify(state));
-	}
-
 	return (
-		<CartContext.Provider value={[cartState, setCartStateWithLocalStorage]}>
+		<CartContext.Provider value={[cartContext, setCartContext]}>
 			<section className="app-wrapper">
 				<Header />
 
