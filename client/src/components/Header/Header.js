@@ -46,6 +46,8 @@ const Header = ({
 	const userLinks = () => (
 		<>
 			{user?.role === 'admin' && adminLinks()}
+
+			<Link onClick={onClickLogoutUser} to="/logout">Logout</Link>
 		</>
 	)
 
