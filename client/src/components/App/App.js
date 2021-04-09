@@ -40,10 +40,15 @@ const App = ({
 		if (cartLocalStorageState) {
 			setCartState(cartLocalStorageState);
 		}
-	}, [])
+	}, []);
+
+	const setCartStateWithLocalStorage = (state) => {
+		setCartState(state);
+		localStorage.setItem('cart', JSON.stringify(state));
+	}
 
 	return (
-		<CartContext.Provider value={[cartState, setCartState]}>
+		<CartContext.Provider value={[cartState, setCartStateWithLocalStorage]}>
 			<section className="app-wrapper">
 				<Header />
 

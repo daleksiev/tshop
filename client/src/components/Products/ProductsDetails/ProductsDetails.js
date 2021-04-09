@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -17,6 +17,7 @@ import {
     getCurrentProduct,
     getUser,
 } from '../../../reducers';
+import CartContext from '../../../context/CartContext';
 
 const ProductsDetails = ({
     match,
@@ -32,8 +33,9 @@ const ProductsDetails = ({
 }) => {
     const [toRedirect, setToRedirect] = useState(false);
     const [didLoad, setDidLoad] = useState(false);
+    const [cartContext, setCartContext] = useContext(CartContext);
     const { productId } = match.params;
-
+    console.log(cartContext);
     useEffect(() => {
         fetchOneProductAsync(productId);
 
@@ -42,6 +44,25 @@ const ProductsDetails = ({
 
     const isFavourite = user?.favourites?.find(product => product === productId || product._id === productId);
     const redirectUrl = `/categories/${product.category}`;
+
+    const onClickAddToCart = () => {
+        const cartCopy = cartContext.slice();
+        let foundProduct = cartCopy.find(x => x.id === productId);
+
+        if (foundProduct) {
+            foundProduct.count += 1;
+        } else {
+            foundProduct = {
+                id: productId,
+                price: product.price,
+                count: 1,
+            };
+
+            cartCopy.push(foundProduct)
+        }
+        setMessage('The product was added to the cart successfully!');
+        setCartContext(cartCopy);
+    }
 
     const onClickDeleteProduct = () => {
         deleteProductAsync(productId, user.accessToken)
@@ -73,9 +94,13 @@ const ProductsDetails = ({
     );
 
     const userView = (
-        isFavourite
-            ? <button className='remove-favourite-button' onClick={onClickRemoveFromFavourites}> Remove from favourites</button>
-            : <button className='add-favourite-button' onClick={onClickAddToFavourites}>Add to favourites</button>
+        <>
+            {isFavourite
+                ? <button className='remove-favourite-button' onClick={onClickRemoveFromFavourites}> Remove from favourites</button>
+                : <button className='add-favourite-button' onClick={onClickAddToFavourites}>Add to favourites</button>
+            }
+            <button className='add-favourite-button' onClick={onClickAddToCart}>Add to cart</button>
+        </>
     )
 
     if (toRedirect) {
