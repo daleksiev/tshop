@@ -12,16 +12,17 @@ import Products from '../Products';
 import ProductsDetails from '../Products/ProductsDetails';
 import ProductsCreate from '../Products/ProductsCreate';
 import ProductsEdit from '../Products/ProductsEdit';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { setUserAuth } from '../../actions/userActions';
 import { setError } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import User from '../User/User';
+import UserFavourites from '../User/UserFavourites';
+import CartContext from '../../context/CartContext';
 import AuthRoute from '../AuthRoute';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UserFavourites from '../User/UserFavourites';
 
 const App = ({
 	setUserAuth,
@@ -31,45 +32,57 @@ const App = ({
 		firebaseService.verifyAuth(setUserAuth, setError);
 	}, [setUserAuth, setError]);
 
+	const [cartState, setCartState] = useState([]);
+
+	useEffect(() => {
+		const cartLocalStorageState = JSON.parse(localStorage.getItem('cart'));
+
+		if (cartLocalStorageState) {
+			setCartState(cartLocalStorageState);
+		}
+	}, [])
+
 	return (
-		<section className="app-wrapper">
-			<Header />
+		<CartContext.Provider value={[cartState, setCartState]}>
+			<section className="app-wrapper">
+				<Header />
 
-			<article className="app-container">
-				<Switch>
-					<Route path="/login" component={Login} />
+				<article className="app-container">
+					<Switch>
+						<Route path="/login" component={Login} />
 
-					<Route path="/register" component={Register} />
+						<Route path="/register" component={Register} />
 
-					<Route path="/" exact render={() => <Redirect to="/categories" />} />
+						<Route path="/" exact render={() => <Redirect to="/categories" />} />
 
-					<AuthRoute path="/categories/create" exact component={CategoriesCreate} />
+						<AuthRoute path="/categories/create" exact component={CategoriesCreate} />
 
-					<AuthRoute path="/categories/edit/:categoryId" exact component={CategoriesEdit} />
+						<AuthRoute path="/categories/edit/:categoryId" exact component={CategoriesEdit} />
 
-					<Route path="/categories/:categoryId" exact component={Products} />
+						<Route path="/categories/:categoryId" exact component={Products} />
 
-					<Route path="/categories" exact component={Categories} />
+						<Route path="/categories" exact component={Categories} />
 
-					<AuthRoute path="/brands/create" exact component={BrandsCreate} />
+						<AuthRoute path="/brands/create" exact component={BrandsCreate} />
 
-					<AuthRoute path="/brands/edit/:brandId" exact component={BrandsEdit} />
+						<AuthRoute path="/brands/edit/:brandId" exact component={BrandsEdit} />
 
-					<AuthRoute path="/brands" exact component={Brands} />
+						<AuthRoute path="/brands" exact component={Brands} />
 
-					<AuthRoute path="/products/create" exact component={ProductsCreate} />
+						<AuthRoute path="/products/create" exact component={ProductsCreate} />
 
-					<Route path="/products/:productId" exact component={ProductsDetails} />
+						<Route path="/products/:productId" exact component={ProductsDetails} />
 
-					<AuthRoute path="/products/edit/:productId" exact component={ProductsEdit} />
+						<AuthRoute path="/products/edit/:productId" exact component={ProductsEdit} />
 
-					<AuthRoute path="/profile" exact component={User} />
+						<AuthRoute path="/profile" exact component={User} />
 
-					<AuthRoute path="/favourites" exact component={UserFavourites} />
+						<AuthRoute path="/favourites" exact component={UserFavourites} />
 
-				</Switch>
-			</article>
-		</section>
+					</Switch>
+				</article>
+			</section>
+		</CartContext.Provider>
 	);
 }
 
