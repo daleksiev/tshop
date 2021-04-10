@@ -37,13 +37,6 @@
         button {
             padding: 0 20px;
             border-radius: 25px;
-            color: #8080d2;
-
-            &:hover {
-                border-color: #fff;
-                background-color: #8080d2;
-                color: #fff;
-            }
         }
     }
 
@@ -52,6 +45,13 @@
         background-color: transparent;
         font-size: 20px;
         border: 2px solid #8080d2;
+        color: #8080d2;
+
+        &:hover {
+            border-color: #fff;
+            background-color: #8080d2;
+            color: #fff;
+        }
     }
 
     input {
