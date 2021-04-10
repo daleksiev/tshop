@@ -27,6 +27,14 @@ const CategoriesItem = ({
 
     const onLoad = (e) => setDidLoad(true);
 
+    const adminView = (
+        <article>
+            <Link className="edit-button" to={`/categories/edit/${_id}`} >Edit</Link>
+
+            <Button className="delete-button" name="Delete" onClick={onClickDelete} />
+        </article>
+    )
+
     return (
         <div className="categories-item">
             <Link to={`/categories/${_id}`}>
@@ -46,12 +54,8 @@ const CategoriesItem = ({
                 <h3>{name}</h3>
 
             </Link>
-            {user?.role === 'admin' &&
-                <article>
-                    <Link className="edit-button" to={`/categories/edit/${_id}`} >Edit</Link>
-                    <Button className="delete-button" name="Delete" onClick={onClickDelete} />
-                </article>
-            }
+
+            {user?.role === 'admin' && adminView}
         </div>
     )
 }
