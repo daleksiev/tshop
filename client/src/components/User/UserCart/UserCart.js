@@ -5,6 +5,7 @@ import {
     changeProductCount,
     decreaseProductCount,
     increaseProductCount,
+    removeFromCart,
 } from '../../../actions/cartActions'
 import './UserCart.scss';
 
@@ -17,12 +18,13 @@ const UserCart = () => {
     const onChangeCount = (id) => (e) => setCartContext(changeProductCount(id, e.target.value))
     const onClickMinusSign = (id) => () => setCartContext(decreaseProductCount(id));
     const onClickPlusSign = (id) => () => setCartContext(increaseProductCount(id));
+    const onClickRemoveFromCart = (id) => () => setCartContext(removeFromCart(id));
 
     return (
         <div className="cart-container">
             <h2>Shopping Cart</h2>
 
-            <span>Total price : ${cartContext.length ? total : 0.00} </span>
+            <p>Total price : ${cartContext.length ? total : 0.00} </p>
 
             {/* <button>Order now</button> */}
 
@@ -32,8 +34,9 @@ const UserCart = () => {
                         key={x?._id}
                         item={x}
                         onChange={onChangeCount(x?._id)}
-                        onClickMinusSign={onClickMinusSign(x._id)}
-                        onClickPlusSign={onClickPlusSign(x._id)}
+                        onClickMinusSign={onClickMinusSign(x?._id)}
+                        onClickPlusSign={onClickPlusSign(x?._id)}
+                        onClickRemoveFromCart={onClickRemoveFromCart(x?._id)}
                     />
                 ))
                 : 'No products found in the cart!'

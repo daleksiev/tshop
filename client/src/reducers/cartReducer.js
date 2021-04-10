@@ -41,7 +41,8 @@ const cart = (state = cartState, action = {}) => {
             return [...state, { ...action.payload }];
         case REMOVE_FROM_CART:
             const foundProductIndex = state.findIndex(x => x._id === action.productId);
-            return newState.splice(foundProductIndex, 1);
+            newState.splice(foundProductIndex, 1);
+            return newState;
         case CHANGE_PRODUCT_COUNT:
         case INCREASE_COUNT:
         case DECREASE_COUNT:

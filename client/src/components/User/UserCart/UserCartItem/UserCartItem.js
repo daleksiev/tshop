@@ -5,6 +5,7 @@ const UserCartItem = ({
     onClickMinusSign,
     onChange,
     onClickPlusSign,
+    onClickRemoveFromCart,
 }) => {
     return (
         <article>
@@ -29,6 +30,8 @@ const UserCartItem = ({
             <input type="number" value={item?.count} onChange={onChange} min={1} />
 
             <button onClick={onClickPlusSign}>+</button>
+
+            <button onClick={onClickRemoveFromCart}>x</button>
         </article>
     )
 }
