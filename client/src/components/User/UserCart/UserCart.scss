@@ -7,6 +7,10 @@
         width: 100px;
     }
 
+    a {
+        flex-basis: 100%;
+    }
+
     a,
     article {
         display: flex;
