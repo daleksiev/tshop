@@ -40,7 +40,11 @@ const BrandsCreate = ({
             })
     }
 
-    if (user?.role !== 'admin' || toRedirect) {
+    if (toRedirect) {
+        return <Redirect to="/brands" exact />
+    }
+
+    if (user?.role !== 'admin') {
         return <Redirect to="/" exact />
     }
 
