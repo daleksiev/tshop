@@ -11,11 +11,9 @@ import './UserCart.scss';
 const UserCart = () => {
     const [cartContext, setCartContext] = useContext(CartContext);
 
-    let total = cartContext.reduce((a, b) => {
-        const price = a.price * a.count + b.price * b.count
-        return { price, count: 1 };
-    }, { price: 0, count: 1 });
+    let total = cartContext.reduce((a, b) => ({ price: a.price * a.count + b.price * b.count, count: 1 }), { price: 0, count: 1 });
     total = total.price.toFixed(2);
+
     const onChangeCount = (id) => (e) => setCartContext(changeProductCount(id, e.target.value))
     const onClickMinusSign = (id) => () => setCartContext(decreaseProductCount(id));
     const onClickPlusSign = (id) => () => setCartContext(increaseProductCount(id));
@@ -24,7 +22,7 @@ const UserCart = () => {
         <div className="cart-container">
             <h2>Shopping Cart</h2>
 
-            <span>Total sum : ${cartContext.length ? total : 0.00} </span>
+            <span>Total price : ${cartContext.length ? total : 0.00} </span>
 
             {/* <button>Order now</button> */}
 
