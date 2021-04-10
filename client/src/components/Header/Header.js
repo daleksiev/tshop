@@ -45,7 +45,11 @@ const Header = ({
 
 	const userLinks = () => (
 		<>
-			{user?.role === 'admin' && adminLinks()}
+			{user?.role === 'admin'
+				? adminLinks()
+				: <Link to="/cart" > Cart</Link>
+			}
+			<Link to="/orders">Orders</Link>
 
 			<Link onClick={onClickLogoutUser} to="/logout">Logout</Link>
 		</>
@@ -67,7 +71,7 @@ const Header = ({
 				<div onClick={onClickToggleUserMenu}>
 					{user.isLoggedIn && <Img src={user.imageUrl} alt={user.email} />}
 
-					{toggleUserMenu && <HeaderUserMenu onClickLogoutUser={onClickLogoutUser} />}
+					{toggleUserMenu && <HeaderUserMenu user={user} onClickLogoutUser={onClickLogoutUser} />}
 				</div>
 			</div>
 
