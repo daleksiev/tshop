@@ -1,8 +1,8 @@
 const router = require('express').Router();
+const orderService = require('../services/orderService');
 const userService = require('../services/userService');
-const authorizeMiddleware = require('../middlewares/authorizeMiddleware');
 
-router.post('/:userId/favourites/:productId', authorizeMiddleware, (req, res, next) => {
+router.post('/:userId/favourites/:productId', (req, res, next) => {
     const { userId, productId } = req.params;
     userService
         .updateOne(userId, {}, { favourites: productId })
@@ -10,7 +10,7 @@ router.post('/:userId/favourites/:productId', authorizeMiddleware, (req, res, ne
         .catch(err => next(err));
 })
 
-router.delete('/:userId/favourites/:productId', authorizeMiddleware, (req, res, next) => {
+router.delete('/:userId/favourites/:productId', (req, res, next) => {
     const { userId, productId } = req.params;
     userService
         .updateOne(userId, {}, {}, { favourites: productId })
@@ -18,17 +18,23 @@ router.delete('/:userId/favourites/:productId', authorizeMiddleware, (req, res, 
         .catch(err => next(err));
 })
 
-router.get('/:userId', authorizeMiddleware, (req, res, next) => {
+router.get('/:userId', (req, res, next) => {
     const { userId } = req.params;
     userService.getOneById(userId)
         .then(user => res.json(user))
         .catch(err => next(err));
 })
 
-router.patch('/:userId', authorizeMiddleware, (req, res, next) => {
+router.patch('/:userId', (req, res, next) => {
     const { userId } = req.params;
     userService.updateOneById(userId, req.body)
         .then(user => res.json(user))
+        .catch(err => next(err));
+})
+router.get('/:userId/orders', (req, res, next) => {
+    const { userId } = req.params;
+    orderService.getAllByUserId(userId)
+        .then(orders => res.json(orders))
         .catch(err => next(err));
 })
 module.exports = router;
