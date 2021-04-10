@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 import CategoriesItem from './CategoriesItem';
 import { getCategoriesIsLoading, getUser } from '../../reducers';
 import { Spinner } from 'react-bootstrap';
-import styles from './Categories.module.scss';
 import { Link } from 'react-router-dom';
+import './Categories.scss';
 
 const Categories = ({
     fetchAllCategoriesAsync,
@@ -19,7 +19,7 @@ const Categories = ({
     }, [fetchAllCategoriesAsync]);
 
     return (
-        <div className={styles.categories}>
+        <div className='categories'>
             <h1>
                 Categories
                 {user?.role === 'admin' &&
