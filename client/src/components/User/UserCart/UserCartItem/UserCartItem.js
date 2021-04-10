@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 
 const UserCartItem = ({
     item,
-    onClickMinusSign,
+    onClickDecreaseCount,
+    onClickIncreaseCount,
     onChange,
-    onClickPlusSign,
     onClickRemoveFromCart,
 }) => {
     return (
@@ -25,11 +25,11 @@ const UserCartItem = ({
 
             </Link>
 
-            <button onClick={onClickMinusSign}>-</button>
+            <button onClick={onClickDecreaseCount}>-</button>
 
             <input type="number" value={item?.count} onChange={onChange} min={1} />
 
-            <button onClick={onClickPlusSign}>+</button>
+            <button onClick={onClickIncreaseCount}>+</button>
 
             <button onClick={onClickRemoveFromCart}>x</button>
         </article>
