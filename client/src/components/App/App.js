@@ -22,9 +22,10 @@ import UserFavourites from '../User/UserFavourites';
 import CartContext from '../../context/CartContext';
 import AuthRoute from '../AuthRoute';
 import cartReducer, { cartState } from '../../reducers/cartReducer'
+import Orders from '../Orders';
+import UserCart from '../User/UserCart/UserCart';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UserCart from '../User/UserCart/UserCart';
 
 const App = ({
 	setUserAuth,
@@ -87,6 +88,7 @@ const App = ({
 
 						<AuthRoute path="/favourites" exact component={UserFavourites} />
 
+						<AuthRoute path="/orders" exact component={Orders} />
 					</Switch>
 				</article>
 			</section>

@@ -37,10 +37,10 @@ export const fetchOneOrderError = (payload) => ({
     payload,
 })
 
-export const fetchOneOrderAsync = (orderId) => (dispatch) => {
+export const fetchOneOrderAsync = (orderId, token) => (dispatch) => {
     dispatch(fetchOneOrder());
 
-    return orderService.getOne(orderId)
+    return orderService.getOne(orderId, token)
         .then(order => {
             dispatch(fetchOneOrderSuccess(order))
             return order;
@@ -63,10 +63,10 @@ export const fetchAllOrdersError = (payload) => ({
     payload,
 })
 
-export const fetchAllOrdersAsync = () => (dispatch) => {
+export const fetchAllOrdersAsync = (token) => (dispatch) => {
     dispatch(fetchAllOrdersPending());
 
-    orderService.getAll()
+    orderService.getAll(token)
         .then(orders => dispatch(fetchAllOrdersSuccess(orders)))
         .catch(err => dispatch(fetchAllOrdersError(err)));
 }
