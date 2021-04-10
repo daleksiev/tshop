@@ -1,12 +1,12 @@
 import UserProductItem from '../UserProductItem';
 import { connect } from 'react-redux';
 import { getUser } from '../../../reducers';
-import styles from '../User.module.scss';
+import '../User.scss';
 
 const UserFavourites = ({
     user
 }) => (
-    <div className={styles['user-page-wrapper']}>
+    <div className='user-page-wrapper'>
         <article>
             <h2>Favourite products:</h2>
 

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import styles from './User.module.scss';
 import { getUser } from '../../reducers';
 import Input from '../Shared/Input';
 import { updateUserInfoAsync } from '../../actions/userActions';
@@ -9,6 +8,7 @@ import useForm from '../../hooks/useForm';
 import Button from '../Shared/Button';
 import { useState } from 'react';
 import Img from '../Shared/Img/Img';
+import './User.scss';
 
 const User = ({
     user,
@@ -43,7 +43,7 @@ const User = ({
     }
 
     return (
-        <section className={styles['user-page-wrapper']}>
+        <section className='user-page-wrapper'>
             <article>
                 <h2>Profile image: </h2>
 
