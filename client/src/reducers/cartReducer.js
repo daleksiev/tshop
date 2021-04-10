@@ -25,7 +25,7 @@ const cartProduct = (state = cartProductInitialState, action = {}) => {
         case INCREASE_COUNT:
             return { ...state, count: state.count + 1 };
         case DECREASE_COUNT:
-            return { ...state, count: state.count - 1 };
+            return { ...state, count: (state.count - 1 > 0 ? state.count - 1 : 1) };
         default:
             return state;
     }
