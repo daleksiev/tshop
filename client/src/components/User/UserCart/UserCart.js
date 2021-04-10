@@ -30,7 +30,7 @@ const UserCart = ({
     const onClickIncreaseCount = (id) => () => setCartContext(increaseProductCount(id));
     const onClickRemoveFromCart = (id) => () => setCartContext(removeFromCart(id));
     const onClickMakeAnOrder = () => {
-        createOrderAsync({ products: cartContext, price: total }, user.accessToken)
+        createOrderAsync({ products: cartContext, price: total, user: user._id }, user.accessToken)
             .then(() => {
                 setCartContext(clearCart());
                 setMessage('You made an order successfully!');

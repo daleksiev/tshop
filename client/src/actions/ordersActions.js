@@ -63,10 +63,10 @@ export const fetchAllOrdersError = (payload) => ({
     payload,
 })
 
-export const fetchAllOrdersAsync = (token) => (dispatch) => {
+export const fetchAllOrdersAsync = (token, role, userId) => (dispatch) => {
     dispatch(fetchAllOrdersPending());
 
-    orderService.getAll(token)
+    orderService.getAll(token, role, userId)
         .then(orders => dispatch(fetchAllOrdersSuccess(orders)))
         .catch(err => dispatch(fetchAllOrdersError(err)));
 }

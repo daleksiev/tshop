@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     }],
     imageUrl: {
         type: String,
-        default: 'https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=74155150-7f47-4efc-a4a3-694d982e25ca',
+        default: 'https://firebasestorage.googleapis.com/v0/b/t-shop-e1948.appspot.com/o/users%2Funnamed.png?alt=media&token=a611490a-084d-4605-a452-e6b68b08ece0',
     },
     image: {
         type: String,

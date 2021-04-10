@@ -15,7 +15,7 @@ const Orders = ({
     fetchAllOrdersAsync,
 }) => {
     useEffect(() => {
-        fetchAllOrdersAsync(user.accessToken);
+        fetchAllOrdersAsync(user.accessToken, user.role, user._id);
     }, [fetchAllOrdersAsync, user]);
 
     let total = orders.reduce((a, b) => ({ price: a.price + b.price }), { price: 0 });
@@ -36,7 +36,7 @@ const Orders = ({
                             <th>Products:</th>
                         </tr>
                     </thead>
-                    {orders.length
+                    {orders?.length
                         ? orders.map((order, i) => (
                             <tbody key={order._id}>
                                 <tr>
