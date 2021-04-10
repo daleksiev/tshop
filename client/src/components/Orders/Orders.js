@@ -1,5 +1,6 @@
 import { fetchAllOrdersAsync } from '../../actions/ordersActions'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 import {
     getOrdersList,
     getUser,
@@ -16,6 +17,10 @@ const Orders = ({
     useEffect(() => {
         fetchAllOrdersAsync(user.accessToken);
     }, [fetchAllOrdersAsync, user]);
+
+    let total = orders.reduce((a, b) => ({ price: a.price + b.price }), { price: 0 });
+    total = total.price;
+
     return (
         <section className="orders-container">
             <h2>Orders</h2>
@@ -24,6 +29,7 @@ const Orders = ({
                 <table>
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Order Id:</th>
                             <th>Order Date:</th>
                             <th>Price:</th>
@@ -31,16 +37,17 @@ const Orders = ({
                         </tr>
                     </thead>
                     {orders.length
-                        ? orders.map(order => (
-                            <tbody>
+                        ? orders.map((order, i) => (
+                            <tbody key={order._id}>
                                 <tr>
+                                    <td>{i + 1}</td>
                                     <td>{order._id}</td>
-                                    <td>{order.date}</td>
+                                    <td>{moment(order.date).format("DD.MM.YYYY H:m:s")}</td>
                                     <td>${order.price}</td>
                                     <td>
                                         <div>
                                             {order.products.map(product => (
-                                                <section>
+                                                <section key={product._id}>
                                                     {product.count} x ${product.price}
 
                                                     <Link to={`products/${product._id}`}>
@@ -54,8 +61,14 @@ const Orders = ({
                                 </tr>
                             </tbody>
                         ))
-                        : <tr><td colSpan={20}>No orders found!</td></tr>
+                        : <tbody><tr><td colSpan={20}>No orders found!</td></tr></tbody>
                     }
+                    <tfoot>
+                        <tr>
+                            <td colSpan={3}>Total orders: {orders.length}</td>
+                            <td colSpan={2}>Total price: ${total}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </section>
