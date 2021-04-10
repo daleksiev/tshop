@@ -19,10 +19,9 @@ const cartProduct = (state = cartProductInitialState, action = {}) => {
         return state;
     }
 
-
     switch (action.type) {
         case CHANGE_PRODUCT_COUNT:
-            return { ...state, count: action.payload };
+            return { ...state, count: (action.payload > 0 ? action.payload : 1) };
         case INCREASE_COUNT:
             return { ...state, count: state.count + 1 };
         case DECREASE_COUNT:
@@ -39,20 +38,14 @@ const cart = (state = cartState, action = {}) => {
     let newState = state.slice();
     switch (action.type) {
         case ADD_TO_CART:
-            newState = [...state, { ...action.payload }];
-            localStorage.setItem('cart', JSON.stringify(newState));
-            return newState;
+            return [...state, { ...action.payload }];
         case REMOVE_FROM_CART:
             const foundProductIndex = state.findIndex(x => x._id === action.productId);
-            newState.splice(foundProductIndex, 1);
-            localStorage.setItem('cart', JSON.stringify(newState));
-            return newState;
+            return newState.splice(foundProductIndex, 1);
         case CHANGE_PRODUCT_COUNT:
         case INCREASE_COUNT:
         case DECREASE_COUNT:
-            newState = newState.map(x => cartProduct(x, action));
-            localStorage.setItem('cart', JSON.stringify(newState));
-            return newState;
+            return newState.map(x => cartProduct(x, action));
         default:
             return state;
     }

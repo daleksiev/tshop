@@ -44,6 +44,10 @@ const App = ({
 		}
 	}, []);
 
+	useEffect(() => {
+		localStorage.setItem('cart', JSON.stringify(cartContext));
+	}, [cartContext]);
+
 	return (
 		<CartContext.Provider value={[cartContext, setCartContext]}>
 			<section className="app-wrapper">
