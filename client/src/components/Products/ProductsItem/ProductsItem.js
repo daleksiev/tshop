@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import emptyImageSrc from '../../../assets/empty.jpg';
 import { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import styles from './ProductsItem.module.scss';
+import './ProductsItem.scss';
 
 const ProductsItem = ({
     title,
@@ -12,8 +12,9 @@ const ProductsItem = ({
     href,
 }) => {
     const [didLoad, setDidLoad] = useState(false);
+
     return (
-        <Link to={href} className={styles['product-item']}>
+        <Link to={href} className='product-item'>
             <article>
                 <img
                     style={didLoad ? {} : { 'visibility': 'hidden' }}

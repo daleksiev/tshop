@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react';
 import useForm from '../../../hooks/useForm';
 import { setError, setMessage } from '../../../actions/messageActions';
 import validateProduct from '../../../utils/validateProduct';
-import styles from './ProductsEdit.module.scss';
 import emptyImageSrc from '../../../assets/empty.jpg';
 import {
     getCurrentProduct,
@@ -22,6 +21,7 @@ import {
 import { fetchAllCategoriesAsync } from '../../../actions/categoriesActions';
 import Select from '../../Shared/Select';
 import { fetchAllBrandsAsync } from '../../../actions/brandsActions';
+import './ProductsEdit.scss';
 
 const ProductsEdit = ({
     product,
@@ -78,7 +78,7 @@ const ProductsEdit = ({
     }
 
     return (
-        <div className={styles['products-edit']}>
+        <div className='products-edit'>
             <Link to={`/products/${productId}`} >Back to details</Link>
 
             <form method="post">
