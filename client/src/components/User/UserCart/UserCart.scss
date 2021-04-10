@@ -22,6 +22,29 @@
     }
     article {
         border: none;
+
+        button {
+            width: 50px;
+            border-radius: 50%;
+        }
+    }
+
+    section {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+
+        button {
+            padding: 0 20px;
+            border-radius: 25px;
+            color: #8080d2;
+
+            &:hover {
+                border-color: #fff;
+                background-color: #8080d2;
+                color: #fff;
+            }
+        }
     }
 
     button {
@@ -29,8 +52,6 @@
         background-color: transparent;
         font-size: 20px;
         border: 2px solid #8080d2;
-        border-radius: 50%;
-        width: 50px;
     }
 
     input {

@@ -24,22 +24,27 @@ const UserCart = () => {
         <div className="cart-container">
             <h2>Shopping Cart</h2>
 
-            <p>Total price : ${cartContext.length ? total : 0.00} </p>
-
-            {/* <button>Order now</button> */}
-
             { cartContext?.length
-                ? cartContext?.map(x => (
-                    <UserCartItem
-                        key={x?._id}
-                        item={x}
-                        onChange={onChangeCount(x?._id)}
-                        onClickMinusSign={onClickMinusSign(x?._id)}
-                        onClickPlusSign={onClickPlusSign(x?._id)}
-                        onClickRemoveFromCart={onClickRemoveFromCart(x?._id)}
-                    />
-                ))
-                : 'No products found in the cart!'
+                ? (
+                    <>
+                        <section>
+                            <p>Total price : ${total} </p>
+
+                            <button>Order now</button>
+                        </section>
+                        {cartContext?.map(x => (
+                            <UserCartItem
+                                key={x?._id}
+                                item={x}
+                                onChange={onChangeCount(x?._id)}
+                                onClickMinusSign={onClickMinusSign(x?._id)}
+                                onClickPlusSign={onClickPlusSign(x?._id)}
+                                onClickRemoveFromCart={onClickRemoveFromCart(x?._id)}
+                            />
+                        ))}
+                    </>
+                )
+                : <p>No products found in the cart!</p>
             }
         </div>
     )
