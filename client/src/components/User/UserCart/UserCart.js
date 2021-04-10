@@ -1,22 +1,22 @@
 import CartContext from '../../../context/CartContext';
 import { useContext } from "react";
+import UserCartItem from './UserCartItem/UserCartItem';
+import './UserCart.scss';
 
 const UserCart = () => {
-    const [cartContext,] = useContext(CartContext);
+    const [cartContext, setCartContext] = useContext(CartContext);
+
+    // onClickMinusSign,
+    //     onChange,
+    //     onClickPlusSign,
+
+    const onChangeCount = (e) => setCartContext()
 
     return (
-        <div>
-            {
-                cartContext?.map(x => (
-                    <article key={x._id}>
-                        <img
-                            src={x?.imageUrl}
-                            alt={x?.title}
-                        />
-                        {x?.title}
-                        ${x?.price}
-                    </article>
-                ))
+        <div className="cart-container">
+            { cartContext?.length
+                ? cartContext?.map(x => <UserCartItem key={x._id} item={x} />)
+                : 'No products in the cart!'
             }
         </div>
     )

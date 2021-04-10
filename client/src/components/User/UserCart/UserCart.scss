@@ -1,0 +1,36 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    img {
+        width: 100px;
+    }
+
+    a,
+    article {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        border: 2px solid;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    article {
+        border: none;
+    }
+
+    button {
+        border: none;
+        background-color: transparent;
+    }
+
+    input {
+        width: 70px;
+        border: 2px solid #8080d2;
+        border-radius: 10px;
+        outline: none;
+        padding: 0 5px;
+        box-sizing: border-box;
+    }
+}

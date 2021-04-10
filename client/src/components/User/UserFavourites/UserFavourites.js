@@ -10,7 +10,10 @@ const UserFavourites = ({
         <article>
             <h2>Favourite products:</h2>
 
-            {user?.favourites.map(product => <UserProductItem key={product._id} product={product} />)}
+            {user?.favourites?.length
+                ? user?.favourites.map(product => <UserProductItem key={product._id} product={product} />)
+                : 'No favourite products found!'
+            }
         </article>
     </div>
 )
