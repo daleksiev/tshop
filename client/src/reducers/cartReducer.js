@@ -4,6 +4,7 @@ import {
     CHANGE_PRODUCT_COUNT,
     INCREASE_COUNT,
     DECREASE_COUNT,
+    CLEAR_CART,
 } from '../actionTypes/cartActionTypes';
 
 let cartProductInitialState = {
@@ -47,6 +48,8 @@ const cart = (state = cartState, action = {}) => {
         case INCREASE_COUNT:
         case DECREASE_COUNT:
             return newState.map(x => cartProduct(x, action));
+        case CLEAR_CART:
+            return [];
         default:
             return state;
     }

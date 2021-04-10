@@ -10,6 +10,7 @@ import {
     decreaseProductCount,
     increaseProductCount,
     removeFromCart,
+    clearCart,
 } from '../../../actions/cartActions';
 import './UserCart.scss';
 
@@ -31,6 +32,7 @@ const UserCart = ({
     const onClickMakeAnOrder = () => {
         createOrderAsync({ products: cartContext, price: total }, user.accessToken)
             .then(() => {
+                setCartContext(clearCart());
                 setMessage('You made an order successfully!');
             })
             .catch(err => setError(err.message));

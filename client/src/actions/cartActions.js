@@ -4,7 +4,12 @@ import {
     CHANGE_PRODUCT_COUNT,
     INCREASE_COUNT,
     DECREASE_COUNT,
+    CLEAR_CART,
 } from '../actionTypes/cartActionTypes';
+
+export const clearCart = () => ({
+    type: CLEAR_CART,
+})
 
 export const changeProductCount = (productId, count) => ({
     type: CHANGE_PRODUCT_COUNT,

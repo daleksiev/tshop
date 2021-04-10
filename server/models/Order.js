@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
     date: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
     },
     user: {
         type: mongoose.Types.ObjectId,
