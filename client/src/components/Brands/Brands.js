@@ -6,8 +6,9 @@ import {
 import { fetchAllBrandsAsync } from '../../actions/brandsActions';
 import BrandsItem from './BrandsItem';
 import { connect } from 'react-redux';
-import './Brands.scss';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+import './Brands.scss';
 
 const Brands = ({
     brands,
@@ -24,7 +25,13 @@ const Brands = ({
 
     return (
         <section className="brands-container">
-            {brands.map(brand => <BrandsItem key={brand._id} brand={brand} />)}
+            <article>
+                <Link to="/brands/create">+ Create new Brand</Link>
+            </article>
+
+            <div>
+                {brands.map(brand => <BrandsItem key={brand._id} brand={brand} />)}
+            </div>
         </section>
     )
 }

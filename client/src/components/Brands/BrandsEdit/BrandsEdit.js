@@ -1,7 +1,4 @@
 import useForm from '../../../hooks/useForm';
-import Input from '../../Shared/Input';
-import Button from '../../Shared/Button';
-import { Spinner } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -14,6 +11,7 @@ import {
     getUser,
     getCurrentBrand,
 } from '../../../reducers';
+import BrandsEditForm from './BrandsEditForm/BrandsEditForm';
 
 const BrandsEdit = ({
     setMessage,
@@ -25,7 +23,6 @@ const BrandsEdit = ({
     match,
 }) => {
     const { brandId } = match.params;
-    const [didLoaded, setDidLoad] = useState(false);
     const [state, onChangeInput, setState] = useForm({
         name: brand.name,
         image: brand.image || '',
@@ -41,7 +38,7 @@ const BrandsEdit = ({
 
     const onImageUpload = (e) => setState({ ...state, image: e.target.files[0] });
 
-    const onClickButton = (e) => {
+    const onClickButtonSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
 
@@ -66,52 +63,14 @@ const BrandsEdit = ({
     }
 
     return (
-        <form method="post">
-            <h1>Update Brand</h1>
-
-            <Spinner style={!didLoaded ? {} : { 'display': 'none' }} animation="border" variant="primary" />
-
-            <img
-                alt={brand.name}
-                style={didLoaded ? {} : { 'display': 'none' }}
-                src={brand.imageUrl}
-                onLoad={e => setDidLoad(true)}
-                onError={e => setDidLoad(false)}
-            />
-
-            <Input
-                id="name"
-                type="text"
-                name="name"
-                title="Name:"
-                value={state.name}
-                onChange={onChangeInput}
-            />
-
-            <Input
-                id="image"
-                type="file"
-                name="image"
-                fileName={state.image.name}
-                title="Upload an image:"
-                onChange={onImageUpload}
-            />
-
-            {isLoading
-                ? (
-                    <Button name="Loading...">
-                        <Spinner
-                            as="span"
-                            animation="grow"
-                            size="sm"
-                            role="status"
-                            aria-hidden="true"
-                        />
-                    </Button>
-                )
-                : <Button name="Update" onClick={onClickButton} />}
-
-        </form>
+        <BrandsEditForm
+            onChangeInput={onChangeInput}
+            isLoading={isLoading}
+            onImageUpload={onImageUpload}
+            onSubmit={onClickButtonSubmit}
+            brand={brand}
+            state={state}
+        />
     )
 }
 

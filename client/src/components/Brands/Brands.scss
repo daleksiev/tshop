@@ -1,7 +1,13 @@
 .brands-container {
     display: flex;
+    flex-direction: column;
     gap: 50px;
-    align-items: stretch;
-    justify-content: center;
-    flex-wrap: wrap;
+
+    div {
+        display: flex;
+        gap: 50px;
+        align-items: stretch;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
