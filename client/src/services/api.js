@@ -15,3 +15,7 @@ export const categoryUrl = (id) => `${categoriesUrl()}/${id}`;
 
 export const brandsUrl = () => `${apiUrl}/brands`;
 export const brandUrl = (id) => `${brandsUrl()}/${id}`;
+
+export const ordersUrl = () => `${apiUrl}/orders`;
+export const orderUrl = (id) => `${ordersUrl()}/${id}`;
+export const userOrdersUrl = (userId) => `${userUrl(userId)}/orders`

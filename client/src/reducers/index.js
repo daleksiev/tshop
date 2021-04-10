@@ -4,6 +4,7 @@ import user, * as fromUser from "./userReducer";
 import products, * as fromProducts from "./productsReducer";
 import categories, * as fromCategories from "./categoriesReducer";
 import brands, * as fromBrands from "./brandsReducer";
+import orders, * as fromOrders from "./ordersReducer";
 
 export default combineReducers({
     message,
@@ -11,6 +12,7 @@ export default combineReducers({
     products,
     categories,
     brands,
+    orders,
 })
 
 // user selectors
@@ -38,3 +40,9 @@ export const getCategoriesIsLoading = fromCategories.getCategoriesIsLoading;
 export const getMessages = fromMessage.getMessages;
 export const getMessageSuccess = fromMessage.getMessageSuccess;
 export const getMessageError = fromMessage.getMessageError;
+
+// orders selectors 
+export const getOrders = fromOrders.getOrders;
+export const getOrdersList = fromOrders.getOrdersList;
+export const getCurrentOrder = fromOrders.getCurrentOrder;
+export const getOrdersIsLoading = fromOrders.getOrdersIsLoading;
