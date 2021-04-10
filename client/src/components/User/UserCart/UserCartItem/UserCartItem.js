@@ -8,7 +8,7 @@ const UserCartItem = ({
 }) => {
     return (
         <article>
-            <Link to={`/products/${item._id}`}>
+            <Link to={`/products/${item?._id}`}>
                 <img
                     src={item?.imageUrl}
                     alt={item?.title}
@@ -26,7 +26,7 @@ const UserCartItem = ({
 
             <button onClick={onClickMinusSign}>-</button>
 
-            <input type="number" value={item.count} onChange={onChange} min={1} max={10} />
+            <input type="number" value={item?.count} onChange={onChange} min={1} />
 
             <button onClick={onClickPlusSign}>+</button>
         </article>
