@@ -1,58 +1,15 @@
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
-import { useState } from 'react';
-import firebaseService from '../../services/firebaseService';
-import { Redirect } from 'react-router';
-import useForm from '../../hooks/useForm';
 import { setError, setMessage } from '../../actions/messageActions'
 import { connect } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
+import registerLogic from '../../hoc/registerLogic';
 
 const Register = ({
-	setError,
-	setMessage,
-	user,
+	onClickSubmit,
+	onChangeInput,
+	isLoading,
 }) => {
-	const [state, onChangeInput] = useForm({
-		email: '',
-		password: '',
-		repeatPassword: '',
-	});
-
-	const [toRedirect, setToRedirect] = useState(false);
-
-	const [isLoading, setIsLoading] = useState(false);
-
-	const onClickSubmit = (e) => {
-		e.preventDefault();
-		setIsLoading(true);
-
-		if (state.password !== state.repeatPassword) {
-			setIsLoading(false);
-			return setError('The passwords do not match.');
-		}
-		if (state.email && state.password) {
-			firebaseService
-				.signup(state.email, state.password)
-				.then(res => {
-					setToRedirect(true);
-					setMessage('You registered successfully!');
-					setIsLoading(false);
-				})
-				.catch(err => {
-					setError(err.message);
-					setIsLoading(false);
-				});
-		} else {
-			setIsLoading(false);
-			setError('Email, password and repeat password fields are required!');
-		}
-	}
-
-	if (user.isLoggedIn || toRedirect) {
-		return <Redirect to='login' />
-	}
-
 	return (
 		<form method="post">
 			<h1>Register</h1>
@@ -99,6 +56,8 @@ const Register = ({
 	)
 }
 
+const RegisterComponent = registerLogic(Register);
+
 const mapStateToProps = (state) => ({
 	user: state.user,
 })
@@ -108,4 +67,4 @@ const mapDispatchToProps = {
 	setMessage,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);
