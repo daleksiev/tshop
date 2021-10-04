@@ -1,6 +1,6 @@
 const config = {
     production: {
-        apiUrl: 'https://tshop-softuni-project.herokuapp.com',
+        apiUrl: 'http://35.241.255.211',
     },
     development: {
         apiUrl: 'http://localhost:5000',
