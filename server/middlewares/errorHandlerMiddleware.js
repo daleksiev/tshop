@@ -1,5 +1,5 @@
 module.exports = (err, req, res, next) => {
-    if (err?.errors) {
+    if (err.errors) {
         let message = '';
 
         for (const key in err.errors) {
@@ -10,7 +10,7 @@ module.exports = (err, req, res, next) => {
         return res.status(400).json({ ok: false, message });
     }
 
-    if (err?.message) {
+    if (err.message) {
         return res.status(400).json({ ok: false, message: err.message });
     }
 
