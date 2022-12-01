@@ -1,23 +1,23 @@
 .brands-item-container {
-    border: 1px solid #8080d2;
-    border-radius: 25px;
+  border: 1px solid var(--color-1);
+  border-radius: 25px;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+
+  a {
     display: flex;
-    align-items: stretch;
     flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 20%;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+  }
 
-    a {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        flex-basis: 20%;
-        text-align: center;
-        gap: 20px;
-        padding: 20px;
-    }
-
-    img {
-        width: 150px;
-        margin: auto;
-        border-radius: 15px;
-    }
+  img {
+    width: 150px;
+    margin: auto;
+    border-radius: 15px;
+  }
 }
