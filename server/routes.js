@@ -6,6 +6,7 @@ const authController = require('./controllers/authController');
 const usersController = require('./controllers/usersController');
 const ordersController = require('./controllers/ordersController');
 const authorizeMiddleware = require('./middlewares/authorizeMiddleware');
+// "deploy": "cd .. && git subtree push --prefix server heroku/tshop master"
 
 router.use('/products', productsController);
 router.use('/auth', authController);

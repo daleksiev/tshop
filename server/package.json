@@ -1,22 +1,22 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "firebase-admin": "^9.5.0",
-    "mongoose": "^5.12.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  },
-  "scripts": {
-    "dev": "set NODE_ENV=development && nodemon ./index.js",
-    "start": "set NODE_ENV=production && node ./index.js",
-    "deploy": "cd .. && git subtree push --prefix server heroku/tshop master"
-  },
-  "author": "",
-  "license": "ISC"
+	"name": "server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"firebase-admin": "^9.5.0",
+		"mongoose": "^5.12.2"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.7"
+	},
+	"scripts": {
+		"dev": "set NODE_ENV=development && nodemon ./index.js",
+		"start": "set NODE_ENV=production && node ./index.js",
+		"deploy": "cd .. && git subtree push --prefix server heroku master"
+	},
+	"author": "",
+	"license": "ISC"
 }
