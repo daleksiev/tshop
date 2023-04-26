@@ -1,25 +1,23 @@
-@import "./constats.scss";
-
 body {
-  margin: 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 a {
-  color: var(--color-1);
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
+	color: #8080d2;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-  }
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 h1,
@@ -29,100 +27,100 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
-  color: var(--color-1);
+	margin: 0;
+	color: #8080d2;
 }
 
 strong {
-  display: block;
-  color: var(--color-2);
+	display: block;
+	color: #3336;
 }
 
 em {
-  color: var(--color-8);
-  font-weight: 600;
+	color: #8080d288;
+	font-weight: 600;
 }
 
 h1 {
-  font-size: 20px;
+	font-size: 20px;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid var(--color-1);
-  padding: 75px;
-  border-radius: 15px;
-  max-width: 410px;
-  box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	border: 2px solid #8080d2;
+	padding: 75px;
+	border-radius: 15px;
+	max-width: 410px;
+	box-sizing: border-box;
 
-  h1 {
-    color: var(--color-1);
-    text-align: center;
-    margin: 0 0 35px;
-  }
+	h1 {
+		color: #8080d2;
+		text-align: center;
+		margin: 0 0 35px;
+	}
 
-  select,
-  input {
-    margin: 10px 0 35px;
-  }
+	select,
+	input {
+		margin: 10px 0 35px;
+	}
 }
 button.filter {
-  border: none;
-  outline: none;
-  background: transparent;
-  border: 2px solid var(--color-1);
-  font-weight: 600;
-  color: var(--color-1);
-  border-radius: 15px;
-  vertical-align: top;
-  line-height: 20px;
-  transition: 0.4s;
+	border: none;
+	outline: none;
+	background: transparent;
+	border: 2px solid #8080d2;
+	font-weight: 600;
+	color: #8080d2;
+	border-radius: 15px;
+	vertical-align: top;
+	line-height: 20px;
+	transition: 0.4s;
 
-  &:hover {
-    color: var(--color-4);
-    background-color: var(--color-1);
-  }
+	&:hover {
+		color: #fff;
+		background-color: #8080d2;
+	}
 }
 
 .delete-button {
-  font-size: 20px;
-  background: var(--color-5);
+	font-size: 20px;
+	background: #b64f4f;
 
-  &:hover {
-    color: var(--color-5);
-    border-color: var(--color-5);
-  }
+	&:hover {
+		color: #b64f4f;
+		border-color: #b64f4f;
+	}
 }
 a.edit-button {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  font-weight: normal;
-  text-decoration: none;
-  color: var(--color-4);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 20px;
-  border: 2px solid transparent;
-  transition: 0.4s;
-  text-align: center;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	font-weight: normal;
+	text-decoration: none;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 20px;
+	border: 2px solid transparent;
+	transition: 0.4s;
+	text-align: center;
 
-  &:hover {
-    text-decoration: none;
-    background: var(--color-4);
-    border: 2px solid;
-  }
+	&:hover {
+		text-decoration: none;
+		background: #fff;
+		border: 2px solid;
+	}
 }
 .edit-button {
-  background: var(--color-1);
-  color: var(--color-4);
+	background: #8080d2;
+	color: #fff;
 
-  &:hover {
-    color: var(--color-1);
-    border-color: var(--color-1);
-  }
+	&:hover {
+		color: #8080d2;
+		border-color: #8080d2;
+	}
 }

@@ -1,22 +1,22 @@
 .aside-wrapper {
-  position: absolute;
-  padding: 20px;
-  width: 300px;
-  border: 2px solid var(--color-1);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  section,
-  article {
-    width: auto;
-    padding-left: 30px;
-  }
-
-  section.aside-items {
-    width: auto;
-    gap: 10px;
+    position: absolute;
+    padding: 20px;
+    width: 300px;
+    border: 2px solid #8080d2;
+    border-radius: 15px;
+    display: flex;
     flex-direction: column;
-  }
+    gap: 10px;
+
+    section,
+    article {
+        width: auto;
+        padding-left: 30px;
+    }
+
+    section.aside-items {
+        width: auto;
+        gap: 10px;
+        flex-direction: column;
+    }
 }

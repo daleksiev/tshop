@@ -1,65 +1,65 @@
 .cart-container {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-
-  img {
-    width: 100px;
-  }
-
-  a {
-    flex-basis: 100%;
-  }
-
-  a,
-  article {
     display: flex;
+    flex-direction: column;
     gap: 50px;
-    align-items: center;
-    border: 2px solid;
-    padding: 20px;
-    border-radius: 15px;
-  }
-  article {
-    border: none;
+
+    img {
+        width: 100px;
+    }
+
+    a {
+        flex-basis: 100%;
+    }
+
+    a,
+    article {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        border: 2px solid;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    article {
+        border: none;
+
+        button {
+            width: 50px;
+            border-radius: 50%;
+        }
+    }
+
+    section {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+
+        button {
+            padding: 0 20px;
+            border-radius: 25px;
+        }
+    }
 
     button {
-      width: 50px;
-      border-radius: 50%;
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        border: 2px solid #8080d2;
+        color: #8080d2;
+
+        &:hover {
+            border-color: #fff;
+            background-color: #8080d2;
+            color: #fff;
+        }
     }
-  }
 
-  section {
-    display: flex;
-    gap: 50px;
-    align-items: center;
-
-    button {
-      padding: 0 20px;
-      border-radius: 25px;
+    input {
+        width: 70px;
+        border: 2px solid #8080d2;
+        border-radius: 10px;
+        outline: none;
+        padding: 0 5px;
+        box-sizing: border-box;
     }
-  }
-
-  button {
-    border: none;
-    background-color: transparent;
-    font-size: 20px;
-    border: 2px solid var(--color-1);
-    color: var(--color-1);
-
-    &:hover {
-      border-color: var(--color-4);
-      background-color: var(--color-1);
-      color: var(--color-4);
-    }
-  }
-
-  input {
-    width: 70px;
-    border: 2px solid var(--color-1);
-    border-radius: 10px;
-    outline: none;
-    padding: 0 5px;
-    box-sizing: border-box;
-  }
 }
