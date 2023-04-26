@@ -3,7 +3,7 @@ const config = {
     apiUrl: 'https://tshop.onrender.com',
   },
   development: {
-    apiUrl: 'http://localhost:5000',
+    apiUrl: 'https://tshop.onrender.com',
   },
 }
 
