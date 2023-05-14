@@ -1,11 +1,9 @@
-@mixin page-gradient {
+@import "./variables.scss";
+
+@mixin page-gradient($width, $height) {
+  width: $width;
+  height: $height;
+
   background: $primary-color;
-  background: linear-gradient(
-    170deg,
-    $primary-color 0%,
-    $primary-color 49%,
-    $complementary-color 50%,
-    $complementary-color 70%,
-    $complementary-color 100%
-  );
+  background: linear-gradient(to bottom right, $complementary-color, $primary-color);
 }
