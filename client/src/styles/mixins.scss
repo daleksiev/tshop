@@ -4,6 +4,9 @@
   width: $width;
   height: $height;
 
-  background: $primary-color;
-  background: linear-gradient(to bottom right, $complementary-color, $primary-color);
+  // background: $primary-color;
+  // background: linear-gradient(to bottom right, $white-color, $primary-color);
+
+  background: $tertiary-color;
+  background: linear-gradient(0deg, $tertiary-color 0%, $white-color 50%, $white-color 100%);
 }

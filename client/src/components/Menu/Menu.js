@@ -6,9 +6,9 @@ import { logoutUser } from '../../actions/userActions';
 import { setMessage } from '../../actions/messageActions';
 import firebaseService from '../../services/firebaseService';
 import { getUser } from '../../reducers';
-import './Menu.scss';
 import { useState } from "react";
 import UserMenu from "./UserMenu";
+import './Menu.scss';
 
 import {
   AppRegistration as RegisterIcon,
@@ -40,32 +40,31 @@ const Menu = ({
     setMessage('You logged out successfully!');
   }
 
-  const getCurrentPageClass = (path = '/') => location.pathname === path ? 'active' : ''
+  const selectCurrentPage = (path = '/') => location.pathname === path ? 'active' : ''
 
   const guestLinks = () => (
     <>
-      <Link to="/login" className={getCurrentPageClass('/login')}><LoginIcon />Login</Link>
+      <Link to="/login" className={selectCurrentPage('/login')}><LoginIcon />Login</Link>
 
-      <Link to="/register" className={getCurrentPageClass('/register')}> <RegisterIcon /> Register</Link>
+      <Link to="/register" className={selectCurrentPage('/register')}> <RegisterIcon /> Register</Link>
     </>
   )
 
   const adminLinks = () => (
     <>
-      <Link to="/products/create" className={getCurrentPageClass('/products/create')} ><AddProductIcon /> Add Product</Link>
+      <Link to="/products/create" className={selectCurrentPage('/products/create')} ><AddProductIcon /> Add Product</Link>
 
-      <Link to="/brands" className={getCurrentPageClass('/brands')}><BrandIcon /> Brands</Link>
+      <Link to="/brands" className={selectCurrentPage('/brands')}><BrandIcon /> Brands</Link>
     </>
   )
 
   const userLinks = () => (
     <>
-      {user?.role === 'admin'
-        ? adminLinks()
-        : <Link to="/cart" className={getCurrentPageClass('/cart')} ><CartIcon /> Cart</Link>
-      }
+      {user?.role === 'admin' ? adminLinks() : null}
 
-      <Link to="/orders" className={getCurrentPageClass('/orders')}><OrderIcon /> Orders</Link>
+      <Link to="/cart" className={selectCurrentPage('/cart')} ><CartIcon /> Cart</Link>
+
+      <Link to="/orders" className={selectCurrentPage('/orders')}><OrderIcon /> Orders</Link>
 
       <Link onClick={onClickLogoutUser} to="/logout"><LogoutIcon /> Logout</Link>
     </>
@@ -78,9 +77,9 @@ const Menu = ({
       <ModalSuccess />
 
       <nav className={user.role}>
-        <Link to="/" className={getCurrentPageClass('/')}><HomeIcon /> Home</Link>
+        <Link to="/" className={selectCurrentPage('/')}><HomeIcon /> Home</Link>
 
-        <Link to="/categories" className={getCurrentPageClass('/categories')}><CategoriesIcon />Categories</Link>
+        <Link to="/categories" className={selectCurrentPage('/categories')}><CategoriesIcon />Categories</Link>
 
         {user.isLoggedIn ? userLinks() : guestLinks()}
       </nav>
