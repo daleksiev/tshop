@@ -1,4 +1,5 @@
-.header-wrapper {
+.menu-wrapper {
+  z-index: 100;
   position: fixed;
   left: 0;
   top: 0;
@@ -15,7 +16,7 @@
   justify-content: center;
 
   &:hover {
-    width: 225px;
+    width: 240px;
   }
 
   a {
@@ -26,6 +27,7 @@
     transition: 0.5s;
     border-left: 5px solid transparent;
     padding-left: 8px;
+    white-space: nowrap;
 
     &:hover,
     &.active {
@@ -43,9 +45,16 @@
     flex-shrink: 0;
   }
 
-  & > div {
-    padding: 24px 0 0;
-    margin: 0 auto;
+  & div.profile {
+    width: 78px;
+    text-align: center;
+    color: #fff;
+    margin-top: 20px;
+
+    .account-icon {
+      height: 50px;
+      width: 50px;
+    }
   }
 
   img {

@@ -3,7 +3,8 @@ const config = {
     apiUrl: 'https://tshop.onrender.com',
   },
   development: {
-    apiUrl: 'https://tshop.onrender.com',
+    apiUrl: 'http://localhost:5001',
+    // apiUrl: 'https://tshop.onrender.com',
   },
 }
 

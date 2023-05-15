@@ -1,4 +1,4 @@
-import Header from '../Header';
+import Menu from '../Menu';
 import { Route, Switch } from 'react-router';
 
 import {
@@ -57,7 +57,7 @@ const App = ({
   return (
     <CartContext.Provider value={[cartContext, setCartContext]}>
       <section className="app-wrapper">
-        <Header />
+        <Menu />
 
         <article className="app-container">
           <Switch>
