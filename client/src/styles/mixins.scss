@@ -7,6 +7,12 @@
   // background: $primary-color;
   // background: linear-gradient(to bottom right, $white-color, $primary-color);
 
-  background: $tertiary-color;
-  background: linear-gradient(0deg, $tertiary-color 0%, $white-color 50%, $white-color 100%);
+  background: $secondary-color;
+  background: linear-gradient(
+    354deg,
+    $secondary-color 0%,
+    $secondary-color 9%,
+    $primary-color 10%,
+    $primary-color 100%
+  );
 }

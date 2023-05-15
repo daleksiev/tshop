@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import Img from '../Shared/Img'
 import ModalError from "../Modal/ModalError";
 import ModalSuccess from "../Modal/ModalSuccess";
 import { connect } from 'react-redux';
@@ -9,6 +10,8 @@ import { getUser } from '../../reducers';
 import { useState } from "react";
 import UserMenu from "./UserMenu";
 import './Menu.scss';
+
+import Logo from '../../assets/logo.png'
 
 import {
   AppRegistration as RegisterIcon,
@@ -75,6 +78,11 @@ const Menu = ({
       <ModalError />
 
       <ModalSuccess />
+
+      <Link to="/" className="logo-wrapper">
+        <img className='logo' src={Logo} alt="logo" />
+        <h1>T-shop</h1>
+      </Link>
 
       <nav className={user.role}>
         <Link to="/" className={selectCurrentPage('/')}><HomeIcon /> Home</Link>

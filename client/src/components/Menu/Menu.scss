@@ -12,16 +12,35 @@
   display: flex;
   align-items: flex-start;
   overflow: hidden;
-  background-color: #8080d2;
+  background-color: $primary-color;
   transition: 0.5s;
-  cursor: pointer;
   justify-content: center;
+  box-shadow: 1px 1px 10px #333;
 
   &:hover {
     width: 240px;
   }
 
-  a {
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $white-color;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 12px;
+
+    h1 {
+      white-space: nowrap;
+      color: $white-color;
+    }
+
+    .logo {
+      width: 58px;
+    }
+  }
+
+  nav a {
     color: #fff;
     display: flex;
     align-items: center;
@@ -30,11 +49,13 @@
     border-left: 5px solid transparent;
     padding-left: 8px;
     white-space: nowrap;
+    padding: 8px;
 
     &:hover,
     &.active {
       color: $secondary-color;
       border-color: $secondary-color;
+      box-shadow: -8px 10px 10px #333;
     }
   }
 

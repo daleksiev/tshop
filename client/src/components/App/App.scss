@@ -1,5 +1,14 @@
+@import "../../styles/mixins.scss";
+
 .app-wrapper {
+  @include page-gradient(100vw, 100vh);
+
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
   .app-container {
     display: flex;
     justify-content: center;
