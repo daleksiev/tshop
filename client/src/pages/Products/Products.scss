@@ -1,33 +1,33 @@
 .products-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  section {
     display: flex;
-    flex-direction: column;
+    width: 1000px;
     gap: 50px;
+    flex-wrap: wrap;
+  }
 
-    section {
-        display: flex;
-        width: 1000px;
-        gap: 50px;
-        flex-wrap: wrap;
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    h2 {
+      flex-basis: 100%;
+      flex-grow: 1;
     }
+  }
 
-    & > div {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        flex-wrap: wrap;
+  div.input-container {
+    display: inline-block;
+    vertical-align: baseline;
+  }
 
-        h2 {
-            flex-basis: 100%;
-            flex-grow: 1;
-        }
-    }
-
-    div.input-container {
-        display: inline-block;
-        vertical-align: baseline;
-    }
-
-    aside {
-        left: 36px;
-    }
+  aside {
+    left: 116px;
+  }
 }

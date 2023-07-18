@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import Button from '../../../components/Shared/Button';
 import { setMessage, setError } from '../../../actions/messageActions'
 import { deleteCategoryAsync } from '../../../actions/categoriesActions'
+import CardLink from '../../../components/Shared/CardLink'
 import './CategoriesItem.scss';
+
 
 const CategoriesItem = ({
   _id,
@@ -25,10 +27,12 @@ const CategoriesItem = ({
       .catch((err) => setError(err.message));
   }
 
+  const isAdmin = user?.role === 'admin'
+
   const onLoad = (e) => setDidLoad(true);
 
   const adminView = (
-    <article>
+    <article className='action-buttons'>
       <Link className="edit-button" to={`/categories/edit/${_id}`} >Edit</Link>
 
       <Button className="delete-button" name="Delete" onClick={onClickDelete} />
@@ -36,8 +40,8 @@ const CategoriesItem = ({
   )
 
   return (
-    <div className="categories-item">
-      <Link to={`/categories/${_id}`}>
+    <div className='card-container'>
+      <CardLink to={`/categories/${_id}`} className='card-item'>
         <Spinner
           style={didLoad ? { 'display': 'none' } : {}}
           animation="border"
@@ -53,9 +57,9 @@ const CategoriesItem = ({
 
         <h3>{name}</h3>
 
-      </Link>
 
-      {user?.role === 'admin' && adminView}
+      </CardLink>
+      {isAdmin && adminView}
     </div>
   )
 }

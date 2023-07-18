@@ -28,7 +28,6 @@ div.input-container {
     border-bottom: 1px solid $secondary-color;
     border-left: 1px solid $secondary-color;
     box-shadow: 0 0 0px 40rem $primary-color inset;
-
     transition: 0.4s;
     &:focus {
       color: $white-color;
@@ -65,7 +64,7 @@ div.input-container {
     }
 
     input[type="radio"]:checked {
-      background-color: $secondary-color;
+      background-color: $white-color;
     }
   }
 

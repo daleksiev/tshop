@@ -58,11 +58,11 @@ const Products = ({
           id="search"
           name="search"
           type="text"
-          placeholder="Search Products"
+          placeholder={`Search in ${currentCategory.name}`}
           onChange={onSearchChange}
         />
 
-        <h2>Products from category "{currentCategory.name}"</h2>
+        <h2>{currentCategory.name}</h2>
       </div>
 
       <section>
